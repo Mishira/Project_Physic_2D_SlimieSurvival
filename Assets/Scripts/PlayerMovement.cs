@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("===== Basic Setting =====")]
     [SerializeField] private float moveSpeed;
+    [SerializeField] private float moveSpeedInWater;
     [SerializeField] private float jumpForce;
     [SerializeField] private bool playerStartWithFaceingRight = true;
 
@@ -21,6 +22,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private LayerMask waterLayer;
     [SerializeField] private Animator ani;
 
     [Header("===== Key Bind =====")]
@@ -28,6 +30,7 @@ public class PlayerMovement : MonoBehaviour
 
     private float horizontal;
     private bool isFaceingRight;
+    private float baseMoveSpeed;
     private PlayerState _state;
     
     //public PlayerState State { get { return state; } set { state = value; } }
@@ -42,6 +45,8 @@ public class PlayerMovement : MonoBehaviour
         {
             isFaceingRight = false;
         }
+
+        baseMoveSpeed = moveSpeed;
     }
 
     private void Update()
@@ -50,8 +55,9 @@ public class PlayerMovement : MonoBehaviour
         Flip();
         UpdatePlayerState();
         UpdateAnimation();
+        ChangeSpeedInWater();
 
-        if (Input.GetKeyDown(jumpKey) && IsGrounded())
+        if (Input.GetKeyDown(jumpKey) && (IsGrounded() || IsWater()))
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         }
@@ -65,6 +71,11 @@ public class PlayerMovement : MonoBehaviour
     private bool IsGrounded()
     {
         return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
+    }
+
+    private bool IsWater()
+    {
+        return Physics2D.OverlapCircle(groundCheck.position, 0.2f, waterLayer);
     }
 
     private void Flip()
@@ -82,7 +93,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (horizontal == 0)
         {
-            if (IsGrounded())
+            if (IsGrounded() || IsWater())
             {
                 _state = PlayerState.Idle;
             }
@@ -93,7 +104,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (horizontal != 0)
         {
-            if (IsGrounded())
+            if (IsGrounded() || IsWater())
             {
                 _state = PlayerState.Run;
             }
@@ -130,5 +141,17 @@ public class PlayerMovement : MonoBehaviour
         ani.SetBool("isIdle", false);
         ani.SetBool("isRun", false);
         ani.SetBool("isInAir", false);
+    }
+
+    private void ChangeSpeedInWater()
+    {
+        if (IsWater())
+        {
+            moveSpeed = moveSpeedInWater;
+        }
+        else
+        {
+            moveSpeed = baseMoveSpeed;
+        }
     }
 }
