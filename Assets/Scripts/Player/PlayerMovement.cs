@@ -29,6 +29,8 @@ public class PlayerMovement : MonoBehaviour
     private float horizontal;
     private bool isFaceingRight;
     private PlayerState _state;
+
+    public bool _isFaceingRight => isFaceingRight;
     
     //public PlayerState State { get { return state; } set { state = value; } }
 
