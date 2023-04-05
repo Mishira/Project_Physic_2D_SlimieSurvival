@@ -3,6 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum PlayerState
+{
+    Idle,
+    Run,
+    InAir
+}
+
 public class PlayerMovement : MonoBehaviour
 {
     [Header("===== Basic Setting =====")]
@@ -14,11 +21,16 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private Animator ani;
 
+    [Header("===== Key Bind =====")]
     [SerializeField] private KeyCode jumpKey = KeyCode.Space;
 
     private float horizontal;
     private bool isFaceingRight;
+    private PlayerState _state;
+    
+    //public PlayerState State { get { return state; } set { state = value; } }
 
     private void Start()
     {
@@ -36,6 +48,8 @@ public class PlayerMovement : MonoBehaviour
     {
         horizontal = Input.GetAxisRaw("Horizontal");    // This return -1,0,1
         Flip();
+        UpdatePlayerState();
+        UpdateAnimation();
 
         if (Input.GetKeyDown(jumpKey) && IsGrounded())
         {
@@ -62,5 +76,59 @@ public class PlayerMovement : MonoBehaviour
             localScale.x *= -1f;
             transform.localScale = localScale;
         }
+    }
+
+    private void UpdatePlayerState()
+    {
+        if (horizontal == 0)
+        {
+            if (IsGrounded())
+            {
+                _state = PlayerState.Idle;
+            }
+            else
+            {
+                _state = PlayerState.InAir;
+            }
+        }
+        else if (horizontal != 0)
+        {
+            if (IsGrounded())
+            {
+                _state = PlayerState.Run;
+            }
+            else
+            {
+                _state = PlayerState.InAir;
+            }
+        }
+    }
+
+    private void UpdateAnimation()
+    {
+        if (_state == PlayerState.Idle)
+        {
+            DisableAllAnimation();
+            ani.SetBool("isIdle", true);
+        }
+
+        if (_state == PlayerState.Run)
+        {
+            DisableAllAnimation();
+            ani.SetBool("isRun", true);
+        }
+
+        if (_state == PlayerState.InAir)
+        {
+            DisableAllAnimation();
+            ani.SetBool("isInAir", true);
+        }
+    }
+
+    private void DisableAllAnimation()
+    {
+        ani.SetBool("isIdle", false);
+        ani.SetBool("isRun", false);
+        ani.SetBool("isInAir", false);
     }
 }
