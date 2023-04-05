@@ -7,7 +7,8 @@ public enum PlayerState
 {
     Idle,
     Run,
-    InAir
+    InAir,
+    Shooting
 }
 
 public class PlayerMovement : MonoBehaviour

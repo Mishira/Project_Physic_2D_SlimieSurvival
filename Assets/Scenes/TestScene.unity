@@ -329,10 +329,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   launchForce: 10
+  shootCoolDown: 0.5
   arrow: {fileID: 3021478163902362214, guid: e6439fec0c1f61443afe989e0e09ea8b, type: 3}
   shootKey: 323
   shotPoint: {fileID: 1850418358}
   pm: {fileID: 1776693610}
+  ani: {fileID: 1776693609}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
