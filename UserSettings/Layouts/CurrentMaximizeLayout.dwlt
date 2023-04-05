@@ -25,7 +25,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 36965
+  controlID: 39584
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -142,7 +142,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 36966
+  controlID: 39544
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -162,8 +162,8 @@ MonoBehaviour:
     y: 0
     width: 501
     height: 486
-  m_MinSize: {x: 201, y: 221}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 5}
   m_Panes:
   - {fileID: 5}
@@ -200,23 +200,23 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: f438feff
-      m_LastClickedID: -116492
-      m_ExpandedIDs: 5639feff9884ffff3ca2ffff10bbffffa4c2ffff16c4ffff4ec5ffff94c5ffff96c8ffff92f9ffff
+      m_SelectedIDs: 5639feff
+      m_LastClickedID: -116394
+      m_ExpandedIDs: 9884ffff3ca2ffff10bbffffa4c2ffff16c4ffff4ec5ffff94c5ffff96c8ffff92f9ffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: Shoot point
-        m_OriginalName: Shoot point
+        m_Name: 
+        m_OriginalName: 
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: -116492
+        m_UserData: 0
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 0
+        m_OriginalEventType: 11
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 4}
       m_SearchString: 
@@ -293,21 +293,21 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scripts/PlayerWeapon
+    - Assets/Prefab
     m_Globs: []
     m_OriginalText: 
-  m_ViewMode: 1
+  m_ViewMode: 0
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scripts/PlayerWeapon
+  - Assets/Prefab
   m_LastFoldersGridSize: -1
   m_LastProjectPath: D:\BU Work\2_2\GI203 Physics for Games and Interactive Media\Project_2D\Project_Physic_2D
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 0aba0000
-    m_LastClickedID: 47626
+    m_SelectedIDs: da870000
+    m_LastClickedID: 34778
     m_ExpandedIDs: 00000000aa5f0000006500003a650000667c000022820000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -334,9 +334,9 @@ MonoBehaviour:
       m_ResourceFile: 
   m_AssetTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 248b0000
+    m_SelectedIDs: 5639feff
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000aa5f0000006500003a65000022820000
+    m_ExpandedIDs: ffffffff00000000aa5f0000006500003a65000022820000da8700000aba0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -361,9 +361,9 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: f438feff
-    m_LastClickedInstanceID: -116492
-    m_HadKeyboardFocusLastEvent: 1
+    m_SelectedInstanceIDs: 5639feff
+    m_LastClickedInstanceID: -116394
+    m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: 34830000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -416,7 +416,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 36943
+  controlID: 39585
 --- !u!114 &9
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -692,9 +692,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -0.08537004, y: -2.2544978, z: -1.4941137}
+    m_Target: {x: 0.27944386, y: -0.3407821, z: -1.6485417}
     speed: 2
-    m_Value: {x: -0.08537004, y: -2.2544978, z: -1.4941137}
+    m_Value: {x: 0.27944386, y: -0.3407821, z: -1.6485417}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -745,9 +745,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 1.5159078
+    m_Target: 6.9152555
     speed: 2
-    m_Value: 1.5159078
+    m_Value: 6.9152555
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -804,14 +804,14 @@ MonoBehaviour:
     m_KeySerializationHelper:
     - {fileID: 6393361310332295751, guid: 6d5d22a078ef78a44b0b5e971aa5b1be, type: 2}
     m_ValueSerializationHelper:
-    - e00: 0.76119035
+    - e00: 0.5499601
       e01: 0
       e02: 0
-      e03: 147.5488
+      e03: 159.4884
       e10: 0
-      e11: 0.76119035
+      e11: 0.5499601
       e12: 0
-      e13: 60.82877
+      e13: 128.57375
       e20: 0
       e21: 0
       e22: 1
@@ -883,8 +883,8 @@ MonoBehaviour:
     y: 486
     width: 775
     height: 461
-  m_MinSize: {x: 202, y: 221}
-  m_MaxSize: {x: 4002, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 2}
   m_Panes:
   - {fileID: 2}

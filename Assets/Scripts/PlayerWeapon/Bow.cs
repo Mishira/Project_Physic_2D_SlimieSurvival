@@ -12,20 +12,26 @@ public class Bow : MonoBehaviour
     [Header("===== Prefab =====")]
     [SerializeField] private GameObject arrow;
 
+    [Header("===== Key Bind =====")]
     [SerializeField] private KeyCode shootKey = KeyCode.Mouse0;
-    
+    [SerializeField] private KeyCode autoFireKey = KeyCode.C;
+
     [Header("===== Get Component =====")]
     [SerializeField] private Transform shotPoint;
     [SerializeField] private PlayerMovement pm;
     [SerializeField] private Animator ani;
 
     private bool readyToShoot = true;
+    private bool autoFire = false;
 
     private void Update()
     {
-        //Vector2 bowPosition = transform.position;
+        if (Input.GetKeyDown(autoFireKey))
+        {
+            autoFire = !autoFire;
+        }
 
-        if (Input.GetKeyDown(shootKey) && readyToShoot)
+        if ((Input.GetKey(shootKey) || autoFire) && readyToShoot)
         {
             Shoot();
             Invoke(nameof(ResetReadyToShoot), shootCoolDown);
