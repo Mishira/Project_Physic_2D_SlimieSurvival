@@ -13,6 +13,8 @@ public class GreenSlime : MonoBehaviour
 
     [Header("===== Get Component =====")]
     [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private GameObject experienceOrb;
+    [SerializeField] private Transform experienceDropPoint;
 
     private GameObject player;
     private PlayerStatus ps;
@@ -54,6 +56,7 @@ public class GreenSlime : MonoBehaviour
         health = health - damageTake;
         if (health <= 0)
         {
+            Instantiate(experienceOrb, experienceDropPoint.position, experienceDropPoint.rotation);
             Destroy(this.gameObject);
         }
     }

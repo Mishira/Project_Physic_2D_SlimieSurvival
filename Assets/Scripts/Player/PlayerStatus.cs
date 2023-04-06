@@ -17,29 +17,69 @@ public class PlayerStatus : MonoBehaviour
     [Header("===== Experience Setting =====")]
     [SerializeField] private int playerLevel = 1;
     [SerializeField] private float playerExperience = 0;
-    [SerializeField] private float nextLevelExperienceRequire = 4;
-    [SerializeField] private float expRequirementGrowForEachLevel = 2;
+    [SerializeField] private float nextLevelExperienceRequire = 100;
+    [SerializeField] private float expRequirementGrowForEachLevel = 20;
 
     [Header("===== Get Component =====")]
     [SerializeField] private PlayerMovement pm;
+    [SerializeField] private UIController uiController;
+    [SerializeField] private LevelUp levelUp;
+
+    private float nextLevelEXPBuff;
+    private float lastLevelExperienceRequire = 0;
+
+    public float _health => health;
+    public float _maxHealth => maxHealth;
+    public int _playerLevel => playerLevel;
+    public float _playerExperience => playerExperience;
+    public float _nextLevelExperienceRequire => nextLevelExperienceRequire;
+    public float _lastLevelExperienceRequire => lastLevelExperienceRequire;
 
     private void Start()
     {
         health = maxHealth;
+        nextLevelEXPBuff = nextLevelExperienceRequire + expRequirementGrowForEachLevel;
+        
+        CheckLevelUp();
     }
 
     private void Update()
     {
+        CheckLevelUp();
         
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            PlayerPickUpExperienceOrb(nextLevelExperienceRequire - playerExperience);
+        }
     }
 
     public void PlayerTakeDamage(float damageTake)
     {
         health = health - damageTake;
-        if (health < 0)
+        if (health <= 0)
         {
             health = 0;
             pm.SetPlayerDie();
         }
+        uiController.UpdateHealthBar();
+    }
+
+    private void CheckLevelUp()
+    {
+        if (playerExperience >= nextLevelExperienceRequire)
+        {
+            playerLevel++;
+            lastLevelExperienceRequire = nextLevelExperienceRequire;
+            nextLevelExperienceRequire = lastLevelExperienceRequire + nextLevelEXPBuff;
+            nextLevelEXPBuff = nextLevelEXPBuff + expRequirementGrowForEachLevel;
+            levelUp.PlayerLevelUp();
+        }
+        uiController.UpdateExperienceBar();
+    }
+
+    public void PlayerPickUpExperienceOrb(float exp)
+    {
+        playerExperience = playerExperience + exp;
+        //CheckLevelUp();
     }
 }

@@ -32,10 +32,7 @@ public class LevelUp : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.J))
-        {
-            PlayerLevelUp();
-        }
+        
     }
 
     public void PlayerLevelUp()
