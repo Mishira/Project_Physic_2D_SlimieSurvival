@@ -8,7 +8,7 @@ public enum PlayerState
     Idle,
     Run,
     InAir,
-    Shooting
+    Dead
 }
 
 public class PlayerMovement : MonoBehaviour
@@ -30,8 +30,11 @@ public class PlayerMovement : MonoBehaviour
     private float horizontal;
     private bool isFaceingRight;
     private PlayerState _state;
+    private bool pausePlayer = false;
+    private bool playerDead = false;
 
     public bool _isFaceingRight => isFaceingRight;
+    public bool _pausePlayer => pausePlayer;
     
     //public PlayerState State { get { return state; } set { state = value; } }
 
@@ -54,7 +57,7 @@ public class PlayerMovement : MonoBehaviour
         UpdatePlayerState();
         UpdateAnimation();
 
-        if (Input.GetKeyDown(jumpKey) && IsGrounded())
+        if (Input.GetKeyDown(jumpKey) && IsGrounded() && !pausePlayer)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         }
@@ -62,7 +65,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.velocity = new Vector2(horizontal * moveSpeed, rb.velocity.y);
+        if (!pausePlayer)
+        {
+            rb.velocity = new Vector2(horizontal * moveSpeed, rb.velocity.y);
+        }
     }
 
     private bool IsGrounded()
@@ -72,7 +78,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Flip()
     {
-        if (isFaceingRight && horizontal < 0f || !isFaceingRight && horizontal > 0f)
+        if ((isFaceingRight && horizontal < 0f || !isFaceingRight && horizontal > 0f) && !pausePlayer)
         {
             isFaceingRight = !isFaceingRight;
             Vector3 localScale = transform.localScale;
@@ -83,7 +89,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void UpdatePlayerState()
     {
-        if (horizontal == 0)
+        if (playerDead)
+        {
+            _state = PlayerState.Dead;
+        }
+        else if (horizontal == 0)
         {
             if (IsGrounded())
             {
@@ -126,6 +136,12 @@ public class PlayerMovement : MonoBehaviour
             DisableAllAnimation();
             ani.SetBool("isInAir", true);
         }
+
+        if (_state == PlayerState.Dead)
+        {
+            DisableAllAnimation();
+            ani.SetBool("isDead", true);
+        }
     }
 
     private void DisableAllAnimation()
@@ -133,5 +149,12 @@ public class PlayerMovement : MonoBehaviour
         ani.SetBool("isIdle", false);
         ani.SetBool("isRun", false);
         ani.SetBool("isInAir", false);
+        ani.SetBool("isDead", false);
+    }
+
+    public void SetPlayerDie()
+    {
+        playerDead = true;
+        pausePlayer = true;
     }
 }

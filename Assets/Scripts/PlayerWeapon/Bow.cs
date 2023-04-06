@@ -36,7 +36,7 @@ public class Bow : MonoBehaviour
             autoFire = !autoFire;
         }
 
-        if ((Input.GetKey(shootKey) || autoFire) && readyToShoot)
+        if ((Input.GetKey(shootKey) || autoFire) && readyToShoot && !pm._pausePlayer)
         {
             Shoot();
             Invoke(nameof(ResetReadyToShoot), shootCoolDown);

@@ -9,12 +9,27 @@ public class GreenSlime : MonoBehaviour
     [SerializeField] private float health;
     [SerializeField] private float moveSpeed;
     [SerializeField] private float attackDamage;
+    [SerializeField] private float attackCooldown;
 
     [Header("===== Get Component =====")]
-    [SerializeField] private Transform player;
     [SerializeField] private Rigidbody2D rb;
 
+    private GameObject player;
+    private PlayerStatus ps;
+    
     private float playerXDistance;
+    private bool readyToAttack = true;
+
+    private void Start()
+    {
+        if (GameObject.FindGameObjectWithTag("Player") != null)
+        {
+            GameObject go = GameObject.FindGameObjectWithTag("Player");
+            player = go;
+            ps = go.GetComponent<PlayerStatus>();
+        }
+    }
+
     private void Update()
     {
         moveToPlayer();
@@ -41,5 +56,20 @@ public class GreenSlime : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+    }
+
+    private void OnTriggerStay2D(Collider2D col)
+    {
+        if (col.CompareTag("Player") && readyToAttack)
+        {
+            readyToAttack = false;
+            ps.PlayerTakeDamage(attackDamage);
+            Invoke(nameof(ResetReadyToAttack), attackCooldown);
+        }
+    }
+
+    private void ResetReadyToAttack()
+    {
+        readyToAttack = true;
     }
 }

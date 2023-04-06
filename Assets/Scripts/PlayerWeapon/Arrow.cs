@@ -15,12 +15,16 @@ public class Arrow : MonoBehaviour
 
     private void Start()
     {
-        GameObject go = GameObject.FindGameObjectWithTag("Bow");
-        bow = go.GetComponent<Bow>();
-        
+        if (GameObject.FindGameObjectWithTag("Bow") != null)
+        {
+            GameObject go = GameObject.FindGameObjectWithTag("Bow");
+            bow = go.GetComponent<Bow>();
+            
+            arrowDamage = bow._arrowDamage;
+            arrowPiercing = bow._piercing;
+        }
+
         rb = GetComponent<Rigidbody2D>();
-        arrowDamage = bow._arrowDamage;
-        arrowPiercing = bow._piercing;
     }
 
     private void Update()
