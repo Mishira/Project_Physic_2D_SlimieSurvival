@@ -5,8 +5,10 @@ using UnityEngine;
 
 public class Bow : MonoBehaviour
 {
-    [Header("===== Basic Setting =====")]
+    [Header("===== Basic Setting =====")] 
+    [SerializeField] private float arrowDamage;
     [SerializeField] private float launchForce;
+    [SerializeField] private int piercing = 0;
     [SerializeField] private float shootCoolDown;
     
     [Header("===== Prefab =====")]
@@ -23,6 +25,9 @@ public class Bow : MonoBehaviour
 
     private bool readyToShoot = true;
     private bool autoFire = false;
+
+    public float _arrowDamage => arrowDamage;
+    public int _piercing => piercing;
 
     private void Update()
     {
