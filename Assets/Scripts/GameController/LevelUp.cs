@@ -10,9 +10,16 @@ public class LevelUp : MonoBehaviour
     [SerializeField] private List<string> statusUpgrade = new List<string>();
     [SerializeField] private List<string> itemUpgrade = new List<string>();
 
-    [SerializeField] private Text slot1Name;
-    [SerializeField] private Text slot2Name;
-    [SerializeField] private Text slot3Name;
+    [SerializeField] private PlayerMovement pm;
+
+    [SerializeField] private GameObject LevelUpSlotUI;
+    
+    [SerializeField] private Text slot1ItemName;
+    [SerializeField] private Text slot2ItemName;
+    [SerializeField] private Text slot3ItemName;
+    [SerializeField] private Text slot1DescriptionText;
+    [SerializeField] private Text slot2DescriptionText;
+    [SerializeField] private Text slot3DescriptionText;
 
     private List<char> upgradeGroup = new List<char>(3);
     private List<int> upgradeIndex = new List<int>(3);
@@ -28,6 +35,8 @@ public class LevelUp : MonoBehaviour
         upgradeIndex.Add(-1);
         upgradeIndex.Add(-1);
         upgradeIndex.Add(-1);
+        
+        OpenLevelUpSlotUI(false);
     }
 
     private void Update()
@@ -65,6 +74,9 @@ public class LevelUp : MonoBehaviour
         {
             UpdateTextUI(i, upgradeGroup[i], upgradeIndex[i]);
         }
+        
+        UpdateLevelUpSlotUI();
+        OpenLevelUpSlotUI(true);
     }
 
     private void UpdateTextUI(int i, char upgradeGroup,int index)
@@ -88,6 +100,16 @@ public class LevelUp : MonoBehaviour
         }
     }
 
+    private void UpdateLevelUpSlotUI()
+    {
+        slot1ItemName.text = ReturnUpgradeName(upgradeGroup[0], upgradeIndex[0]);
+        slot1DescriptionText.text = "...";
+        slot2ItemName.text = ReturnUpgradeName(upgradeGroup[1], upgradeIndex[1]);
+        slot2DescriptionText.text = "...";
+        slot3ItemName.text = ReturnUpgradeName(upgradeGroup[2], upgradeIndex[2]);
+        slot3DescriptionText.text = "...";
+    }
+
     private string ReturnUpgradeName(char upgradeGroup, int index)
     {
         if (upgradeGroup == 's')
@@ -97,6 +119,22 @@ public class LevelUp : MonoBehaviour
         else
         {
             return itemUpgrade[index];
+        }
+    }
+
+    public void OpenLevelUpSlotUI(bool open)
+    {
+        if (open)
+        {
+            Time.timeScale = 0;
+            pm.SetPausePlayer(true);
+            LevelUpSlotUI.SetActive(true);
+        }
+        else
+        {
+            Time.timeScale = 1;
+            pm.SetPausePlayer(false);
+            LevelUpSlotUI.SetActive(false);
         }
     }
 }

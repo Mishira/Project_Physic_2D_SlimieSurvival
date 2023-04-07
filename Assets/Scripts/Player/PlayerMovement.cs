@@ -157,4 +157,16 @@ public class PlayerMovement : MonoBehaviour
         playerDead = true;
         pausePlayer = true;
     }
+
+    public void SetPausePlayer(bool pause)
+    {
+        if (pause)
+        {
+            pausePlayer = true;
+        }
+        else
+        {
+            pausePlayer = false;
+        }
+    }
 }
