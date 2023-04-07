@@ -24,6 +24,7 @@ public class PlayerStatus : MonoBehaviour
     [SerializeField] private PlayerMovement pm;
     [SerializeField] private UIController uiController;
     [SerializeField] private LevelUp levelUp;
+    [SerializeField] private Bow bow;
 
     private float nextLevelEXPBuff;
     private float lastLevelExperienceRequire = 0;
@@ -47,6 +48,7 @@ public class PlayerStatus : MonoBehaviour
     private void Update()
     {
         CheckLevelUp();
+        uiController.UpdateHealthBar();
         
         if (Input.GetKeyDown(KeyCode.L))
         {
@@ -62,7 +64,6 @@ public class PlayerStatus : MonoBehaviour
             health = 0;
             pm.SetPlayerDie();
         }
-        uiController.UpdateHealthBar();
     }
 
     private void CheckLevelUp()
@@ -88,5 +89,42 @@ public class PlayerStatus : MonoBehaviour
     public void ResetOpenLevelUpUI()
     {
         openLevelUpUI = false;
+    }
+
+    public void UpdateStatus()
+    {
+        bow.UpdateStatusChange(damageMultiply, projectileSpeedMultiply, attackCooldownMultiply);
+        pm.UpdateStatusChange(moveSpeedMultiply);
+    }
+
+    public void UpgradeStatus(int index, float change)
+    {
+        switch (index)
+        {
+            case 0 :    // Max health
+                maxHealth += change;
+                health += change;
+                break;
+            
+            case 1 :    // Damage
+                damageMultiply += change;
+                break;
+            
+            case 2 :    // Projectile Speed
+                projectileSpeedMultiply += change;
+                break;
+            
+            case 3 :    // Move Speed
+                moveSpeedMultiply += change;
+                break;
+            
+            case 4 :    // Cooldown
+                attackCooldownMultiply += change;
+                break;
+            
+            default:
+                Debug.Log("Upgrade name didn't match with Switch()");
+                break;
+        }
     }
 }

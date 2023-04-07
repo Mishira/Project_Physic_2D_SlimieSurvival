@@ -253,6 +253,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5299340054715664354, guid: cad2e43b3ee75804db8603834417a2c5, type: 3}
+      propertyPath: health
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 5299340054715664354, guid: cad2e43b3ee75804db8603834417a2c5, type: 3}
       propertyPath: moveSpeed
       value: 0
       objectReference: {fileID: 0}
@@ -314,6 +318,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5299340054715664354, guid: cad2e43b3ee75804db8603834417a2c5, type: 3}
+      propertyPath: health
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 5299340054715664354, guid: cad2e43b3ee75804db8603834417a2c5, type: 3}
       propertyPath: moveSpeed
       value: 0
       objectReference: {fileID: 0}
@@ -365,6 +373,7 @@ MonoBehaviour:
   upGradeCooldownAmount: 5
   pm: {fileID: 1776693616}
   ps: {fileID: 1776693614}
+  bow: {fileID: 0}
   LevelUpSlotUI: {fileID: 2101738312}
   slot1ItemName: {fileID: 218514582}
   slot2ItemName: {fileID: 1611699822}
@@ -422,8 +431,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -145, y: 21.999998}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: 45.144, y: 27}
+  m_SizeDelta: {x: 540.29, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &218514582
 MonoBehaviour:
@@ -767,6 +776,10 @@ PrefabInstance:
     - target: {fileID: 2770394255079757140, guid: cad2e43b3ee75804db8603834417a2c5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5299340054715664354, guid: cad2e43b3ee75804db8603834417a2c5, type: 3}
+      propertyPath: health
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 5299340054715664354, guid: cad2e43b3ee75804db8603834417a2c5, type: 3}
       propertyPath: moveSpeed
@@ -1115,8 +1128,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 199982722}
         m_TargetAssemblyTypeName: LevelUp, Assembly-CSharp
-        m_MethodName: OpenLevelUpSlotUI
-        m_Mode: 6
+        m_MethodName: PressUpgradeSlot1
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1339,6 +1352,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5299340054715664354, guid: cad2e43b3ee75804db8603834417a2c5, type: 3}
+      propertyPath: health
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 5299340054715664354, guid: cad2e43b3ee75804db8603834417a2c5, type: 3}
       propertyPath: moveSpeed
       value: 0
       objectReference: {fileID: 0}
@@ -1432,8 +1449,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 199982722}
         m_TargetAssemblyTypeName: LevelUp, Assembly-CSharp
-        m_MethodName: OpenLevelUpSlotUI
-        m_Mode: 6
+        m_MethodName: PressUpgradeSlot2
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1604,6 +1621,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &923841651 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 438930289, guid: 5692bac621ddb69428504723992f3349, type: 3}
+  m_PrefabInstance: {fileID: 1288260184}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bea304e8c9c6db408a07fee0d2bc336, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &943237464
 GameObject:
   m_ObjectHideFlags: 0
@@ -1738,6 +1766,10 @@ PrefabInstance:
     - target: {fileID: 2770394255079757140, guid: cad2e43b3ee75804db8603834417a2c5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5299340054715664354, guid: cad2e43b3ee75804db8603834417a2c5, type: 3}
+      propertyPath: health
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 5299340054715664354, guid: cad2e43b3ee75804db8603834417a2c5, type: 3}
       propertyPath: moveSpeed
@@ -4168,6 +4200,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5299340054715664354, guid: cad2e43b3ee75804db8603834417a2c5, type: 3}
+      propertyPath: health
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 5299340054715664354, guid: cad2e43b3ee75804db8603834417a2c5, type: 3}
       propertyPath: moveSpeed
       value: 0
       objectReference: {fileID: 0}
@@ -4568,8 +4604,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -145, y: 21.999998}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: 46.91, y: 27}
+  m_SizeDelta: {x: 543.82, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1611699822
 MonoBehaviour:
@@ -4706,8 +4742,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 199982722}
         m_TargetAssemblyTypeName: LevelUp, Assembly-CSharp
-        m_MethodName: OpenLevelUpSlotUI
-        m_Mode: 6
+        m_MethodName: PressUpgradeSlot3
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -4808,6 +4844,10 @@ PrefabInstance:
     - target: {fileID: 2770394255079757140, guid: cad2e43b3ee75804db8603834417a2c5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5299340054715664354, guid: cad2e43b3ee75804db8603834417a2c5, type: 3}
+      propertyPath: health
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 5299340054715664354, guid: cad2e43b3ee75804db8603834417a2c5, type: 3}
       propertyPath: moveSpeed
@@ -4931,6 +4971,7 @@ MonoBehaviour:
   pm: {fileID: 1776693616}
   uiController: {fileID: 655543429}
   levelUp: {fileID: 199982722}
+  bow: {fileID: 923841651}
 --- !u!114 &1776693616 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1776693610, guid: 5692bac621ddb69428504723992f3349, type: 3}
@@ -5041,6 +5082,10 @@ PrefabInstance:
     - target: {fileID: 2770394255079757140, guid: cad2e43b3ee75804db8603834417a2c5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5299340054715664354, guid: cad2e43b3ee75804db8603834417a2c5, type: 3}
+      propertyPath: health
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 5299340054715664354, guid: cad2e43b3ee75804db8603834417a2c5, type: 3}
       propertyPath: moveSpeed
@@ -5189,6 +5234,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5299340054715664354, guid: cad2e43b3ee75804db8603834417a2c5, type: 3}
+      propertyPath: health
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 5299340054715664354, guid: cad2e43b3ee75804db8603834417a2c5, type: 3}
       propertyPath: moveSpeed
       value: 0
       objectReference: {fileID: 0}
@@ -5305,8 +5354,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -145, y: 22}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: 49.265, y: 27}
+  m_SizeDelta: {x: 548.53, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2028694282
 MonoBehaviour:
@@ -5365,7 +5414,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2101738313
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5501,6 +5550,10 @@ PrefabInstance:
     - target: {fileID: 2770394255079757140, guid: cad2e43b3ee75804db8603834417a2c5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5299340054715664354, guid: cad2e43b3ee75804db8603834417a2c5, type: 3}
+      propertyPath: health
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 5299340054715664354, guid: cad2e43b3ee75804db8603834417a2c5, type: 3}
       propertyPath: moveSpeed

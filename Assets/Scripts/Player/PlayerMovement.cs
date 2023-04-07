@@ -27,6 +27,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("===== Key Bind =====")]
     [SerializeField] private KeyCode jumpKey = KeyCode.Space;
 
+    private float defaultMoveSpeed;
     private float horizontal;
     private bool isFaceingRight;
     private PlayerState _state;
@@ -48,6 +49,8 @@ public class PlayerMovement : MonoBehaviour
         {
             isFaceingRight = false;
         }
+
+        defaultMoveSpeed = moveSpeed;
     }
 
     private void Update()
@@ -168,5 +171,10 @@ public class PlayerMovement : MonoBehaviour
         {
             pausePlayer = false;
         }
+    }
+
+    public void UpdateStatusChange(float moveSpeed)
+    {
+        this.moveSpeed = defaultMoveSpeed * ((moveSpeed + 100) / 100);
     }
 }

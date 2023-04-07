@@ -16,6 +16,7 @@ public class LevelUp : MonoBehaviour
     [Header("===== Get Component =====")]
     [SerializeField] private PlayerMovement pm;
     [SerializeField] private PlayerStatus ps;
+    [SerializeField] private Bow bow;
     
     [Header("===== UI Upgrade Slot =====")]
     [SerializeField] private GameObject LevelUpSlotUI;
@@ -31,15 +32,18 @@ public class LevelUp : MonoBehaviour
     private List<char> upgradeGroup = new List<char>(3);
     private List<int> upgradeIndex = new List<int>(3);
 
+    // ===== Level item here =====
+    private int levelBow = 1;
+    
     private int itemUpgradeCount;
 
     private void Start()
     {
-        statusUpgrade.Add("Max health");
-        statusUpgrade.Add("Damage");
-        statusUpgrade.Add("Projectile speed");
-        statusUpgrade.Add("Move speed");
-        statusUpgrade.Add("Cooldown");
+        statusUpgrade.Add("Increase player max health");
+        statusUpgrade.Add("Increase player damage");
+        statusUpgrade.Add("Increase player projectile speed");
+        statusUpgrade.Add("Increase player move speed");
+        statusUpgrade.Add("Reduce arrow cooldown");
         itemUpgrade.Add("Bow");
         
         upgradeGroup.Add('0');
@@ -84,10 +88,10 @@ public class LevelUp : MonoBehaviour
             }
         }
 
-        for (int i = 0; i < 3; i++)
+        /*for (int i = 0; i < 3; i++)
         {
             UpdateTextUI(i, upgradeGroup[i], upgradeIndex[i]);
-        }
+        }*/
         
         UpdateLevelUpSlotUI();
         OpenLevelUpSlotUI(true);
@@ -140,33 +144,84 @@ public class LevelUp : MonoBehaviour
     {
         switch (upgradeName)
         {
-            case "Max health" :
+            case "Increase player max health" :
                 return "Max health + " + upGradeMaxHealthAmount;
             break;
             
-            case "Damage" :
+            case "Increase player damage" :
                 return $"All damage + {upGradeDamageAmount} %";
             break;
             
-            case "Projectile speed" :
+            case "Increase player projectile speed" :
                 return $"Arrow projectile speed + {upGradeProjectileSpeedAmount}";
             break;
             
-            case "Move speed" :
+            case "Increase player move speed" :
                 return $"Player move speed + {upGradeMoveSpeedAmount}";
             break;
             
-            case "Cooldown" :
+            case "Reduce arrow cooldown" :
                 return $"Arrow shoot cooldown - {upGradeCooldownAmount} %";
             break;
             
             default:
                 return "Upgrade name didn't match with Switch()";
+            break;
         }
-
-        return "-1";
     }
 
+    private void UpGrade(string upgradeName)
+    {
+        switch (upgradeName)
+        {
+            case "Increase player max health" :
+                ps.UpgradeStatus(0, upGradeMaxHealthAmount);
+                break;
+            
+            case "Increase player damage" :
+                ps.UpgradeStatus(1, upGradeDamageAmount);
+                ps.UpdateStatus();
+                break;
+            
+            case "Increase player projectile speed" :
+                ps.UpgradeStatus(2, upGradeProjectileSpeedAmount);
+                ps.UpdateStatus();
+                break;
+            
+            case "Increase player move speed" :
+                ps.UpgradeStatus(3, upGradeMoveSpeedAmount);
+                ps.UpdateStatus();
+                break;
+            
+            case "Reduce arrow cooldown" :
+                ps.UpgradeStatus(4, upGradeCooldownAmount);
+                ps.UpdateStatus();
+                break;
+            
+            default:
+                Debug.Log("Upgrade name didn't match with Switch()");
+                break;
+        }
+    }
+
+    public void PressUpgradeSlot1()
+    {
+        UpGrade(ReturnUpgradeName(upgradeGroup[0], upgradeIndex[0]));
+        OpenLevelUpSlotUI(false);
+    }
+    
+    public void PressUpgradeSlot2()
+    {
+        UpGrade(ReturnUpgradeName(upgradeGroup[1], upgradeIndex[1]));
+        OpenLevelUpSlotUI(false);
+    }
+    
+    public void PressUpgradeSlot3()
+    {
+        UpGrade(ReturnUpgradeName(upgradeGroup[2], upgradeIndex[2]));
+        OpenLevelUpSlotUI(false);
+    }
+    
     public void OpenLevelUpSlotUI(bool open)
     {
         if (open)

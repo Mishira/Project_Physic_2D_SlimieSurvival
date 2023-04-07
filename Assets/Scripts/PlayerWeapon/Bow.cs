@@ -23,11 +23,22 @@ public class Bow : MonoBehaviour
     [SerializeField] private PlayerMovement pm;
     [SerializeField] private Animator ani;
 
+    private float defaultArrowDamage;
+    private float defaultLaunchForce;
+    private float defaultShootCooldown;
+    
     private bool readyToShoot = true;
     private bool autoFire = false;
 
     public float _arrowDamage => arrowDamage;
     public int _piercing => piercing;
+
+    private void Start()
+    {
+        defaultArrowDamage = arrowDamage;
+        defaultLaunchForce = launchForce;
+        defaultShootCooldown = shootCoolDown;
+    }
 
     private void Update()
     {
@@ -62,5 +73,12 @@ public class Bow : MonoBehaviour
     private void ResetReadyToShoot()
     {
         readyToShoot = true;
+    }
+
+    public void UpdateStatusChange(float damage, float launch, float cooldown)
+    {
+        arrowDamage = defaultArrowDamage * ((damage + 100) / 100);
+        launchForce = defaultLaunchForce * ((launch + 100) / 100);
+        shootCoolDown = defaultShootCooldown * ((100 - cooldown) / 100);
     }
 }
