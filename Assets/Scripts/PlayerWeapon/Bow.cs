@@ -21,7 +21,8 @@ public class Bow : MonoBehaviour
     [Header("===== Get Component =====")]
     [SerializeField] private Transform shotPoint;
     [SerializeField] private PlayerMovement pm;
-    [SerializeField] private Animator ani;
+    [SerializeField] private PlayerStatus ps;
+    //[SerializeField] private Animator ani;
 
     private float defaultArrowDamage;
     private float defaultLaunchForce;
@@ -75,10 +76,20 @@ public class Bow : MonoBehaviour
         readyToShoot = true;
     }
 
-    public void UpdateStatusChange(float damage, float launch, float cooldown)
+    public void UpdateStatusChange()
     {
-        arrowDamage = defaultArrowDamage * ((damage + 100) / 100);
-        launchForce = defaultLaunchForce * ((launch + 100) / 100);
-        shootCoolDown = defaultShootCooldown * ((100 - cooldown) / 100);
+        arrowDamage = defaultArrowDamage * ((ps._damageMultiply + 100) / 100);
+        launchForce = defaultLaunchForce * ((ps._projectileSpeedMultiply + 100) / 100);
+        shootCoolDown = defaultShootCooldown * ((100 - ps._attackCooldownMultiply) / 100);
+    }
+
+    public void UpgradeBow(float damage, float speed, float cooldown, int pierce)
+    {
+        defaultArrowDamage += damage;
+        defaultLaunchForce += speed;
+        defaultShootCooldown -= cooldown;
+        piercing += pierce;
+        
+        UpdateStatusChange();
     }
 }

@@ -23,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private Animator ani;
+    [SerializeField] private PlayerStatus ps;
 
     [Header("===== Key Bind =====")]
     [SerializeField] private KeyCode jumpKey = KeyCode.Space;
@@ -173,8 +174,8 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    public void UpdateStatusChange(float moveSpeed)
+    public void UpdateStatusChange()
     {
-        this.moveSpeed = defaultMoveSpeed * ((moveSpeed + 100) / 100);
+        this.moveSpeed = defaultMoveSpeed * ((ps._moveSpeedMultiply + 100) / 100);
     }
 }

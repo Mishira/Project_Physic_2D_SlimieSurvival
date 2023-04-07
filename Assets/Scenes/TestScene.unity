@@ -368,12 +368,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upGradeMaxHealthAmount: 10
   upGradeDamageAmount: 10
-  upGradeProjectileSpeedAmount: 20
+  upGradeProjectileSpeedAmount: 15
   upGradeMoveSpeedAmount: 15
   upGradeCooldownAmount: 5
   pm: {fileID: 1776693616}
   ps: {fileID: 1776693614}
-  bow: {fileID: 0}
+  bow: {fileID: 923841651}
   LevelUpSlotUI: {fileID: 2101738312}
   slot1ItemName: {fileID: 218514582}
   slot2ItemName: {fileID: 1611699822}
@@ -1575,6 +1575,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   ani: {fileID: 0}
+  ps: {fileID: 0}
   jumpKey: 32
 --- !u!1 &867436677
 GameObject:
@@ -4226,6 +4227,10 @@ PrefabInstance:
       value: Bow
       objectReference: {fileID: 0}
     - target: {fileID: 438930289, guid: 5692bac621ddb69428504723992f3349, type: 3}
+      propertyPath: ps
+      value: 
+      objectReference: {fileID: 1776693614}
+    - target: {fileID: 438930289, guid: 5692bac621ddb69428504723992f3349, type: 3}
       propertyPath: piercing
       value: 0
       objectReference: {fileID: 0}
@@ -4237,6 +4242,10 @@ PrefabInstance:
       propertyPath: shootCoolDown
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1776693610, guid: 5692bac621ddb69428504723992f3349, type: 3}
+      propertyPath: ps
+      value: 
+      objectReference: {fileID: 1776693614}
     - target: {fileID: 3408982907303215174, guid: 5692bac621ddb69428504723992f3349, type: 3}
       propertyPath: m_Name
       value: Player

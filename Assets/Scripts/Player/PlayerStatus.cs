@@ -10,6 +10,7 @@ public class PlayerStatus : MonoBehaviour
     [SerializeField] private float maxHealth = 100;
     [SerializeField] private float damageMultiply = 0;
     [SerializeField] private float attackCooldownMultiply = 0;
+    [SerializeField] private float maxCooldownMultiplyLimit = 70;
     [SerializeField] private float projectileSpeedMultiply = 0;
     [SerializeField] private float moveSpeedMultiply = 0;
     [SerializeField] private float experienceGainMultiply = 0;
@@ -29,6 +30,7 @@ public class PlayerStatus : MonoBehaviour
     private float nextLevelEXPBuff;
     private float lastLevelExperienceRequire = 0;
     private bool openLevelUpUI = false;
+    private bool firstTimeHitCooldownLimit = true;
 
     public float _health => health;
     public float _maxHealth => maxHealth;
@@ -36,6 +38,10 @@ public class PlayerStatus : MonoBehaviour
     public float _playerExperience => playerExperience;
     public float _nextLevelExperienceRequire => nextLevelExperienceRequire;
     public float _lastLevelExperienceRequire => lastLevelExperienceRequire;
+    public float _damageMultiply => damageMultiply;
+    public float _attackCooldownMultiply => attackCooldownMultiply;
+    public float _projectileSpeedMultiply => projectileSpeedMultiply;
+    public float _moveSpeedMultiply => moveSpeedMultiply;
 
     private void Start()
     {
@@ -93,8 +99,8 @@ public class PlayerStatus : MonoBehaviour
 
     public void UpdateStatus()
     {
-        bow.UpdateStatusChange(damageMultiply, projectileSpeedMultiply, attackCooldownMultiply);
-        pm.UpdateStatusChange(moveSpeedMultiply);
+        bow.UpdateStatusChange();
+        pm.UpdateStatusChange();
     }
 
     public void UpgradeStatus(int index, float change)
@@ -120,6 +126,16 @@ public class PlayerStatus : MonoBehaviour
             
             case 4 :    // Cooldown
                 attackCooldownMultiply += change;
+                if (attackCooldownMultiply >= maxCooldownMultiplyLimit && firstTimeHitCooldownLimit)
+                {
+                    firstTimeHitCooldownLimit = false;
+                    attackCooldownMultiply = maxCooldownMultiplyLimit;
+                    levelUp.RemoveCooldownUpgradeStatus();
+                }
+                else if (attackCooldownMultiply > maxCooldownMultiplyLimit)
+                {
+                    attackCooldownMultiply = maxCooldownMultiplyLimit;
+                }
                 break;
             
             default:

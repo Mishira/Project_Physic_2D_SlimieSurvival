@@ -34,8 +34,9 @@ public class LevelUp : MonoBehaviour
 
     // ===== Level item here =====
     private int levelBow = 1;
-    
+
     private int itemUpgradeCount;
+    private bool cooldownUpgradeStatusIsInUpgradeList = true;
 
     private void Start()
     {
@@ -99,8 +100,8 @@ public class LevelUp : MonoBehaviour
 
     private void UpdateTextUI(int i, char upgradeGroup,int index)
     {
-        Debug.Log($"slot {i + 1} / Upgrade name {ReturnUpgradeName(upgradeGroup, index)}");
-    }
+        Debug.Log($"slot {i + 1} / Upgrade name {ReturnUpgradeName(upgradeGroup, index, true)}");
+    }   // This is for show in Console
 
     private char SetUpgradeGroup(int i)
     {
@@ -118,17 +119,26 @@ public class LevelUp : MonoBehaviour
         }
     }
 
-    private void UpdateLevelUpSlotUI()
+    public void RemoveCooldownUpgradeStatus()
     {
-        slot1ItemName.text = ReturnUpgradeName(upgradeGroup[0], upgradeIndex[0]);
-        slot1DescriptionText.text = ReturnUpgradeDescription(ReturnUpgradeName(upgradeGroup[0], upgradeIndex[0]));
-        slot2ItemName.text = ReturnUpgradeName(upgradeGroup[1], upgradeIndex[1]);
-        slot2DescriptionText.text = ReturnUpgradeDescription(ReturnUpgradeName(upgradeGroup[1], upgradeIndex[1]));
-        slot3ItemName.text = ReturnUpgradeName(upgradeGroup[2], upgradeIndex[2]);
-        slot3DescriptionText.text = ReturnUpgradeDescription(ReturnUpgradeName(upgradeGroup[2], upgradeIndex[2]));
+        if (cooldownUpgradeStatusIsInUpgradeList)
+        {
+            cooldownUpgradeStatusIsInUpgradeList = false;
+            statusUpgrade.Remove("Reduce arrow cooldown");
+        }
     }
 
-    private string ReturnUpgradeName(char upgradeGroup, int index)
+    private void UpdateLevelUpSlotUI()
+    {
+        slot1ItemName.text = ReturnUpgradeName(upgradeGroup[0], upgradeIndex[0], true);
+        slot1DescriptionText.text = ReturnUpgradeDescription(ReturnUpgradeName(upgradeGroup[0], upgradeIndex[0], false));
+        slot2ItemName.text = ReturnUpgradeName(upgradeGroup[1], upgradeIndex[1], true);
+        slot2DescriptionText.text = ReturnUpgradeDescription(ReturnUpgradeName(upgradeGroup[1], upgradeIndex[1], false));
+        slot3ItemName.text = ReturnUpgradeName(upgradeGroup[2], upgradeIndex[2], true);
+        slot3DescriptionText.text = ReturnUpgradeDescription(ReturnUpgradeName(upgradeGroup[2], upgradeIndex[2], false));
+    }
+
+    private string ReturnUpgradeName(char upgradeGroup, int index, bool showItemLevel)
     {
         if (upgradeGroup == 's')
         {
@@ -136,7 +146,14 @@ public class LevelUp : MonoBehaviour
         }
         else
         {
-            return itemUpgrade[index];
+            if (showItemLevel)
+            {
+                return $"{itemUpgrade[index]} LV. {ShowUpgradeItemToLevel(itemUpgrade[index])}";
+            }
+            else
+            {
+                return itemUpgrade[index];
+            }
         }
     }
     
@@ -164,6 +181,12 @@ public class LevelUp : MonoBehaviour
                 return $"Arrow shoot cooldown - {upGradeCooldownAmount} %";
             break;
             
+            // ============================= End - Status Description =============================
+
+            case "Bow" :
+                return UpGradeBowDescription(levelBow + 1);
+                break;
+
             default:
                 return "Upgrade name didn't match with Switch()";
             break;
@@ -198,6 +221,13 @@ public class LevelUp : MonoBehaviour
                 ps.UpdateStatus();
                 break;
             
+            // ============================= End - Status Upgrade =============================
+            
+            case "Bow" :
+                UpgradeBow(levelBow + 1);
+                break;
+                
+            
             default:
                 Debug.Log("Upgrade name didn't match with Switch()");
                 break;
@@ -206,19 +236,19 @@ public class LevelUp : MonoBehaviour
 
     public void PressUpgradeSlot1()
     {
-        UpGrade(ReturnUpgradeName(upgradeGroup[0], upgradeIndex[0]));
+        UpGrade(ReturnUpgradeName(upgradeGroup[0], upgradeIndex[0], false));
         OpenLevelUpSlotUI(false);
     }
     
     public void PressUpgradeSlot2()
     {
-        UpGrade(ReturnUpgradeName(upgradeGroup[1], upgradeIndex[1]));
+        UpGrade(ReturnUpgradeName(upgradeGroup[1], upgradeIndex[1], false));
         OpenLevelUpSlotUI(false);
     }
     
     public void PressUpgradeSlot3()
     {
-        UpGrade(ReturnUpgradeName(upgradeGroup[2], upgradeIndex[2]));
+        UpGrade(ReturnUpgradeName(upgradeGroup[2], upgradeIndex[2], false));
         OpenLevelUpSlotUI(false);
     }
     
@@ -236,6 +266,121 @@ public class LevelUp : MonoBehaviour
             pm.SetPausePlayer(false);
             LevelUpSlotUI.SetActive(false);
             ps.ResetOpenLevelUpUI();
+        }
+    }
+
+    private int ShowUpgradeItemToLevel(string itemName)
+    {
+        switch (itemName)
+        {
+            case "Bow" :
+                return levelBow + 1;
+            break;
+            
+            default:
+                return -1;
+            // ShowUpgradeItemToLevel() - No match item name in switch()
+        }
+    }
+    
+    // =============================== Item - Upgrade() ===============================
+
+    private void UpgradeBow(int lv)
+    {
+        switch (lv)
+        {
+            case 2 :
+                bow.UpgradeBow(3, 0, 0, 0);
+                levelBow++;
+                break;
+            
+            case 3 :
+                bow.UpgradeBow(0, 1, 0, 0);
+                levelBow++;
+                break;
+            
+            case 4 :
+                bow.UpgradeBow(3, 0, 0, 0);
+                levelBow++;
+                break;
+            
+            case 5 :
+                bow.UpgradeBow(0, 1, 0, 0);
+                levelBow++;
+                break;
+            
+            case 6 :
+                bow.UpgradeBow(0, 0, 0.2f, 0);
+                levelBow++;
+                break;
+            
+            case 7 :
+                bow.UpgradeBow(0, 2, 0, 0);
+                levelBow++;
+                break;
+            
+            case 8 :
+                bow.UpgradeBow(4, 0, 0, 0);
+                levelBow++;
+                break;
+            
+            case 9 :
+                bow.UpgradeBow(0, 0, 0.3f, 0);
+                levelBow++;
+                break;
+            
+            case 10 :
+                bow.UpgradeBow(0, 0, 0, 1);
+                levelBow++;
+                itemUpgrade.Remove("Bow");
+                break;
+        }
+    }
+    
+    // =============================== Item - UpgradeDescription() ===============================
+
+    private string UpGradeBowDescription(int lv)
+    {
+        switch (lv)
+        {
+            case 2 :
+                return "Base damage +3";
+            break;
+            
+            case 3 :
+                return "Projectile speed +1";
+            break;
+            
+            case 4 :
+                return "Base damage +3";
+            break;
+            
+            case 5 :
+                return "Projectile speed +1";
+                break;
+
+            case 6 :
+                return "Cooldown -0.2 second";
+                break;
+
+            case 7 :
+                return "Projectile speed +2";
+                break;
+
+            case 8 :
+                return "Base damage +4";
+                break;
+
+            case 9 :
+                return "Cooldown -0.3 second";
+                break;
+
+            case 10 :
+                return "Piercing +1";
+                break;
+
+            default:
+                return "UpGradeBowDescription() - int lv didn't match in switch";
         }
     }
 }
