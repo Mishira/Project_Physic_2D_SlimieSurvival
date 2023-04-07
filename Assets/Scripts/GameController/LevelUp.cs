@@ -27,6 +27,9 @@ public class LevelUp : MonoBehaviour
     [SerializeField] private Text slot2DescriptionText;
     [SerializeField] private Text slot3DescriptionText;
 
+    [Header("===== UI Item Level Text =====")]
+    [SerializeField] private Text bowLevelText;
+
     private List<string> statusUpgrade = new List<string>();
     private List<string> itemUpgrade = new List<string>();
     private List<char> upgradeGroup = new List<char>(3);
@@ -335,6 +338,8 @@ public class LevelUp : MonoBehaviour
                 itemUpgrade.Remove("Bow");
                 break;
         }
+        
+        UpdateBowLevelText();
     }
     
     // =============================== Item - UpgradeDescription() ===============================
@@ -381,6 +386,20 @@ public class LevelUp : MonoBehaviour
 
             default:
                 return "UpGradeBowDescription() - int lv didn't match in switch";
+        }
+    }
+    
+    // =============================== Item - Level Text ===============================
+
+    private void UpdateBowLevelText()
+    {
+        if (levelBow == 10)
+        {
+            bowLevelText.text = "LV. max";
+        }
+        else
+        {
+            bowLevelText.text = $"LV. {levelBow}";
         }
     }
 }
