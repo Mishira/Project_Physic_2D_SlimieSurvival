@@ -27,6 +27,7 @@ public class PlayerStatus : MonoBehaviour
 
     private float nextLevelEXPBuff;
     private float lastLevelExperienceRequire = 0;
+    private bool openLevelUpUI = false;
 
     public float _health => health;
     public float _maxHealth => maxHealth;
@@ -66,8 +67,9 @@ public class PlayerStatus : MonoBehaviour
 
     private void CheckLevelUp()
     {
-        if (playerExperience >= nextLevelExperienceRequire)
+        if (playerExperience >= nextLevelExperienceRequire && !openLevelUpUI)
         {
+            openLevelUpUI = true;
             playerLevel++;
             lastLevelExperienceRequire = nextLevelExperienceRequire;
             nextLevelExperienceRequire = lastLevelExperienceRequire + nextLevelEXPBuff;
@@ -81,5 +83,10 @@ public class PlayerStatus : MonoBehaviour
     {
         playerExperience = playerExperience + exp;
         //CheckLevelUp();
+    }
+
+    public void ResetOpenLevelUpUI()
+    {
+        openLevelUpUI = false;
     }
 }

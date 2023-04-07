@@ -7,13 +7,18 @@ using Random = UnityEngine.Random;
 
 public class LevelUp : MonoBehaviour
 {
-    [SerializeField] private List<string> statusUpgrade = new List<string>();
-    [SerializeField] private List<string> itemUpgrade = new List<string>();
+    [SerializeField] private float upGradeMaxHealthAmount = 10;
+    [SerializeField] private float upGradeDamageAmount = 10;
+    [SerializeField] private float upGradeProjectileSpeedAmount = 20;
+    [SerializeField] private float upGradeMoveSpeedAmount = 15;
+    [SerializeField] private float upGradeCooldownAmount = 5;
 
+    [Header("===== Get Component =====")]
     [SerializeField] private PlayerMovement pm;
-
-    [SerializeField] private GameObject LevelUpSlotUI;
+    [SerializeField] private PlayerStatus ps;
     
+    [Header("===== UI Upgrade Slot =====")]
+    [SerializeField] private GameObject LevelUpSlotUI;
     [SerializeField] private Text slot1ItemName;
     [SerializeField] private Text slot2ItemName;
     [SerializeField] private Text slot3ItemName;
@@ -21,6 +26,8 @@ public class LevelUp : MonoBehaviour
     [SerializeField] private Text slot2DescriptionText;
     [SerializeField] private Text slot3DescriptionText;
 
+    private List<string> statusUpgrade = new List<string>();
+    private List<string> itemUpgrade = new List<string>();
     private List<char> upgradeGroup = new List<char>(3);
     private List<int> upgradeIndex = new List<int>(3);
 
@@ -28,6 +35,13 @@ public class LevelUp : MonoBehaviour
 
     private void Start()
     {
+        statusUpgrade.Add("Max health");
+        statusUpgrade.Add("Damage");
+        statusUpgrade.Add("Projectile speed");
+        statusUpgrade.Add("Move speed");
+        statusUpgrade.Add("Cooldown");
+        itemUpgrade.Add("Bow");
+        
         upgradeGroup.Add('0');
         upgradeGroup.Add('0');
         upgradeGroup.Add('0');
@@ -103,11 +117,11 @@ public class LevelUp : MonoBehaviour
     private void UpdateLevelUpSlotUI()
     {
         slot1ItemName.text = ReturnUpgradeName(upgradeGroup[0], upgradeIndex[0]);
-        slot1DescriptionText.text = "...";
+        slot1DescriptionText.text = ReturnUpgradeDescription(ReturnUpgradeName(upgradeGroup[0], upgradeIndex[0]));
         slot2ItemName.text = ReturnUpgradeName(upgradeGroup[1], upgradeIndex[1]);
-        slot2DescriptionText.text = "...";
+        slot2DescriptionText.text = ReturnUpgradeDescription(ReturnUpgradeName(upgradeGroup[1], upgradeIndex[1]));
         slot3ItemName.text = ReturnUpgradeName(upgradeGroup[2], upgradeIndex[2]);
-        slot3DescriptionText.text = "...";
+        slot3DescriptionText.text = ReturnUpgradeDescription(ReturnUpgradeName(upgradeGroup[2], upgradeIndex[2]));
     }
 
     private string ReturnUpgradeName(char upgradeGroup, int index)
@@ -120,6 +134,37 @@ public class LevelUp : MonoBehaviour
         {
             return itemUpgrade[index];
         }
+    }
+    
+    private string ReturnUpgradeDescription(string upgradeName)
+    {
+        switch (upgradeName)
+        {
+            case "Max health" :
+                return "Max health + " + upGradeMaxHealthAmount;
+            break;
+            
+            case "Damage" :
+                return $"All damage + {upGradeDamageAmount} %";
+            break;
+            
+            case "Projectile speed" :
+                return $"Arrow projectile speed + {upGradeProjectileSpeedAmount}";
+            break;
+            
+            case "Move speed" :
+                return $"Player move speed + {upGradeMoveSpeedAmount}";
+            break;
+            
+            case "Cooldown" :
+                return $"Arrow shoot cooldown - {upGradeCooldownAmount} %";
+            break;
+            
+            default:
+                return "Upgrade name didn't match with Switch()";
+        }
+
+        return "-1";
     }
 
     public void OpenLevelUpSlotUI(bool open)
@@ -135,6 +180,7 @@ public class LevelUp : MonoBehaviour
             Time.timeScale = 1;
             pm.SetPausePlayer(false);
             LevelUpSlotUI.SetActive(false);
+            ps.ResetOpenLevelUpUI();
         }
     }
 }
