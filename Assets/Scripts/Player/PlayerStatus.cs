@@ -72,6 +72,15 @@ public class PlayerStatus : MonoBehaviour
         }
     }
 
+    public void HealPlayer(float healAmount)
+    {
+        health += healAmount;
+        if (health > maxHealth)
+        {
+            health = maxHealth;
+        }
+    }
+
     private void CheckLevelUp()
     {
         if (playerExperience >= nextLevelExperienceRequire && !openLevelUpUI)
