@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,6 +16,13 @@ public class UIController : MonoBehaviour
     private int time;
     private int timeMinute;
     private int timeSecone;
+    private int startPlayTime;
+
+    private void Start()
+    {
+        startPlayTime = (int)Time.time;
+    }
+
     private void Update()
     {
         TimerNormal();
@@ -41,7 +49,7 @@ public class UIController : MonoBehaviour
 
     private void TimerNormal()
     {
-        time = (int)Time.time;
+        time = (int)Time.time - startPlayTime;
 
         timeMinute = time / 60;
         timeSecone = time % 60;
