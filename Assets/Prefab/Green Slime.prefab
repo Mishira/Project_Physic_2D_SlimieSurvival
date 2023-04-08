@@ -227,7 +227,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 10
-  moveSpeed: 0
+  moveSpeed: 1
   attackDamage: 10
   attackCooldown: 0.5
   rb: {fileID: 5299340054715664365}
