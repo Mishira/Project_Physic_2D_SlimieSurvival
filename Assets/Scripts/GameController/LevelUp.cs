@@ -17,7 +17,7 @@ public class LevelUp : MonoBehaviour
     [SerializeField] private PlayerMovement pm;
     [SerializeField] private PlayerStatus ps;
     [SerializeField] private Bow bow;
-    
+
     [Header("===== UI Upgrade Slot =====")]
     [SerializeField] private GameObject LevelUpSlotUI;
     [SerializeField] private Text slot1ItemName;
@@ -26,6 +26,9 @@ public class LevelUp : MonoBehaviour
     [SerializeField] private Text slot1DescriptionText;
     [SerializeField] private Text slot2DescriptionText;
     [SerializeField] private Text slot3DescriptionText;
+    [SerializeField] private UIIconShowInUpgradeSlot slot1IconShow;
+    [SerializeField] private UIIconShowInUpgradeSlot slot2IconShow;
+    [SerializeField] private UIIconShowInUpgradeSlot slot3IconShow;
 
     [Header("===== UI Item Level Text =====")]
     [SerializeField] private Text bowLevelText;
@@ -135,10 +138,15 @@ public class LevelUp : MonoBehaviour
     {
         slot1ItemName.text = ReturnUpgradeName(upgradeGroup[0], upgradeIndex[0], true);
         slot1DescriptionText.text = ReturnUpgradeDescription(ReturnUpgradeName(upgradeGroup[0], upgradeIndex[0], false));
+        slot1IconShow.ShowIcon(ReturnUpgradeName(upgradeGroup[0], upgradeIndex[0], false));
+        
         slot2ItemName.text = ReturnUpgradeName(upgradeGroup[1], upgradeIndex[1], true);
         slot2DescriptionText.text = ReturnUpgradeDescription(ReturnUpgradeName(upgradeGroup[1], upgradeIndex[1], false));
+        slot2IconShow.ShowIcon(ReturnUpgradeName(upgradeGroup[1], upgradeIndex[1], false));
+        
         slot3ItemName.text = ReturnUpgradeName(upgradeGroup[2], upgradeIndex[2], true);
         slot3DescriptionText.text = ReturnUpgradeDescription(ReturnUpgradeName(upgradeGroup[2], upgradeIndex[2], false));
+        slot3IconShow.ShowIcon(ReturnUpgradeName(upgradeGroup[2], upgradeIndex[2], false));
     }
 
     private string ReturnUpgradeName(char upgradeGroup, int index, bool showItemLevel)
@@ -235,6 +243,10 @@ public class LevelUp : MonoBehaviour
                 Debug.Log("Upgrade name didn't match with Switch()");
                 break;
         }
+        
+        //slot1IconShow.DisableAll();
+        //slot2IconShow.DisableAll();
+        //slot3IconShow.DisableAll();
     }
 
     public void PressUpgradeSlot1()
