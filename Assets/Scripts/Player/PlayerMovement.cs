@@ -160,6 +160,7 @@ public class PlayerMovement : MonoBehaviour
     {
         playerDead = true;
         pausePlayer = true;
+        rb.simulated = false;
     }
 
     public void SetPausePlayer(bool pause)

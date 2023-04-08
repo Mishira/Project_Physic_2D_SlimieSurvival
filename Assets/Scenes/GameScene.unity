@@ -679,6 +679,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2747e4f5a97012f4484a27bf10a29500, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemEffectSecondaryWeapon: {fileID: 1454788348}
   medKitHealPercent: 25
   medKitHealDuration: 5
   medKitCooldown: 10
@@ -7538,8 +7539,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 438930289, guid: 5692bac621ddb69428504723992f3349, type: 3}
+      propertyPath: shootKey
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 438930289, guid: 5692bac621ddb69428504723992f3349, type: 3}
       propertyPath: arrowDamage
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 438930289, guid: 5692bac621ddb69428504723992f3349, type: 3}
+      propertyPath: autoFireKey
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 438930289, guid: 5692bac621ddb69428504723992f3349, type: 3}
       propertyPath: shootCoolDown
@@ -8132,13 +8141,15 @@ GameObject:
   - component: {fileID: 1454788345}
   - component: {fileID: 1454788347}
   - component: {fileID: 1454788346}
+  - component: {fileID: 1454788349}
+  - component: {fileID: 1454788348}
   m_Layer: 5
-  m_Name: Secondary weapon
+  m_Name: Secondary weapon CD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1454788345
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8179,12 +8190,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: 47b607689e31d3e4e984beadcfb226c0, type: 3}
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
+  m_FillMethod: 1
+  m_FillAmount: 0
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -8197,6 +8208,31 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1454788344}
   m_CullTransparentMesh: 1
+--- !u!114 &1454788348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1454788344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec29e8317481c4e4b8ad791b2995dde0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  image: {fileID: 1454788346}
+--- !u!225 &1454788349
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1454788344}
+  m_Enabled: 1
+  m_Alpha: 0.7
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1001 &1471554175
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9624,7 +9660,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 569e41c07ebda3947a7f9410861ead5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawn: 0
+  enemySpawn: 1
   minSpawnCooldown: 1
   maxSpawnCooldown: 120
   growEverySecond: 30

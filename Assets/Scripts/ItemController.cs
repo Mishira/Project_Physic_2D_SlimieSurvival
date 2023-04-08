@@ -7,6 +7,10 @@ using Debug = UnityEngine.Debug;
 
 public class ItemController : MonoBehaviour
 {
+    [Header("===== Cooldown UI =====")]
+    [SerializeField] private ItemEffect itemEffectSecondaryWeapon;
+    //[SerializeField] private ItemEffect itemEffectItemSlot1;
+    
     [Header("===== Med Kit =====")]
     [SerializeField] private float medKitHealPercent = 25;
     [SerializeField] private int medKitHealDuration = 5;
@@ -57,6 +61,7 @@ public class ItemController : MonoBehaviour
             case "Med kit" :
                 healTime = medKitHealDuration;
                 Invoke(nameof(ResetWeaponReadyToUse), medKitCooldown);
+                itemEffectSecondaryWeapon.StartCountDown(medKitCooldown);
                 break;
             
             default:

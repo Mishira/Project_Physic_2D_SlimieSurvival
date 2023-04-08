@@ -10,6 +10,7 @@ public class Bow : MonoBehaviour
     [SerializeField] private float launchForce;
     [SerializeField] private int piercing = 0;
     [SerializeField] private float shootCoolDown;
+    [SerializeField] private bool autoFire = true;
     
     [Header("===== Prefab =====")]
     [SerializeField] private GameObject arrow;
@@ -28,8 +29,7 @@ public class Bow : MonoBehaviour
     private float defaultLaunchForce;
     private float defaultShootCooldown;
     
-    private bool readyToShoot = true;
-    private bool autoFire = false;
+    private bool readyToShoot = false;
 
     public float _arrowDamage => arrowDamage;
     public int _piercing => piercing;
@@ -39,6 +39,7 @@ public class Bow : MonoBehaviour
         defaultArrowDamage = arrowDamage;
         defaultLaunchForce = launchForce;
         defaultShootCooldown = shootCoolDown;
+        Invoke(nameof(ResetReadyToShoot), 1);
     }
 
     private void Update()
