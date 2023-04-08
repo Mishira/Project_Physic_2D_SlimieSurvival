@@ -24,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private Animator ani;
     [SerializeField] private PlayerStatus ps;
+    [SerializeField] private ScenceManager sm;
 
     [Header("===== Key Bind =====")]
     [SerializeField] private KeyCode jumpKey = KeyCode.Space;
@@ -161,6 +162,7 @@ public class PlayerMovement : MonoBehaviour
         playerDead = true;
         pausePlayer = true;
         rb.simulated = false;
+        Invoke(nameof(GoToMainMenu), 3);
     }
 
     public void SetPausePlayer(bool pause)
@@ -178,5 +180,10 @@ public class PlayerMovement : MonoBehaviour
     public void UpdateStatusChange()
     {
         this.moveSpeed = defaultMoveSpeed * ((ps._moveSpeedMultiply + 100) / 100);
+    }
+
+    private void GoToMainMenu()     // Temporary for prototype version
+    {
+        sm.GotoMainMenuScene();
     }
 }
