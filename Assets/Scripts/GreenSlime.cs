@@ -18,6 +18,7 @@ public class GreenSlime : MonoBehaviour
 
     private GameObject player;
     private PlayerStatus ps;
+    private GameManager gm;
     
     private float playerXDistance;
     private bool readyToAttack = true;
@@ -30,6 +31,14 @@ public class GreenSlime : MonoBehaviour
             player = go;
             ps = go.GetComponent<PlayerStatus>();
         }
+
+        if (GameObject.FindGameObjectWithTag("GameController") != null)
+        {
+            GameObject go1 = GameObject.FindGameObjectWithTag("GameController");
+            gm = go1.GetComponent<GameManager>();
+        }
+        
+        SlimeGrowFromGameManager();
     }
 
     private void Update()
@@ -74,5 +83,12 @@ public class GreenSlime : MonoBehaviour
     private void ResetReadyToAttack()
     {
         readyToAttack = true;
+    }
+
+    private void SlimeGrowFromGameManager()
+    {
+        health += gm._greenSlimeGrowHealth;
+        moveSpeed += gm._greenSlimeGrowMoveSpeed;
+        attackDamage += gm._greenSlimeGrowAttack;
     }
 }
