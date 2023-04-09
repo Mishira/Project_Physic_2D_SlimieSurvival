@@ -227,8 +227,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 10
-  moveSpeed: 1
-  attackDamage: 0.6
+  moveSpeed: 0.6
+  attackDamage: 10
   attackCooldown: 0.5
   greenSlime: 1
   blueSlime: 0
