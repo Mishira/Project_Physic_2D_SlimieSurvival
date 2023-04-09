@@ -11,6 +11,11 @@ public class GreenSlime : MonoBehaviour
     [SerializeField] private float attackDamage;
     [SerializeField] private float attackCooldown;
 
+    [Header("===== Slime Type Setting =====")]
+    [SerializeField] private bool greenSlime;
+    [SerializeField] private bool blueSlime;
+    [SerializeField] private bool redSlime;
+
     [Header("===== Get Component =====")]
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private GameObject experienceOrb;
@@ -87,8 +92,24 @@ public class GreenSlime : MonoBehaviour
 
     private void SlimeGrowFromGameManager()
     {
-        health += gm._greenSlimeGrowHealth;
-        moveSpeed += gm._greenSlimeGrowMoveSpeed;
-        attackDamage += gm._greenSlimeGrowAttack;
+        if (greenSlime)
+        {
+            health += gm._greenSlimeGrowHealth;
+            moveSpeed += gm._greenSlimeGrowMoveSpeed;
+            attackDamage += gm._greenSlimeGrowAttack;
+        }
+        else if (blueSlime)
+        {
+            health += gm._blueSlimeGrowHealth;
+            moveSpeed += gm._blueSlimeGrowMoveSpeed;
+            attackDamage += gm._blueSlimeGrowAttack;
+        }
+        else if (redSlime)
+        {
+            health += gm._redSlimeGrowHealth;
+            moveSpeed += gm._redSlimeGrowMoveSpeed;
+            attackDamage += gm._redSlimeGrowAttack;
+        }
+        
     }
 }

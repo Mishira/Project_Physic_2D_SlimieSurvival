@@ -6,6 +6,9 @@ using UnityEngine;
 public class ExperienceOrb : MonoBehaviour
 {
     [SerializeField] private float experience = 1;
+    [SerializeField] private bool greenSlime = false;
+    [SerializeField] private bool blueSlime = false;
+    [SerializeField] private bool redSlime = false;
     
     private PlayerStatus ps;
     private GameManager gm;
@@ -23,7 +26,19 @@ public class ExperienceOrb : MonoBehaviour
             GameObject go1 = GameObject.FindGameObjectWithTag("GameController");
             gm = go1.GetComponent<GameManager>();
 
-            experience = gm._greenSlimeExperienceDrop;
+            if (greenSlime)
+            {
+                experience = gm._greenSlimeExperienceDrop;
+            }
+            else if (blueSlime)
+            {
+                experience = gm._blueSlimeExperienceDrop;
+            }
+            else if (redSlime)
+            {
+                experience = gm._redSlimeExperienceDrop;
+            }
+            
         }
     }
 

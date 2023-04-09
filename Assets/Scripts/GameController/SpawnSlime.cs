@@ -8,6 +8,8 @@ public class SpawnSlime : MonoBehaviour
 {
     [SerializeField] private Transform spawnPoint;
     [SerializeField] private GameObject greenSlime;
+    [SerializeField] private GameObject blueSlime;
+    [SerializeField] private GameObject redSlime;
     [SerializeField] private GameManager gm;
 
     private int minSpawnCooldownTime;
@@ -15,6 +17,9 @@ public class SpawnSlime : MonoBehaviour
     private bool enemySpawn;
     private bool readyToSpawn;
     private int cooldown;
+    private int spawnCode;
+    private int blueSlimeSpawnChange;
+    private int redSlimeSpawnChange;
 
     private void Start()
     {
@@ -22,6 +27,9 @@ public class SpawnSlime : MonoBehaviour
         UpdateSpawnCooldown();
         cooldown = Random.Range(minSpawnCooldownTime, maxSpawnCooldownTime) / 10;
         Invoke(nameof(ResetReadyToSpawn), cooldown);
+
+        blueSlimeSpawnChange = gm._blueSlimeSpawnChange;
+        redSlimeSpawnChange = gm._redSlimeSpawnChange;
     }
 
     private void Update()
@@ -44,7 +52,20 @@ public class SpawnSlime : MonoBehaviour
         {
             readyToSpawn = false;
             cooldown = Random.Range(minSpawnCooldownTime, maxSpawnCooldownTime) / 10;
-            Instantiate(greenSlime, spawnPoint.position, spawnPoint.rotation);
+            spawnCode = Random.Range(1, 101);
+            if (100 - (redSlimeSpawnChange + blueSlimeSpawnChange) >= spawnCode)
+            {
+                Instantiate(greenSlime, spawnPoint.position, spawnPoint.rotation);
+            }
+            else if (100 - redSlimeSpawnChange >= spawnCode)
+            {
+                Instantiate(blueSlime, spawnPoint.position, spawnPoint.rotation);
+            }
+            else
+            {
+                Instantiate(redSlime, spawnPoint.position, spawnPoint.rotation);
+            }
+            
             Invoke(nameof(ResetReadyToSpawn), cooldown);
         }
     }
