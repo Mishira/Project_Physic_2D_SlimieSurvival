@@ -26,11 +26,15 @@ public class PlayerStatus : MonoBehaviour
     [SerializeField] private UIController uiController;
     [SerializeField] private LevelUp levelUp;
     [SerializeField] private Bow bow;
+    [SerializeField] private ItemController itemController;
 
     private float nextLevelEXPBuff;
     private float lastLevelExperienceRequire = 0;
     private bool openLevelUpUI = false;
     private bool firstTimeHitCooldownLimit = true;
+    private bool crucifixDeadProtection = false;
+    private bool playerInvincible = false;
+    private float crucifixInvincibleTime = 2;
 
     public float _health => health;
     public float _maxHealth => maxHealth;
@@ -64,8 +68,20 @@ public class PlayerStatus : MonoBehaviour
 
     public void PlayerTakeDamage(float damageTake)
     {
-        health = health - damageTake;
-        if (health <= 0)
+        if (!playerInvincible)
+        {
+            health = health - damageTake;
+        }
+        
+        if (health <= 0 && crucifixDeadProtection)
+        {
+            health = 1;
+            crucifixDeadProtection = false;
+            playerInvincible = true;
+            itemController.ActivateCrucifix();
+            Invoke(nameof(DisablePlayerInvincible), crucifixInvincibleTime);
+        }
+        else if (health <= 0)
         {
             health = 0;
             pm.SetPlayerDie();
@@ -151,5 +167,20 @@ public class PlayerStatus : MonoBehaviour
                 Debug.Log("Upgrade name didn't match with Switch()");
                 break;
         }
+    }
+    
+    public void ResetCrucifixDeadProtection()
+    {
+        crucifixDeadProtection = true;
+    }
+
+    public void ChangeCrucifixInvincibleTime(float duration)
+    {
+        crucifixInvincibleTime = duration;
+    }
+
+    private void DisablePlayerInvincible()
+    {
+        playerInvincible = false;
     }
 }

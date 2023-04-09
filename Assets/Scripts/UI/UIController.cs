@@ -7,11 +7,23 @@ using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
+    [Header("===== Basic UI =====")]
     [SerializeField] private Slider healthBar;
     [SerializeField] private Slider experienceBar;
     [SerializeField] private Text playerLevelText;
     [SerializeField] private PlayerStatus ps;
     [SerializeField] private Text timer;
+
+    [Header("===== Item Pick up UI =====")]
+    [SerializeField] private GameObject itemPickUpUI;
+    [SerializeField] private Text headerText;
+    [SerializeField] private Text itemNameText;
+    [SerializeField] private Text descriptionText;
+    [SerializeField] private GameObject iconCrucifix;
+
+    [Header("===== Get Component =====")]
+    [SerializeField] private PlayerMovement pm;
+    [SerializeField] private LevelUp levelUp;
 
     private int time;
     private int timeMinute;
@@ -21,6 +33,7 @@ public class UIController : MonoBehaviour
     private void Start()
     {
         startPlayTime = (int)Time.time;
+        OpenPickUpItemUI(false);
     }
 
     private void Update()
@@ -62,5 +75,42 @@ public class UIController : MonoBehaviour
         {
             timer.text = $"{timeMinute} : {timeSecone}";
         }
+    }
+
+    public void OpenPickUpItemUI(bool open)
+    {
+        if (open)
+        {
+            levelUp.SetTimeScale(0);
+            pm.SetPausePlayer(true);
+            itemPickUpUI.SetActive(true);
+        }
+        else
+        {
+            levelUp.SetTimeScale(1);
+            pm.SetPausePlayer(false);
+            itemPickUpUI.SetActive(false);
+        }
+    }
+
+    public void UpdatePickUpItemUI(string pickUpItemName)
+    {
+        DisableAllIcon();
+        
+        switch (pickUpItemName)
+        {
+            case "Crucifix" :
+                iconCrucifix.SetActive(true);
+                headerText.text = "Item Found!";
+                itemNameText.text = "Crucifix";
+                descriptionText.text = "Protect player HP can't go below 1 then give Invincible for 2 second and regen " +
+                                       "30 HP in 10 second. Cooldown 120 second";
+                break;
+        }
+    }
+
+    private void DisableAllIcon()
+    {
+        iconCrucifix.SetActive(false);
     }
 }

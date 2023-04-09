@@ -17,9 +17,10 @@ public class LevelUp : MonoBehaviour
     [SerializeField] private PlayerMovement pm;
     [SerializeField] private PlayerStatus ps;
     [SerializeField] private Bow bow;
+    [SerializeField] private ItemController itemController;
 
     [Header("===== UI Upgrade Slot =====")]
-    [SerializeField] private GameObject LevelUpSlotUI;
+    [SerializeField] private GameObject levelUpSlotUI;
     [SerializeField] private Text slot1ItemName;
     [SerializeField] private Text slot2ItemName;
     [SerializeField] private Text slot3ItemName;
@@ -40,6 +41,7 @@ public class LevelUp : MonoBehaviour
 
     // ===== Level item here =====
     private int levelBow = 1;
+    private int levelCrucifix = 1;
 
     private int itemUpgradeCount;
     private bool cooldownUpgradeStatusIsInUpgradeList = true;
@@ -149,6 +151,11 @@ public class LevelUp : MonoBehaviour
         slot3IconShow.ShowIcon(ReturnUpgradeName(upgradeGroup[2], upgradeIndex[2], false));
     }
 
+    public void AddItemUpgradeList(string newItem)
+    {
+        itemUpgrade.Add(newItem);
+    }
+
     private string ReturnUpgradeName(char upgradeGroup, int index, bool showItemLevel)
     {
         if (upgradeGroup == 's')
@@ -174,33 +181,29 @@ public class LevelUp : MonoBehaviour
         {
             case "Increase player max health" :
                 return "Max health + " + upGradeMaxHealthAmount;
-            break;
-            
+
             case "Increase player damage" :
                 return $"All damage + {upGradeDamageAmount} %";
-            break;
-            
+
             case "Increase player projectile speed" :
                 return $"Arrow projectile speed + {upGradeProjectileSpeedAmount}";
-            break;
-            
+
             case "Increase player move speed" :
                 return $"Player move speed + {upGradeMoveSpeedAmount}";
-            break;
-            
+
             case "Reduce arrow cooldown" :
                 return $"Arrow shoot cooldown - {upGradeCooldownAmount} %";
-            break;
-            
+
             // ============================= End - Status Description =============================
 
             case "Bow" :
                 return UpGradeBowDescription(levelBow + 1);
-                break;
 
+            case "Crucifix" :
+                return UpGradeCrucifixDescription(levelCrucifix + 1);
+            
             default:
                 return "Upgrade name didn't match with Switch()";
-            break;
         }
     }
 
@@ -237,6 +240,10 @@ public class LevelUp : MonoBehaviour
             case "Bow" :
                 UpgradeBow(levelBow + 1);
                 break;
+            
+            case "Crucifix" :
+                UpgradeCrucifix(levelCrucifix + 1);
+                break;
                 
             
             default:
@@ -271,17 +278,22 @@ public class LevelUp : MonoBehaviour
     {
         if (open)
         {
-            Time.timeScale = 0;
+            SetTimeScale(0);
             pm.SetPausePlayer(true);
-            LevelUpSlotUI.SetActive(true);
+            levelUpSlotUI.SetActive(true);
         }
         else
         {
-            Time.timeScale = 1;
+            SetTimeScale(1);
             pm.SetPausePlayer(false);
-            LevelUpSlotUI.SetActive(false);
+            levelUpSlotUI.SetActive(false);
             ps.ResetOpenLevelUpUI();
         }
+    }
+
+    public void SetTimeScale(float change)
+    {
+        Time.timeScale = change;
     }
 
     private int ShowUpgradeItemToLevel(string itemName)
@@ -291,6 +303,11 @@ public class LevelUp : MonoBehaviour
             case "Bow" :
                 return levelBow + 1;
             break;
+            
+            case "Crucifix" :
+                return levelCrucifix + 1;
+            break;
+            
             
             default:
                 return -1;
@@ -353,6 +370,37 @@ public class LevelUp : MonoBehaviour
         
         UpdateBowLevelText();
     }
+
+    private void UpgradeCrucifix(int lv)
+    {
+        switch (lv)
+        {
+            case 2 :
+                ps.ChangeCrucifixInvincibleTime(2.5f);
+                itemController.UpdateCrucifixUpGrade(40, 105);
+                levelCrucifix++;
+                break;
+            
+            case 3 :
+                ps.ChangeCrucifixInvincibleTime(3f);
+                itemController.UpdateCrucifixUpGrade(50, 90);
+                levelCrucifix++;
+                break;
+
+            case 4 :
+                ps.ChangeCrucifixInvincibleTime(3.5f);
+                itemController.UpdateCrucifixUpGrade(60, 75);
+                levelCrucifix++;
+                break;
+
+            case 5 :
+                ps.ChangeCrucifixInvincibleTime(4f);
+                itemController.UpdateCrucifixUpGrade(70, 60);
+                itemUpgrade.Remove("Crucifix");
+                break;
+
+        }
+    }
     
     // =============================== Item - UpgradeDescription() ===============================
 
@@ -398,6 +446,31 @@ public class LevelUp : MonoBehaviour
 
             default:
                 return "UpGradeBowDescription() - int lv didn't match in switch";
+        }
+    }
+
+    private string UpGradeCrucifixDescription(int lv)
+    {
+        switch (lv)
+        {
+            case 2 :
+                return "Protect player HP can't go below 1 then give Invincible for 2.5 second and regen 40 HP in 10 second. Cooldown 105 second";
+            break;
+            
+            case 3 :
+                return "Protect player HP can't go below 1 then give Invincible for 3 second and regen 50 HP in 10 second. Cooldown 90 second";
+            break;
+            
+            case 4 :
+                return "Protect player HP can't go below 1 then give Invincible for 3.5 second and regen 60 HP in 10 second. Cooldown 75 second";
+            break;
+            
+            case 5 :
+                return "Protect player HP can't go below 1 then give Invincible for 4 second and regen 70 HP in 10 second. Cooldown 60 second";
+            break;
+            
+            default:
+                return "UpGradeCrucifixDescription(int lv) - int lv didn't match in switch";
         }
     }
     

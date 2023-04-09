@@ -12,6 +12,7 @@ public class UIIconShowInUpgradeSlot : MonoBehaviour
     [SerializeField] private GameObject health;
 
     [SerializeField] private GameObject bow;
+    [SerializeField] private GameObject crucifix;
 
     public void ShowIcon(string itemName)
     {
@@ -46,6 +47,11 @@ public class UIIconShowInUpgradeSlot : MonoBehaviour
                 DisableAll();
                 bow.SetActive(true);
                 break;
+            
+            case "Crucifix" :
+                DisableAll();
+                crucifix.SetActive(true);
+                break;
 
             
             default:
@@ -62,5 +68,6 @@ public class UIIconShowInUpgradeSlot : MonoBehaviour
         moveSpeed.SetActive(false);
         health.SetActive(false);
         bow.SetActive(false);
+        crucifix.SetActive(false);
     }
 }
