@@ -62,6 +62,12 @@ public class ItemController : MonoBehaviour
     private bool crucifixReadyToHeal = true;
     private int crucifixSlot = -1;
     private bool crucifixPickUp = false;
+    
+    // Health orb
+    private float healthOrbHealPercent = 1;
+    private bool healthReadyToHeal = true;
+    private int healthOrbSlot = -1;
+    private bool healthOrbPickUp = false;
 
     private void Start()
     {
@@ -78,6 +84,7 @@ public class ItemController : MonoBehaviour
         
         MedKitHeal();
         CrucifixHeal();
+        HealthOrbHeal();
     }
 
     private void ResetWeaponReadyToUse()
@@ -108,10 +115,10 @@ public class ItemController : MonoBehaviour
 
     public void PlayerPickUpItem(string itemNameInput)
     {
-        itemWaitingToPutInToList = itemNameInput;
+        itemWaitingToPutInToList = itemNameInput;       // Change item name input
         readyToAdd = true;
-        uiC.UpdatePickUpItemUI(itemNameInput);
-        uiC.OpenPickUpItemUI(true);
+        uiC.UpdatePickUpItemUI(itemNameInput);      // Update UI
+        uiC.OpenPickUpItemUI(true);     // Open UI
     }
 
     public void AddItemInToList()       // Click pick up button
@@ -121,13 +128,25 @@ public class ItemController : MonoBehaviour
             case "Crucifix":
                 //playerItemName.Add("Crucifix");
                 readyToAdd = false;
-                ps.ResetCrucifixDeadProtection();
                 crucifixSlot = nextEmptySlotItem;
                 crucifixPickUp = true;
+                ps.ResetCrucifixDeadProtection();
                 PutItemIconInEmptySlot(nextEmptySlotItem);
                 uiC.OpenPickUpItemUI(false);
                 levelUp.AddItemUpgradeList(itemWaitingToPutInToList);
                 break;
+
+            case "Health orb":
+            {
+                readyToAdd = false;
+                healthOrbSlot = nextEmptySlotItem;
+                healthOrbPickUp = true;
+                PickUpHealthOrb();
+                PutItemIconInEmptySlot(nextEmptySlotItem);
+                uiC.OpenPickUpItemUI(false);
+                levelUp.AddItemUpgradeList(itemWaitingToPutInToList);
+                break;
+            }
             
             default:
                 Debug.Log("PlayerPickUpItem(string itemName) Input didn't match with switch()");
@@ -252,5 +271,33 @@ public class ItemController : MonoBehaviour
     private void CrucifixFinishCooldown()
     {
         ps.ResetCrucifixDeadProtection();
+    }
+    
+    // =============================== Item - Health orb ===============================
+
+    private void HealthOrbHeal()
+    {
+        if (healthOrbPickUp && healthReadyToHeal)
+        {
+            healthReadyToHeal = false;
+            ps.HealPlayer((healthOrbHealPercent / 100) * ps._maxHealth);
+            Invoke(nameof(ResetHealthOrbReadyToHeal), 1);
+        }
+    }
+
+    private void ResetHealthOrbReadyToHeal()
+    {
+        healthReadyToHeal = true;
+    }
+
+    public void UpgradeHealthOrbHealPercent(float newPercent)
+    {
+        healthOrbHealPercent = newPercent;
+    }
+
+    public void PickUpHealthOrb()
+    {
+        healthOrbPickUp = true;
+        ps.UpgradeStatus(0, 20);
     }
 }

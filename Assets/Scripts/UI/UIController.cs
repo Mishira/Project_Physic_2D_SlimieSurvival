@@ -20,6 +20,7 @@ public class UIController : MonoBehaviour
     [SerializeField] private Text itemNameText;
     [SerializeField] private Text descriptionText;
     [SerializeField] private GameObject iconCrucifix;
+    [SerializeField] private GameObject iconHealthOrb;
 
     [Header("===== Get Component =====")]
     [SerializeField] private PlayerMovement pm;
@@ -93,7 +94,7 @@ public class UIController : MonoBehaviour
         }
     }
 
-    public void UpdatePickUpItemUI(string pickUpItemName)
+    public void UpdatePickUpItemUI(string pickUpItemName)       // Show UI Pick Up Item
     {
         DisableAllIcon();
         
@@ -106,11 +107,19 @@ public class UIController : MonoBehaviour
                 descriptionText.text = "Protect player HP can't go below 1 then give Invincible for 2 second and regen " +
                                        "30 HP in 10 second. Cooldown 120 second";
                 break;
+            
+            case "Health orb" :
+                iconHealthOrb.SetActive(true);
+                headerText.text = "Item Found!";
+                itemNameText.text = "Health orb";
+                descriptionText.text = "Max health +20 and Heal 1% max HP every second.";
+                break;
         }
     }
 
     private void DisableAllIcon()
     {
         iconCrucifix.SetActive(false);
+        iconHealthOrb.SetActive(false);
     }
 }

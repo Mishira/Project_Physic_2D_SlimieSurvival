@@ -5,6 +5,7 @@ using UnityEngine;
 public class UIIconItemInPlayerSlot : MonoBehaviour
 {
     [SerializeField] private GameObject crucifix;
+    [SerializeField] private GameObject healthOrb;
 
     public void ShowItemIcon(string itemShowName)
     {
@@ -13,6 +14,11 @@ public class UIIconItemInPlayerSlot : MonoBehaviour
             case "Crucifix" :
                 crucifix.SetActive(true);
                 break;
+            
+            case "Health orb" :
+                healthOrb.SetActive(true);
+                break;
+            
             
             default:
                 Debug.Log("ShowItemIcon(string itemShowName) Input didn't match with switch");

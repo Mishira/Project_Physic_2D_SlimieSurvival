@@ -42,6 +42,7 @@ public class LevelUp : MonoBehaviour
     // ===== Level item here =====
     private int levelBow = 1;
     private int levelCrucifix = 1;
+    private int levelHealthOrb = 1;
 
     private int itemUpgradeCount;
     private bool cooldownUpgradeStatusIsInUpgradeList = true;
@@ -202,6 +203,10 @@ public class LevelUp : MonoBehaviour
             case "Crucifix" :
                 return UpGradeCrucifixDescription(levelCrucifix + 1);
             
+            case "Health orb" :
+                return UpGradeHealthOrbDescription(levelHealthOrb + 1);
+            
+            
             default:
                 return "Upgrade name didn't match with Switch()";
         }
@@ -245,6 +250,10 @@ public class LevelUp : MonoBehaviour
                 UpgradeCrucifix(levelCrucifix + 1);
                 break;
                 
+            case "Health orb" :
+                UpgradeHealthOrb(levelHealthOrb + 1);
+                break;
+            
             
             default:
                 Debug.Log("Upgrade name didn't match with Switch()");
@@ -302,11 +311,12 @@ public class LevelUp : MonoBehaviour
         {
             case "Bow" :
                 return levelBow + 1;
-            break;
-            
+
             case "Crucifix" :
                 return levelCrucifix + 1;
-            break;
+
+            case "Health orb" :
+                return levelHealthOrb + 1;
             
             
             default:
@@ -398,7 +408,36 @@ public class LevelUp : MonoBehaviour
                 itemController.UpdateCrucifixUpGrade(70, 60);
                 itemUpgrade.Remove("Crucifix");
                 break;
+        }
+    }
 
+    private void UpgradeHealthOrb(int lv)
+    {
+        switch (lv)
+        {
+            case 2 :
+                ps.UpgradeStatus(0, 10);
+                itemController.UpgradeHealthOrbHealPercent(1.25f);
+                levelHealthOrb++;
+                break;
+            
+            case 3 :
+                ps.UpgradeStatus(0, 10);
+                itemController.UpgradeHealthOrbHealPercent(1.5f);
+                levelHealthOrb++;
+                break;
+
+            case 4 :
+                ps.UpgradeStatus(0, 10);
+                itemController.UpgradeHealthOrbHealPercent(1.7f);
+                levelHealthOrb++;
+                break;
+
+            case 5 :
+                ps.UpgradeStatus(0, 10);
+                itemController.UpgradeHealthOrbHealPercent(2f);
+                itemUpgrade.Remove("Health orb");
+                break;
         }
     }
     
@@ -410,39 +449,30 @@ public class LevelUp : MonoBehaviour
         {
             case 2 :
                 return "Base damage +3";
-            break;
-            
+
             case 3 :
                 return "Projectile speed +1";
-            break;
-            
+
             case 4 :
                 return "Base damage +3";
-            break;
-            
+
             case 5 :
                 return "Projectile speed +1";
-                break;
 
             case 6 :
                 return "Cooldown -0.2 second";
-                break;
 
             case 7 :
                 return "Projectile speed +2";
-                break;
 
             case 8 :
                 return "Base damage +4";
-                break;
 
             case 9 :
                 return "Cooldown -0.3 second";
-                break;
 
             case 10 :
                 return "Piercing +1";
-                break;
 
             default:
                 return "UpGradeBowDescription() - int lv didn't match in switch";
@@ -455,22 +485,41 @@ public class LevelUp : MonoBehaviour
         {
             case 2 :
                 return "Protect player HP can't go below 1 then give Invincible for 2.5 second and regen 40 HP in 10 second. Cooldown 105 second";
-            break;
-            
+
             case 3 :
                 return "Protect player HP can't go below 1 then give Invincible for 3 second and regen 50 HP in 10 second. Cooldown 90 second";
-            break;
-            
+
             case 4 :
-                return "Protect player HP can't go below 1 then give Invincible for 3.5 second and regen 60 HP in 10 second. Cooldown 75 second";
-            break;
-            
+                return
+                    "Protect player HP can't go below 1 then give Invincible for 3.5 second and regen 60 HP in 10 second. Cooldown 75 second";
+
             case 5 :
                 return "Protect player HP can't go below 1 then give Invincible for 4 second and regen 70 HP in 10 second. Cooldown 60 second";
-            break;
-            
+
             default:
                 return "UpGradeCrucifixDescription(int lv) - int lv didn't match in switch";
+        }
+    }
+
+    private string UpGradeHealthOrbDescription(int lv)
+    {
+        switch (lv)
+        {
+            case 2 :
+                return "Max health +30 and Heal 1.25% max HP every second.";
+            
+            case 3 :
+                return "Max health +40 and Heal 1.5% max HP every second.";
+
+            case 4 :
+                return "Max health +50 and Heal 1.75% max HP every second.";
+
+            case 5 :
+                return "Max health +60 and Heal 2% max HP every second.";
+            
+            default:
+                return "UpGradeHealthOrbDescription(int lv) - didn't match in switch";
+
         }
     }
     
