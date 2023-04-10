@@ -35,6 +35,8 @@ public class PlayerStatus : MonoBehaviour
     private bool crucifixDeadProtection = false;
     private bool playerInvincible = false;
     private float crucifixInvincibleTime = 2;
+    private bool shieldDamageProtection = false;
+    private float shieldInvincibleTime = 1;
 
     public float _health => health;
     public float _maxHealth => maxHealth;
@@ -71,6 +73,13 @@ public class PlayerStatus : MonoBehaviour
         if (!playerInvincible)
         {
             health = health - damageTake;
+            if (shieldDamageProtection && health > 0)
+            {
+                shieldDamageProtection = false;
+                playerInvincible = true;
+                itemController.ActivateShield();
+                Invoke(nameof(DisablePlayerInvincible), shieldInvincibleTime);
+            }
         }
         
         if (health <= 0 && crucifixDeadProtection)
@@ -179,8 +188,18 @@ public class PlayerStatus : MonoBehaviour
         crucifixInvincibleTime = duration;
     }
 
-    private void DisablePlayerInvincible()
+    public void DisablePlayerInvincible()
     {
         playerInvincible = false;
+    }
+
+    public void ChangeShieldInvincibleTime(float duration)
+    {
+        shieldInvincibleTime = duration;
+    }
+
+    public void ResetShieldProtection()
+    {
+        shieldDamageProtection = true;
     }
 }

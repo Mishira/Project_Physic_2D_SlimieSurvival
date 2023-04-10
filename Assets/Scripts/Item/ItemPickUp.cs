@@ -6,6 +6,7 @@ using UnityEngine;
 public class ItemPickUp : MonoBehaviour
 {
     [SerializeField] private string itemName;
+    [SerializeField] private float despawnTime = 30;
 
     private ItemController ic;
 
@@ -13,6 +14,8 @@ public class ItemPickUp : MonoBehaviour
     {
         GameObject go = GameObject.FindGameObjectWithTag("ItemController");
         ic = go.GetComponent<ItemController>();
+        
+        Invoke(nameof(DespawnItem), despawnTime);
     }
 
     private void OnTriggerEnter2D(Collider2D col)
@@ -22,6 +25,11 @@ public class ItemPickUp : MonoBehaviour
             ic.PlayerPickUpItem(itemName);
             Destroy(this.gameObject);
         }
+    }
+
+    private void DespawnItem()
+    {
+        Destroy(this.gameObject);
     }
     
 }

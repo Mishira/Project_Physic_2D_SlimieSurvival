@@ -21,6 +21,7 @@ public class UIController : MonoBehaviour
     [SerializeField] private Text descriptionText;
     [SerializeField] private GameObject iconCrucifix;
     [SerializeField] private GameObject iconHealthOrb;
+    [SerializeField] private GameObject iconShield;
 
     [Header("===== Get Component =====")]
     [SerializeField] private PlayerMovement pm;
@@ -105,7 +106,7 @@ public class UIController : MonoBehaviour
                 headerText.text = "Item Found!";
                 itemNameText.text = "Crucifix";
                 descriptionText.text = "Protect player HP can't go below 1 then give Invincible for 2 second and regen " +
-                                       "30 HP in 10 second. Cooldown 120 second";
+                                       "60 HP in 10 second. Cooldown 120 second";
                 break;
             
             case "Health orb" :
@@ -114,6 +115,13 @@ public class UIController : MonoBehaviour
                 itemNameText.text = "Health orb";
                 descriptionText.text = "Max health +20 and Heal 1% max HP every second.";
                 break;
+            
+            case "Shield" :
+                iconShield.SetActive(true);
+                headerText.text = "Item Found!";
+                itemNameText.text = "Shield";
+                descriptionText.text = "When player take damage gain Invincible for 1 second. Cooldown 10 second";
+                break;
         }
     }
 
@@ -121,5 +129,6 @@ public class UIController : MonoBehaviour
     {
         iconCrucifix.SetActive(false);
         iconHealthOrb.SetActive(false);
+        iconShield.SetActive(false);
     }
 }

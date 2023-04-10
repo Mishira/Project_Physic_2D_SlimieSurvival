@@ -6,6 +6,7 @@ public class UIIconItemInPlayerSlot : MonoBehaviour
 {
     [SerializeField] private GameObject crucifix;
     [SerializeField] private GameObject healthOrb;
+    [SerializeField] private GameObject shield;
 
     public void ShowItemIcon(string itemShowName)
     {
@@ -17,6 +18,10 @@ public class UIIconItemInPlayerSlot : MonoBehaviour
             
             case "Health orb" :
                 healthOrb.SetActive(true);
+                break;
+            
+            case "Shield" :
+                shield.SetActive(true);
                 break;
             
             

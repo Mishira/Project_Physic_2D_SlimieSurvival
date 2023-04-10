@@ -43,6 +43,7 @@ public class LevelUp : MonoBehaviour
     private int levelBow = 1;
     private int levelCrucifix = 1;
     private int levelHealthOrb = 1;
+    private int levelShield = 1;
 
     private int itemUpgradeCount;
     private bool cooldownUpgradeStatusIsInUpgradeList = true;
@@ -206,6 +207,9 @@ public class LevelUp : MonoBehaviour
             case "Health orb" :
                 return UpGradeHealthOrbDescription(levelHealthOrb + 1);
             
+            case "Shield" :
+                return UpGradeShieldDescription(levelShield + 1);
+            
             
             default:
                 return "Upgrade name didn't match with Switch()";
@@ -252,6 +256,10 @@ public class LevelUp : MonoBehaviour
                 
             case "Health orb" :
                 UpgradeHealthOrb(levelHealthOrb + 1);
+                break;
+            
+            case "Shield" :
+                UpgradeShield(levelShield + 1);
                 break;
             
             
@@ -317,6 +325,9 @@ public class LevelUp : MonoBehaviour
 
             case "Health orb" :
                 return levelHealthOrb + 1;
+            
+            case "Shield" :
+                return levelShield + 1;
             
             
             default:
@@ -387,25 +398,25 @@ public class LevelUp : MonoBehaviour
         {
             case 2 :
                 ps.ChangeCrucifixInvincibleTime(2.5f);
-                itemController.UpdateCrucifixUpGrade(40, 105);
+                itemController.UpdateCrucifixUpGrade(75, 105);
                 levelCrucifix++;
                 break;
             
             case 3 :
                 ps.ChangeCrucifixInvincibleTime(3f);
-                itemController.UpdateCrucifixUpGrade(50, 90);
+                itemController.UpdateCrucifixUpGrade(90, 90);
                 levelCrucifix++;
                 break;
 
             case 4 :
                 ps.ChangeCrucifixInvincibleTime(3.5f);
-                itemController.UpdateCrucifixUpGrade(60, 75);
+                itemController.UpdateCrucifixUpGrade(105, 75);
                 levelCrucifix++;
                 break;
 
             case 5 :
                 ps.ChangeCrucifixInvincibleTime(4f);
-                itemController.UpdateCrucifixUpGrade(70, 60);
+                itemController.UpdateCrucifixUpGrade(120, 60);
                 itemUpgrade.Remove("Crucifix");
                 break;
         }
@@ -437,6 +448,32 @@ public class LevelUp : MonoBehaviour
                 ps.UpgradeStatus(0, 10);
                 itemController.UpgradeHealthOrbHealPercent(2f);
                 itemUpgrade.Remove("Health orb");
+                break;
+        }
+    }
+
+    private void UpgradeShield(int lv)
+    {
+        switch (lv)
+        {
+            case 2 :
+                itemController.UpdateShieldUpgrade(1.5f, 9.5f);
+                levelShield++;
+                break;
+            
+            case 3 :
+                itemController.UpdateShieldUpgrade(2f, 9f);
+                levelShield++;
+                break;
+            
+            case 4 :
+                itemController.UpdateShieldUpgrade(2.5f, 8.5f);
+                levelShield++;
+                break;
+            
+            case 5 :
+                itemController.UpdateShieldUpgrade(3f, 8f);
+                itemUpgrade.Remove("Shield");
                 break;
         }
     }
@@ -484,17 +521,16 @@ public class LevelUp : MonoBehaviour
         switch (lv)
         {
             case 2 :
-                return "Protect player HP can't go below 1 then give Invincible for 2.5 second and regen 40 HP in 10 second. Cooldown 105 second";
+                return "Protect player HP can't go below 1 then give Invincible for 2.5 second and regen 75 HP in 10 second. Cooldown 105 second";
 
             case 3 :
-                return "Protect player HP can't go below 1 then give Invincible for 3 second and regen 50 HP in 10 second. Cooldown 90 second";
+                return "Protect player HP can't go below 1 then give Invincible for 3 second and regen 90 HP in 10 second. Cooldown 90 second";
 
             case 4 :
-                return
-                    "Protect player HP can't go below 1 then give Invincible for 3.5 second and regen 60 HP in 10 second. Cooldown 75 second";
+                return "Protect player HP can't go below 1 then give Invincible for 3.5 second and regen 105 HP in 10 second. Cooldown 75 second";
 
             case 5 :
-                return "Protect player HP can't go below 1 then give Invincible for 4 second and regen 70 HP in 10 second. Cooldown 60 second";
+                return "Protect player HP can't go below 1 then give Invincible for 4 second and regen 120 HP in 10 second. Cooldown 60 second";
 
             default:
                 return "UpGradeCrucifixDescription(int lv) - int lv didn't match in switch";
@@ -519,6 +555,28 @@ public class LevelUp : MonoBehaviour
             
             default:
                 return "UpGradeHealthOrbDescription(int lv) - didn't match in switch";
+
+        }
+    }
+
+    private string UpGradeShieldDescription(int lv)
+    {
+        switch (lv)
+        {
+            case 2 :
+                return "When player take damage gain Invincible for 1.5 second. Cooldown 9.5 second";
+            
+            case 3 :
+                return "When player take damage gain Invincible for 2 second. Cooldown 9 second";
+
+            case 4 :
+                return "When player take damage gain Invincible for 2.5 second. Cooldown 8.5 second";
+
+            case 5 :
+                return "When player take damage gain Invincible for 3 second. Cooldown 8 second";
+            
+            default:
+                return "UpGradeShieldDescription(int lv) - didn't match in switch";
 
         }
     }

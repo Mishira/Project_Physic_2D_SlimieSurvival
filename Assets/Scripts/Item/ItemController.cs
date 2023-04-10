@@ -34,6 +34,13 @@ public class ItemController : MonoBehaviour
     [SerializeField] private float crucifixHeal = 30;
     [SerializeField] private int crucifixHealDuration = 10;
     [SerializeField] private float crucifixCooldown = 120;
+    
+    [Header("===== Health orb =====")]
+    [SerializeField] private float healthOrbHealPercent = 1;
+
+    [Header("===== Shield =====")] 
+    [SerializeField] private float shieldInvincibleTime = 1;
+    [SerializeField] private float shieldCooldown = 10;
 
     [Header("===== Key Bind =====")]
     [SerializeField] private KeyCode weapon2Key = KeyCode.Mouse1;
@@ -64,10 +71,13 @@ public class ItemController : MonoBehaviour
     private bool crucifixPickUp = false;
     
     // Health orb
-    private float healthOrbHealPercent = 1;
     private bool healthReadyToHeal = true;
     private int healthOrbSlot = -1;
     private bool healthOrbPickUp = false;
+    
+    // Shield
+    private int shieldSlot = -1;
+    private bool shieldPickUp = false;
 
     private void Start()
     {
@@ -126,7 +136,6 @@ public class ItemController : MonoBehaviour
         switch (itemWaitingToPutInToList)
         {
             case "Crucifix":
-                //playerItemName.Add("Crucifix");
                 readyToAdd = false;
                 crucifixSlot = nextEmptySlotItem;
                 crucifixPickUp = true;
@@ -137,7 +146,6 @@ public class ItemController : MonoBehaviour
                 break;
 
             case "Health orb":
-            {
                 readyToAdd = false;
                 healthOrbSlot = nextEmptySlotItem;
                 healthOrbPickUp = true;
@@ -146,7 +154,18 @@ public class ItemController : MonoBehaviour
                 uiC.OpenPickUpItemUI(false);
                 levelUp.AddItemUpgradeList(itemWaitingToPutInToList);
                 break;
-            }
+            
+            
+            case "Shield" :
+                readyToAdd = false;
+                shieldSlot = nextEmptySlotItem;
+                shieldPickUp = true;
+                ResetShield();
+                PutItemIconInEmptySlot(nextEmptySlotItem);
+                uiC.OpenPickUpItemUI(false);
+                levelUp.AddItemUpgradeList(itemWaitingToPutInToList);
+                break;
+            
             
             default:
                 Debug.Log("PlayerPickUpItem(string itemName) Input didn't match with switch()");
@@ -246,7 +265,7 @@ public class ItemController : MonoBehaviour
             crucifixHealTime--;
             crucifixReadyToHeal = false;
             ps.HealPlayer(crucifixHeal / crucifixHealDuration);
-            Invoke(nameof(ResetcrucifixReadyToHeal), 1);
+            Invoke(nameof(ResetCrucifixReadyToHeal), 1);
         }
     }
 
@@ -263,7 +282,7 @@ public class ItemController : MonoBehaviour
         crucifixCooldown = cooldown;
     }
 
-    private void ResetcrucifixReadyToHeal()
+    private void ResetCrucifixReadyToHeal()
     {
         crucifixReadyToHeal = true;
     }
@@ -297,7 +316,26 @@ public class ItemController : MonoBehaviour
 
     public void PickUpHealthOrb()
     {
-        healthOrbPickUp = true;
         ps.UpgradeStatus(0, 20);
+    }
+    
+    // =============================== Item - Shield ===============================
+
+    private void ResetShield()
+    {
+        ps.ResetShieldProtection();
+    }
+
+    public void ActivateShield()
+    {
+        SetActivateCooldownItemSlot(shieldSlot, shieldCooldown);
+        Invoke(nameof(ResetShield), shieldCooldown);
+    }
+
+    public void UpdateShieldUpgrade(float invincibleDuration, float cooldown)
+    {
+        shieldInvincibleTime = invincibleDuration;
+        ps.ChangeShieldInvincibleTime(invincibleDuration);
+        shieldCooldown = cooldown;
     }
 }
