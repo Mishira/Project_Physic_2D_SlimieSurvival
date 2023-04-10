@@ -15,6 +15,7 @@ public class UIIconShowInUpgradeSlot : MonoBehaviour
     [SerializeField] private GameObject crucifix;
     [SerializeField] private GameObject healthOrb;
     [SerializeField] private GameObject shield;
+    [SerializeField] private GameObject syringe;
 
     public void ShowIcon(string itemName)
     {
@@ -64,6 +65,11 @@ public class UIIconShowInUpgradeSlot : MonoBehaviour
                 DisableAll();
                 shield.SetActive(true);
                 break;
+            
+            case "Syringe" :
+                DisableAll();
+                syringe.SetActive(true);
+                break;
 
             
             default:
@@ -83,5 +89,6 @@ public class UIIconShowInUpgradeSlot : MonoBehaviour
         crucifix.SetActive(false);
         healthOrb.SetActive(false);
         shield.SetActive(false);
+        syringe.SetActive(false);
     }
 }

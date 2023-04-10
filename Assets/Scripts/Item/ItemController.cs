@@ -42,6 +42,12 @@ public class ItemController : MonoBehaviour
     [SerializeField] private float shieldInvincibleTime = 1;
     [SerializeField] private float shieldCooldown = 10;
 
+    [SerializeField] private float syringeHeal = 10;
+    [SerializeField] private float syringeBuffMoveSpeed = 20;
+    [SerializeField] private float syringeBuffDamage = 15;
+    [SerializeField] private float syringeBuffDuration = 6;
+    [SerializeField] private float syringeCooldown = 30;
+
     [Header("===== Key Bind =====")]
     [SerializeField] private KeyCode weapon2Key = KeyCode.Mouse1;
     [SerializeField] private KeyCode weapon2SecondKey = KeyCode.Space;
@@ -78,6 +84,12 @@ public class ItemController : MonoBehaviour
     // Shield
     private int shieldSlot = -1;
     private bool shieldPickUp = false;
+    
+    //Syringe
+    private int syringeSlot = -1;
+    private bool syringePickUp = false;
+    private float lastSyringeBuffMoveSpeed;
+    private float lastSyringeBuffDamage;
 
     private void Start()
     {
@@ -161,6 +173,16 @@ public class ItemController : MonoBehaviour
                 shieldSlot = nextEmptySlotItem;
                 shieldPickUp = true;
                 ResetShield();
+                PutItemIconInEmptySlot(nextEmptySlotItem);
+                uiC.OpenPickUpItemUI(false);
+                levelUp.AddItemUpgradeList(itemWaitingToPutInToList);
+                break;
+            
+            case "Syringe" :
+                readyToAdd = false;
+                syringeSlot = nextEmptySlotItem;
+                syringePickUp = true;
+                ResetSyringe();
                 PutItemIconInEmptySlot(nextEmptySlotItem);
                 uiC.OpenPickUpItemUI(false);
                 levelUp.AddItemUpgradeList(itemWaitingToPutInToList);
@@ -337,5 +359,40 @@ public class ItemController : MonoBehaviour
         shieldInvincibleTime = invincibleDuration;
         ps.ChangeShieldInvincibleTime(invincibleDuration);
         shieldCooldown = cooldown;
+    }
+    
+    // =============================== Item - Syringe ===============================
+
+    private void ResetSyringe()
+    {
+        ps.ResetSyringeBuff();
+    }
+
+    public void ActivateSyringeBuff()
+    {
+        ps.HealPlayer(syringeHeal);
+        ps.UpgradeStatus(3, syringeBuffMoveSpeed);
+        ps.UpgradeStatus(1, syringeBuffDamage);
+        lastSyringeBuffMoveSpeed = syringeBuffMoveSpeed;
+        lastSyringeBuffDamage = syringeBuffDamage;
+        SetActivateCooldownItemSlot(syringeSlot, syringeCooldown);
+        
+        Invoke(nameof(DisableSyringeBuff), syringeBuffDuration);
+        Invoke(nameof(ResetSyringe), syringeCooldown);
+    }
+
+    private void DisableSyringeBuff()
+    {
+        ps.UpgradeStatus(3, -lastSyringeBuffMoveSpeed);
+        ps.UpgradeStatus(1, -lastSyringeBuffDamage);
+    }
+
+    public void UpgradeSyringe(float heal, float moveSpeed, float damage, float duration, float cooldown)
+    {
+        syringeHeal = heal;
+        syringeBuffMoveSpeed = moveSpeed;
+        syringeBuffDamage = damage;
+        syringeBuffDuration = duration;
+        syringeCooldown = cooldown;
     }
 }

@@ -10,6 +10,7 @@ public class GreenSlime : MonoBehaviour
     [SerializeField] private float moveSpeed;
     [SerializeField] private float attackDamage;
     [SerializeField] private float attackCooldown;
+    [SerializeField] private bool updateStatusWhenSpawn = true;
 
     [Header("===== Slime Type Setting =====")]
     [SerializeField] private bool greenSlime;
@@ -42,8 +43,11 @@ public class GreenSlime : MonoBehaviour
             GameObject go1 = GameObject.FindGameObjectWithTag("GameController");
             gm = go1.GetComponent<GameManager>();
         }
-        
-        SlimeGrowFromGameManager();
+
+        if (updateStatusWhenSpawn)
+        {
+            SlimeGrowFromGameManager();
+        }
     }
 
     private void Update()

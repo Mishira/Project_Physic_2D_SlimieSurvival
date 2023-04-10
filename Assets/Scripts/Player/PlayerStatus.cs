@@ -37,6 +37,7 @@ public class PlayerStatus : MonoBehaviour
     private float crucifixInvincibleTime = 2;
     private bool shieldDamageProtection = false;
     private float shieldInvincibleTime = 1;
+    private bool syringeBuff = false;
 
     public float _health => health;
     public float _maxHealth => maxHealth;
@@ -79,6 +80,12 @@ public class PlayerStatus : MonoBehaviour
                 playerInvincible = true;
                 itemController.ActivateShield();
                 Invoke(nameof(DisablePlayerInvincible), shieldInvincibleTime);
+            }
+
+            if (syringeBuff && health > 0)
+            {
+                syringeBuff = false;
+                itemController.ActivateSyringeBuff();
             }
         }
         
@@ -176,6 +183,8 @@ public class PlayerStatus : MonoBehaviour
                 Debug.Log("Upgrade name didn't match with Switch()");
                 break;
         }
+        
+        UpdateStatus();
     }
     
     public void ResetCrucifixDeadProtection()
@@ -201,5 +210,10 @@ public class PlayerStatus : MonoBehaviour
     public void ResetShieldProtection()
     {
         shieldDamageProtection = true;
+    }
+
+    public void ResetSyringeBuff()
+    {
+        syringeBuff = true;
     }
 }

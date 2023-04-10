@@ -44,6 +44,7 @@ public class LevelUp : MonoBehaviour
     private int levelCrucifix = 1;
     private int levelHealthOrb = 1;
     private int levelShield = 1;
+    private int levelSyringe = 1;
 
     private int itemUpgradeCount;
     private bool cooldownUpgradeStatusIsInUpgradeList = true;
@@ -177,6 +178,8 @@ public class LevelUp : MonoBehaviour
         }
     }
     
+    // =================================================================================================================
+    
     private string ReturnUpgradeDescription(string upgradeName)
     {
         switch (upgradeName)
@@ -209,6 +212,9 @@ public class LevelUp : MonoBehaviour
             
             case "Shield" :
                 return UpGradeShieldDescription(levelShield + 1);
+            
+            case "Syringe" :
+                return UpGradeSyringeDescription(levelSyringe + 1);
             
             
             default:
@@ -260,6 +266,10 @@ public class LevelUp : MonoBehaviour
             
             case "Shield" :
                 UpgradeShield(levelShield + 1);
+                break;
+            
+            case "Syringe" :
+                UpgradeSyringe(levelSyringe + 1);
                 break;
             
             
@@ -328,6 +338,9 @@ public class LevelUp : MonoBehaviour
             
             case "Shield" :
                 return levelShield + 1;
+            
+            case "Syringe" :
+                return levelSyringe + 1;
             
             
             default:
@@ -477,6 +490,32 @@ public class LevelUp : MonoBehaviour
                 break;
         }
     }
+
+    private void UpgradeSyringe(int lv)
+    {
+        switch (lv)
+        {
+            case 2 :
+                itemController.UpgradeSyringe(15, 30, 20, 7, 27.5f);
+                levelSyringe++;
+                break;
+            
+            case 3 :
+                itemController.UpgradeSyringe(20, 40, 25, 8, 25f);
+                levelSyringe++;
+                break;
+            
+            case 4 :
+                itemController.UpgradeSyringe(25, 50, 30, 9, 22.5f);
+                levelSyringe++;
+                break;
+            
+            case 5 :
+                itemController.UpgradeSyringe(30, 60, 40, 10, 20f);
+                itemUpgrade.Remove("Syringe");
+                break;
+        }
+    }
     
     // =============================== Item - UpgradeDescription() ===============================
 
@@ -578,6 +617,27 @@ public class LevelUp : MonoBehaviour
             default:
                 return "UpGradeShieldDescription(int lv) - didn't match in switch";
 
+        }
+    }
+
+    private string UpGradeSyringeDescription(int lv)
+    {
+        switch (lv)
+        {
+            case 2 :
+                return "When player take damage heal 15 HP then gain Move speed +30 %, Damage +20 %, for 7 second. cooldown 27.5 second";
+            
+            case 3 :
+                return "When player take damage heal 20 HP then gain Move speed +40 %, Damage +25 %, for 8 second. cooldown 25 second";
+            
+            case 4 :
+                return "When player take damage heal 25 HP then gain Move speed +50 %, Damage +30 %, for 9 second. cooldown 22.5 second";
+            
+            case 5 :
+                return "When player take damage heal 30 HP then gain Move speed +60 %, Damage +40 %, for 10 second. cooldown 20 second";
+            
+            default:
+                return "UpGradeSyringeDescription(int lv) - didn't match in switch";
         }
     }
     
