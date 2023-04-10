@@ -45,6 +45,8 @@ public class LevelUp : MonoBehaviour
     private int levelHealthOrb = 1;
     private int levelShield = 1;
     private int levelSyringe = 1;
+    private int levelKnowledge = 1;
+    private int levelGoldenSword = 1;
 
     private int itemUpgradeCount;
     private bool cooldownUpgradeStatusIsInUpgradeList = true;
@@ -216,6 +218,12 @@ public class LevelUp : MonoBehaviour
             case "Syringe" :
                 return UpGradeSyringeDescription(levelSyringe + 1);
             
+            case "Knowledge" :
+                return UpGradeKnowledgeDescription(levelKnowledge + 1);
+            
+            case "Golden sword" :
+                return UpGradeGoldenSwordDescription(levelGoldenSword + 1);
+            
             
             default:
                 return "Upgrade name didn't match with Switch()";
@@ -270,6 +278,14 @@ public class LevelUp : MonoBehaviour
             
             case "Syringe" :
                 UpgradeSyringe(levelSyringe + 1);
+                break;
+            
+            case "Knowledge" :
+                UpgradeKnowledge(levelKnowledge + 1);
+                break;
+            
+            case "Golden sword" :
+                UpgradeGoldenSword(levelGoldenSword + 1);
                 break;
             
             
@@ -341,6 +357,12 @@ public class LevelUp : MonoBehaviour
             
             case "Syringe" :
                 return levelSyringe + 1;
+            
+            case "Knowledge" :
+                return levelKnowledge + 1;
+            
+            case "Golden sword" :
+                return levelGoldenSword + 1;
             
             
             default:
@@ -516,6 +538,59 @@ public class LevelUp : MonoBehaviour
                 break;
         }
     }
+
+    private void UpgradeKnowledge(int lv)
+    {
+        switch (lv)
+        {
+            case 2 :
+                itemController.UpgradeKnowledge(10);     // Add 10 ---> 45%
+                levelKnowledge++;
+                break;
+            
+            case 3 :
+                itemController.UpgradeKnowledge(10);     // Add 10 ---> 55%
+                levelKnowledge++;
+                break;
+            
+            case 4 :
+                itemController.UpgradeKnowledge(10);     // Add 10 ---> 65%
+                levelKnowledge++;
+                break;
+            
+            case 5 :
+                itemController.UpgradeKnowledge(10);     // Add 10 ---> 75%
+                itemUpgrade.Remove("Knowledge");
+                break;
+        }
+    }
+
+    private void UpgradeGoldenSword(int lv)
+    {
+        switch (lv)
+        {
+            case 2 :
+                itemController.UpgradeGoldenSword(15);      // Add 15 --> 45%
+                levelGoldenSword++;
+                break;
+            
+            case 3 :
+                itemController.UpgradeGoldenSword(15);      // Add 15 --> 60%
+                levelGoldenSword++;
+                break;
+
+            case 4 :
+                itemController.UpgradeGoldenSword(20);      // Add 20 --> 80%
+                levelGoldenSword++;
+                break;
+
+            case 5 :
+                itemController.UpgradeGoldenSword(20);      // Add 20 --> 100%
+                itemUpgrade.Remove("Golden sword");
+                break;
+
+        }
+    }
     
     // =============================== Item - UpgradeDescription() ===============================
 
@@ -638,6 +713,50 @@ public class LevelUp : MonoBehaviour
             
             default:
                 return "UpGradeSyringeDescription(int lv) - didn't match in switch";
+        }
+    }
+
+    private string UpGradeKnowledgeDescription(int lv)
+    {
+        switch (lv)
+        {
+            case 2 :
+                return "Slime drop 45% more EXP.";
+            
+            case 3 :
+                return "Slime drop 55% more EXP.";
+
+            case 4 :
+                return "Slime drop 65% more EXP.";
+
+            case 5 :
+                return "Slime drop 75% more EXP.";
+            
+            default:
+                return "UpGradeKnowledgeDescription(int lv) - didn't match in switch";
+
+        }
+    }
+
+    private string UpGradeGoldenSwordDescription(int lv)
+    {
+        switch (lv)
+        {
+            case 2 :
+                return "All player damage +45%";
+            
+            case 3 :
+                return "All player damage +60%";
+
+            case 4 :
+                return "All player damage +80%";
+
+            case 5 :
+                return "All player damage +100%";
+            
+            default:
+                return "UpGradeGoldenSwordDescription(int lv) - didn't match in switch";
+
         }
     }
     

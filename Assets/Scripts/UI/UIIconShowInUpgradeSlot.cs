@@ -16,6 +16,8 @@ public class UIIconShowInUpgradeSlot : MonoBehaviour
     [SerializeField] private GameObject healthOrb;
     [SerializeField] private GameObject shield;
     [SerializeField] private GameObject syringe;
+    [SerializeField] private GameObject knowledge;
+    [SerializeField] private GameObject goldenSword;
 
     public void ShowIcon(string itemName)
     {
@@ -70,6 +72,17 @@ public class UIIconShowInUpgradeSlot : MonoBehaviour
                 DisableAll();
                 syringe.SetActive(true);
                 break;
+            
+            case "Knowledge" :
+                DisableAll();
+                knowledge.SetActive(true);
+                break;
+            
+            case "Golden sword" :
+                DisableAll();
+                goldenSword.SetActive(true);
+                break;
+            
 
             
             default:
@@ -90,5 +103,7 @@ public class UIIconShowInUpgradeSlot : MonoBehaviour
         healthOrb.SetActive(false);
         shield.SetActive(false);
         syringe.SetActive(false);
+        knowledge.SetActive(false);
+        goldenSword.SetActive(false);
     }
 }

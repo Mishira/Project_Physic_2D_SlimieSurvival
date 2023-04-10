@@ -117,5 +117,4 @@ public class GameManager : MonoBehaviour
         
         Invoke(nameof(EnemyGrow), growEverySecond);
     }
-    
 }

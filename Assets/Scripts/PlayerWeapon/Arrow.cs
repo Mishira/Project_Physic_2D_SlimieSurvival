@@ -52,6 +52,11 @@ public class Arrow : MonoBehaviour
                 arrowPiercing--;
             }
         }
+        else if (col.CompareTag("Box"))
+        {
+            col.GetComponent<Box>().ShootBox();
+            Destroy(this.gameObject);
+        }
     }
 
     private void DestroyArrow() // Only for Invoke()

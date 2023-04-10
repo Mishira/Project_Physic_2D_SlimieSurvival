@@ -129,8 +129,13 @@ public class PlayerStatus : MonoBehaviour
 
     public void PlayerPickUpExperienceOrb(float exp)
     {
-        playerExperience = playerExperience + exp;
+        playerExperience = playerExperience + (exp * (experienceGainMultiply + 100) / 100);
         //CheckLevelUp();
+    }
+
+    public void AddExperienceGainMultiply(float add)
+    {
+        experienceGainMultiply += add;
     }
 
     public void ResetOpenLevelUpUI()

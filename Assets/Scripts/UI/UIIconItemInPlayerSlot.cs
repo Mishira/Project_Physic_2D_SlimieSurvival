@@ -8,6 +8,8 @@ public class UIIconItemInPlayerSlot : MonoBehaviour
     [SerializeField] private GameObject healthOrb;
     [SerializeField] private GameObject shield;
     [SerializeField] private GameObject syringe;
+    [SerializeField] private GameObject knowledge;
+    [SerializeField] private GameObject goldenSword;
 
     public void ShowItemIcon(string itemShowName)
     {
@@ -27,6 +29,14 @@ public class UIIconItemInPlayerSlot : MonoBehaviour
             
             case "Syringe" :
                 syringe.SetActive(true);
+                break;
+            
+            case "Knowledge" :
+                knowledge.SetActive(true);
+                break;
+            
+            case "Golden sword" :
+                goldenSword.SetActive(true);
                 break;
             
             

@@ -23,6 +23,8 @@ public class UIController : MonoBehaviour
     [SerializeField] private GameObject iconHealthOrb;
     [SerializeField] private GameObject iconShield;
     [SerializeField] private GameObject iconSyringe;
+    [SerializeField] private GameObject iconKnowledge;
+    [SerializeField] private GameObject iconGoldenSword;
 
     [Header("===== Get Component =====")]
     [SerializeField] private PlayerMovement pm;
@@ -131,6 +133,20 @@ public class UIController : MonoBehaviour
                 descriptionText.text = "When player take damage heal 10 HP then gain Move speed +20 %, Damage +15 %, " +
                                        "for 5 second. cooldown 30 second";
                 break;
+            
+            case "Knowledge" :
+                iconKnowledge.SetActive(true);
+                headerText.text = "Item Found!";
+                itemNameText.text = "Knowledge";
+                descriptionText.text = "Slime drop 35% more EXP.";
+                break;
+            
+            case "Golden sword" :
+                iconGoldenSword.SetActive(true);
+                headerText.text = "Item Found!";
+                itemNameText.text = "Golden sword";
+                descriptionText.text = "All player damage +30%";
+                break;
         }
     }
 
@@ -140,5 +156,7 @@ public class UIController : MonoBehaviour
         iconHealthOrb.SetActive(false);
         iconShield.SetActive(false);
         iconSyringe.SetActive(false);
+        iconKnowledge.SetActive(false);
+        iconGoldenSword.SetActive(false);
     }
 }

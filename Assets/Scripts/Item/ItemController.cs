@@ -42,11 +42,18 @@ public class ItemController : MonoBehaviour
     [SerializeField] private float shieldInvincibleTime = 1;
     [SerializeField] private float shieldCooldown = 10;
 
+    [Header("===== Syringe =====")]
     [SerializeField] private float syringeHeal = 10;
     [SerializeField] private float syringeBuffMoveSpeed = 20;
     [SerializeField] private float syringeBuffDamage = 15;
     [SerializeField] private float syringeBuffDuration = 6;
     [SerializeField] private float syringeCooldown = 30;
+
+    [Header("===== Knowledge =====")]
+    [SerializeField] private float knowledgeEXPMultiply = 35;
+
+    [Header("===== Golden sword =====")]
+    [SerializeField] private float goldenSwordBuffDamage = 30;
 
     [Header("===== Key Bind =====")]
     [SerializeField] private KeyCode weapon2Key = KeyCode.Mouse1;
@@ -57,7 +64,12 @@ public class ItemController : MonoBehaviour
     [SerializeField] private LevelUp levelUp;
 
     // List player item
-    //private List<string> playerItemName = new List<string>();
+    private List<string> itemInRandomBox = new List<string>();
+
+    public List<string> _itemInRandomBox => itemInRandomBox;
+    
+    
+    
     private string itemWaitingToPutInToList;
     private bool readyToAdd = false;
     private int nextEmptySlotItem = 1;
@@ -90,10 +102,24 @@ public class ItemController : MonoBehaviour
     private bool syringePickUp = false;
     private float lastSyringeBuffMoveSpeed;
     private float lastSyringeBuffDamage;
+    
+    //Knowledge
+    private int knowledgeSlot = -1;
+    private bool knowledgePickUp = false;
+    
+    //Golden sword
+    private int goldenSwordSlot = -1;
+    private bool goldenSwordPickUp = false;
 
     private void Start()
     {
         itemName = "Med kit";   // Use only for prototype version.
+        itemInRandomBox.Add("Crucifix");
+        itemInRandomBox.Add("Health orb");
+        itemInRandomBox.Add("Shield");
+        itemInRandomBox.Add("Syringe");
+        itemInRandomBox.Add("Knowledge");
+        itemInRandomBox.Add("Golden sword");
     }
 
     private void Update()
@@ -143,6 +169,64 @@ public class ItemController : MonoBehaviour
         uiC.OpenPickUpItemUI(true);     // Open UI
     }
 
+    public bool CheckSameItem(string itemPickUpName)
+    {
+        if (nextEmptySlotItem > 6)
+        {
+            return true;
+        }
+
+        switch (itemPickUpName)
+        {
+            case "Crucifix" :
+                if (crucifixPickUp)
+                {
+                    return true;
+                }
+                break;
+            
+            case "Health orb" :
+                if (healthOrbPickUp)
+                {
+                    return true;
+                }
+                break;
+            
+            case "Shield" :
+                if (shieldPickUp)
+                {
+                    return true;
+                }
+                break;
+            
+            case "Syringe" :
+                if (syringePickUp)
+                {
+                    return true;
+                }
+                break;
+            
+            case "Knowledge" :
+                if (knowledgePickUp)
+                {
+                    return true;
+                }
+                break;
+            
+            case "Golden sword" :
+                if (goldenSwordPickUp)
+                {
+                    return true;
+                }
+                break;
+            
+            default:
+                return true;
+        }
+
+        return false;
+    }
+
     public void AddItemInToList()       // Click pick up button
     {
         switch (itemWaitingToPutInToList)
@@ -151,6 +235,7 @@ public class ItemController : MonoBehaviour
                 readyToAdd = false;
                 crucifixSlot = nextEmptySlotItem;
                 crucifixPickUp = true;
+                itemInRandomBox.Remove("Crucifix");
                 ps.ResetCrucifixDeadProtection();
                 PutItemIconInEmptySlot(nextEmptySlotItem);
                 uiC.OpenPickUpItemUI(false);
@@ -161,6 +246,7 @@ public class ItemController : MonoBehaviour
                 readyToAdd = false;
                 healthOrbSlot = nextEmptySlotItem;
                 healthOrbPickUp = true;
+                itemInRandomBox.Remove("Health orb");
                 PickUpHealthOrb();
                 PutItemIconInEmptySlot(nextEmptySlotItem);
                 uiC.OpenPickUpItemUI(false);
@@ -172,6 +258,7 @@ public class ItemController : MonoBehaviour
                 readyToAdd = false;
                 shieldSlot = nextEmptySlotItem;
                 shieldPickUp = true;
+                itemInRandomBox.Remove("Shield");
                 ResetShield();
                 PutItemIconInEmptySlot(nextEmptySlotItem);
                 uiC.OpenPickUpItemUI(false);
@@ -182,7 +269,30 @@ public class ItemController : MonoBehaviour
                 readyToAdd = false;
                 syringeSlot = nextEmptySlotItem;
                 syringePickUp = true;
+                itemInRandomBox.Remove("Syringe");
                 ResetSyringe();
+                PutItemIconInEmptySlot(nextEmptySlotItem);
+                uiC.OpenPickUpItemUI(false);
+                levelUp.AddItemUpgradeList(itemWaitingToPutInToList);
+                break;
+            
+            case "Knowledge" :
+                readyToAdd = false;
+                knowledgeSlot = nextEmptySlotItem;
+                knowledgePickUp = true;
+                itemInRandomBox.Remove("Knowledge");
+                PickUpKnowledge();
+                PutItemIconInEmptySlot(nextEmptySlotItem);
+                uiC.OpenPickUpItemUI(false);
+                levelUp.AddItemUpgradeList(itemWaitingToPutInToList);
+                break;
+            
+            case "Golden sword" :
+                readyToAdd = false;
+                goldenSwordSlot = nextEmptySlotItem;
+                goldenSwordPickUp = true;
+                itemInRandomBox.Remove("Golden sword");
+                PickUpGoldenSword();
                 PutItemIconInEmptySlot(nextEmptySlotItem);
                 uiC.OpenPickUpItemUI(false);
                 levelUp.AddItemUpgradeList(itemWaitingToPutInToList);
@@ -394,5 +504,29 @@ public class ItemController : MonoBehaviour
         syringeBuffDamage = damage;
         syringeBuffDuration = duration;
         syringeCooldown = cooldown;
+    }
+    
+    // =============================== Item - Knowledge ===============================
+
+    private void PickUpKnowledge()
+    {
+        ps.AddExperienceGainMultiply(knowledgeEXPMultiply);
+    }
+    public void UpgradeKnowledge(float addMultiply)
+    {
+        knowledgeEXPMultiply += addMultiply;
+        ps.AddExperienceGainMultiply(addMultiply);
+    }
+    
+    // =============================== Item - Golden sword ===============================
+
+    public void PickUpGoldenSword()
+    {
+        ps.UpgradeStatus(1, goldenSwordBuffDamage);
+    }
+
+    public void UpgradeGoldenSword(float addMultiply)
+    {
+        ps.UpgradeStatus(1, addMultiply);
     }
 }

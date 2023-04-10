@@ -22,8 +22,15 @@ public class ItemPickUp : MonoBehaviour
     {
         if (col.CompareTag("Player"))
         {
-            ic.PlayerPickUpItem(itemName);
-            Destroy(this.gameObject);
+            if (!ic.CheckSameItem(itemName))
+            {
+                ic.PlayerPickUpItem(itemName);
+                Destroy(this.gameObject);
+            }
+            else
+            {
+                Destroy(this.gameObject);
+            }
         }
     }
 
