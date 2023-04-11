@@ -191,7 +191,7 @@ public class LevelUp : MonoBehaviour
         switch (upgradeName)
         {
             case "Increase player max health" :
-                return "Max health + " + upGradeMaxHealthAmount;
+                return $"Max health + {upGradeMaxHealthAmount} then heal 20% max HP";
 
             case "Increase player damage" :
                 return $"All damage + {upGradeDamageAmount} %";
@@ -252,6 +252,7 @@ public class LevelUp : MonoBehaviour
         {
             case "Increase player max health" :
                 ps.UpgradeStatus(0, upGradeMaxHealthAmount);
+                ps.HealPlayer(ps._maxHealth * 0.2f);
                 break;
             
             case "Increase player damage" :
@@ -684,22 +685,22 @@ public class LevelUp : MonoBehaviour
         switch (lv)
         {
             case 2 :
-                itemController.UpgradeGoldenHeart(6, 10);
+                itemController.UpgradeGoldenHeart(6, 3, 13, 10);
                 levelGoldenHeart++;
                 break;
             
             case 3 :
-                itemController.UpgradeGoldenHeart(7, 10);
+                itemController.UpgradeGoldenHeart(7, 4, 15, 10);
                 levelGoldenHeart++;
                 break;
 
             case 4 :
-                itemController.UpgradeGoldenHeart(8, 10);
+                itemController.UpgradeGoldenHeart(8, 4, 18, 10);
                 levelGoldenHeart++;
                 break;
 
             case 5 :
-                itemController.UpgradeGoldenHeart(10, 8);
+                itemController.UpgradeGoldenHeart(10, 5, 20, 8);
                 itemUpgrade.Remove("Golden heart");
                 break;
 
@@ -944,16 +945,16 @@ public class LevelUp : MonoBehaviour
         switch (lv)
         {
             case 2 :
-                return "When player take damage gain +6 max HP. Cooldown 10 second";
+                return "Negate next damage than gain +6 max HP, +3% Damage, +13% projectile speed. Cooldown 10 second";
             
             case 3 :
-                return "When player take damage gain +7 max HP. Cooldown 10 second";
+                return "Negate next damage than gain +7 max HP, +4% Damage, +15% projectile speed. Cooldown 10 second";
 
             case 4 :
-                return "When player take damage gain +8 max HP. Cooldown 10 second";
+                return "Negate next damage than gain +8 max HP, +4% Damage, +18% projectile speed. Cooldown 10 second";
 
             case 5 :
-                return "When player take damage gain +10 max HP. Cooldown 8 second";
+                return "Negate next damage than gain +10 max HP, +5% Damage, +20% projectile speed. Cooldown 8 second";
 
             default:
                 return "UpGradeGoldenHeartDescription(int lv) - didn't match in switch";

@@ -170,7 +170,7 @@ public class UIController : MonoBehaviour
                 iconGoldenHeart.SetActive(true);
                 headerText.text = "Item Found!";
                 itemNameText.text = "Golden heart";
-                descriptionText.text = "When player take damage gain +5 max HP. Cooldown 10 second";
+                descriptionText.text = "Negate next damage than gain +5 max HP, +3% Damage, +10% projectile speed. Cooldown 10 second";
                 break;
             
             case "Mark of Calamity" :

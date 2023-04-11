@@ -6,7 +6,7 @@ using Random = UnityEngine.Random;
 
 public class Box : MonoBehaviour
 {
-    [Header("===== Prefab =====")]
+    [Header("===== Item Prefab =====")]
     [SerializeField] private GameObject crucifix;
     [SerializeField] private GameObject healthOrb;
     [SerializeField] private GameObject shield;
@@ -18,13 +18,16 @@ public class Box : MonoBehaviour
     [SerializeField] private GameObject goldenHeart;
     [SerializeField] private GameObject markOfCalamity;
 
+    [SerializeField] private GameObject expOrb;
+
     [Header("===== Drop Item Position =====")]
     [SerializeField] private Transform dropPosition;
     
     private ItemController itemController;
 
-    private int number;
-    private string spawnItem;
+    private int itemIndex;
+    private int spawnCode;
+    private string spawnItemName;
     
     private void Start()
     {
@@ -34,21 +37,30 @@ public class Box : MonoBehaviour
 
     public void ShootBox()
     {
-        RandomSpawnItem();
+        SpawnItem();
         Destroy(this.gameObject);
     }
-
+    
     private void RandomSpawnItem()
     {
-        if (itemController._itemInRandomBox.Count == 0)
+        if (itemController._nextEmptySlotItem < 7)
         {
+            
+        }
+    }
+
+    private void SpawnItem()
+    {
+        if (itemController._itemInRandomBox.Count == 0 || itemController._nextEmptySlotItem > 6)
+        {
+            Instantiate(expOrb, dropPosition.position, dropPosition.rotation);
             return;
         }
         
-        number = Random.Range(0, itemController._itemInRandomBox.Count);
-        spawnItem = itemController._itemInRandomBox[number];
+        itemIndex = Random.Range(0, itemController._itemInRandomBox.Count);
+        spawnItemName = itemController._itemInRandomBox[itemIndex];
 
-        switch (spawnItem)
+        switch (spawnItemName)
         {
             case "Crucifix" :
                 Instantiate(crucifix, dropPosition.position, dropPosition.rotation);
@@ -89,7 +101,6 @@ public class Box : MonoBehaviour
             case "Mark of Calamity" :
                 Instantiate(markOfCalamity, dropPosition.position, dropPosition.rotation);
                 break;
-
         }
     }
 }

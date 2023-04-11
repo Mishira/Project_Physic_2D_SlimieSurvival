@@ -226,13 +226,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 235de912baa4801409c778ef805096b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 20
-  moveSpeed: 0.6
+  health: 12
+  moveSpeed: 0.4
   attackDamage: 15
   attackCooldown: 0.5
+  dropBox: 1
+  boxDropChange: 50
   greenSlime: 0
   blueSlime: 0
   redSlime: 1
   rb: {fileID: 2839447107749881902}
   experienceOrb: {fileID: 4792614275578453380, guid: 9955568ae66609a4b880de7c77a80c24, type: 3}
   experienceDropPoint: {fileID: 2839447108079872133}
+  box: {fileID: 7648226880630837723, guid: 9bc512922f1beaf409dd060da7a45178, type: 3}

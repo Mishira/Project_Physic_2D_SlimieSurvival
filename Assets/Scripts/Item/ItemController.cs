@@ -16,19 +16,12 @@ public class ItemController : MonoBehaviour
     [SerializeField] private UIIconItemInPlayerSlot uiIconItemInPlayerSlot6;
     
     [Header("===== Cooldown UI =====")]
-    [SerializeField] private ItemEffect itemEffectSecondaryWeapon;
     [SerializeField] private ItemEffect itemEffectArtifact1;
     [SerializeField] private ItemEffect itemEffectArtifact2;
     [SerializeField] private ItemEffect itemEffectArtifact3;
     [SerializeField] private ItemEffect itemEffectArtifact4;
     [SerializeField] private ItemEffect itemEffectArtifact5;
     [SerializeField] private ItemEffect itemEffectArtifact6;
-    //[SerializeField] private ItemEffect itemEffectItemSlot1;
-    
-    [Header("===== Med Kit =====")]
-    [SerializeField] private float medKitHealPercent = 25;
-    [SerializeField] private int medKitHealDuration = 5;
-    [SerializeField] private float medKitCooldown = 10;
 
     [Header("===== Crucifix =====")]
     [SerializeField] private float crucifixHeal = 30;
@@ -63,15 +56,13 @@ public class ItemController : MonoBehaviour
 
     [Header("===== Golden Heart =====")]
     [SerializeField] private float goldenHeartAddMaxHP = 5;
+    [SerializeField] private float goldenHeartAddDamage = 3;
+    [SerializeField] private float goldenHeartAddProjectileSpeed = 10;
     [SerializeField] private float goldenHeartCooldown = 10;
 
     [Header("===== Mark of Calamity =====")]
     [SerializeField] private int blueSlimeSpawnRate = 8;
     [SerializeField] private int redSlimeSpawnRate = 2;
-
-    [Header("===== Key Bind =====")]
-    [SerializeField] private KeyCode weapon2Key = KeyCode.Mouse1;
-    [SerializeField] private KeyCode weapon2SecondKey = KeyCode.Space;
 
     [Header("===== Get Component =====")]
     [SerializeField] private PlayerStatus ps;
@@ -85,18 +76,11 @@ public class ItemController : MonoBehaviour
     public List<string> _itemInRandomBox => itemInRandomBox;
     
     
-    
     private string itemWaitingToPutInToList;
     private bool readyToAdd = false;
     private int nextEmptySlotItem = 1;
 
-    // Player Secondary weapon
-    private string itemName;
-    private bool weaponReadyToUse = true;
-
-    // Med kit
-    private int healTime;
-    private bool readyToHeal = true;
+    public int _nextEmptySlotItem => nextEmptySlotItem;
 
     // Crucifix
     private int crucifixHealTime;
@@ -113,40 +97,39 @@ public class ItemController : MonoBehaviour
     private int shieldSlot = -1;
     private bool shieldPickUp = false;
     
-    //Syringe
+    // Syringe
     private int syringeSlot = -1;
     private bool syringePickUp = false;
     private float lastSyringeBuffMoveSpeed;
     private float lastSyringeBuffDamage;
     
-    //Knowledge
+    // Knowledge
     private int knowledgeSlot = -1;
     private bool knowledgePickUp = false;
     
-    //Golden sword
+    // Golden sword
     private int goldenSwordSlot = -1;
     private bool goldenSwordPickUp = false;
     
-    //Boot
+    // Boot
     private int bootSlot = -1;
     private bool bootPickUp = false;
     
-    //Golden clock
+    // Golden clock
     private int goldenClockSlot = -1;
     private bool goldenClockPickUp = false;
     
-    //Golden Heart
+    // Golden heart
     private int goldenHeartSlot = -1;
     private bool goldenHeartPickUp = false;
     private bool goldenHeartReady = false;
     
-    //Mark of Calamity
+    // Mark of Calamity
     private int markOfCalamitySlot = -1;
     private bool markOfCalamityPickUp = false;
 
     private void Start()
     {
-        itemName = "Med kit";   // Use only for prototype version.
         itemInRandomBox.Add("Crucifix");
         itemInRandomBox.Add("Health orb");
         itemInRandomBox.Add("Shield");
@@ -161,43 +144,9 @@ public class ItemController : MonoBehaviour
 
     private void Update()
     {
-        if ((Input.GetKeyDown(weapon2Key) || Input.GetKeyDown(weapon2SecondKey)) && weaponReadyToUse)
-        {
-            UseSecondaryWeapon(itemName);
-            weaponReadyToUse = false;
-        }
-        
-        MedKitHeal();
         CrucifixHeal();
         HealthOrbHeal();
     }
-
-    private void ResetWeaponReadyToUse()
-    {
-        weaponReadyToUse = true;
-    }
-
-    public void ChangeSecondaryWeapon(string weaponName)
-    {
-        itemName = weaponName;
-    }
-
-    private void UseSecondaryWeapon(string itemName)
-    {
-        switch (itemName)
-        {
-            case "Med kit" :
-                healTime = medKitHealDuration;
-                Invoke(nameof(ResetWeaponReadyToUse), medKitCooldown);
-                itemEffectSecondaryWeapon.StartCountDown(medKitCooldown);
-                break;
-            
-            default:
-                Debug.Log("UseSecondaryWeapon(string itemName) input didn't match with switch()");
-                break;
-        }
-    }
-
     public void PlayerPickUpItem(string itemNameInput)
     {
         itemWaitingToPutInToList = itemNameInput;       // Change item name input
@@ -479,23 +428,13 @@ public class ItemController : MonoBehaviour
         }
     }
 
-    // =============================== Weapon - Med kit ===============================
+    // =============================== Weapon - Method Tools ===============================
+    
+    
+    
+    // =============================== Weapon - Pistol ===============================
 
-    private void MedKitHeal()
-    {
-        if (healTime > 0 && readyToHeal)
-        {
-            healTime--;
-            readyToHeal = false;
-            ps.HealPlayer(((medKitHealPercent / medKitHealDuration) / 100) * ps._maxHealth);
-            Invoke(nameof(ResetReadyToHeal), 1);
-        }
-    }
-
-    private void ResetReadyToHeal()
-    {
-        readyToHeal = true;
-    }
+    
     
     // =============================== Item - Crucifix ===============================
 
@@ -680,20 +619,25 @@ public class ItemController : MonoBehaviour
         {
             goldenHeartReady = false;
             ps.UpgradeStatus(0, goldenHeartAddMaxHP);
+            ps.UpgradeStatus(1, goldenHeartAddDamage);
+            ps.UpgradeStatus(2, goldenHeartAddProjectileSpeed);
             SetActivateCooldownItemSlot(goldenHeartSlot, goldenHeartCooldown);
             Invoke(nameof(ResetGoldenHeartReady), goldenHeartCooldown);
         }
     }
 
-    public void UpgradeGoldenHeart(float addHP, float cooldown)
+    public void UpgradeGoldenHeart(float addHP, float addDam, float addProSpeed, float cooldown)
     {
         goldenHeartAddMaxHP = addHP;
+        goldenHeartAddDamage = addDam;
+        goldenHeartAddProjectileSpeed = addProSpeed;
         goldenHeartCooldown = cooldown;
     }
 
     private void ResetGoldenHeartReady()
     {
         goldenHeartReady = true;
+        ps.ResetGoldenHeartNegateDamage();
     }
     
     // =============================== Item - Mark of Calamity ===============================

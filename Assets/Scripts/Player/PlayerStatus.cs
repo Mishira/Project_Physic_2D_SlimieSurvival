@@ -74,6 +74,13 @@ public class PlayerStatus : MonoBehaviour
     {
         if (!playerInvincible)
         {
+            if (goldenHeart)
+            {
+                goldenHeart = false;
+                itemController.ActivateGoldenHeart();
+                damageTake = 0;
+            }
+            
             health = health - damageTake;
             if (shieldDamageProtection && health > 0)
             {
@@ -81,11 +88,6 @@ public class PlayerStatus : MonoBehaviour
                 playerInvincible = true;
                 itemController.ActivateShield();
                 Invoke(nameof(DisablePlayerInvincible), shieldInvincibleTime);
-            }
-
-            if (goldenHeart)
-            {
-                itemController.ActivateGoldenHeart();
             }
 
             if (syringeBuff && health > 0)
@@ -161,7 +163,7 @@ public class PlayerStatus : MonoBehaviour
         {
             case 0 :    // Max health
                 maxHealth += change;
-                health += change;
+                //health += change;
                 break;
             
             case 1 :    // Damage
@@ -229,6 +231,11 @@ public class PlayerStatus : MonoBehaviour
     }
 
     public void PickUpGoldenHeart()
+    {
+        goldenHeart = true;
+    }
+
+    public void ResetGoldenHeartNegateDamage()
     {
         goldenHeart = true;
     }

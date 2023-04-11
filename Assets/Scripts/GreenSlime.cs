@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class GreenSlime : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class GreenSlime : MonoBehaviour
     [SerializeField] private float moveSpeed;
     [SerializeField] private float attackDamage;
     [SerializeField] private float attackCooldown;
+    [SerializeField] private bool dropBox = false;
+    [SerializeField] private int boxDropChange;
 
     [Header("===== Slime Type Setting =====")]
     [SerializeField] private bool greenSlime;
@@ -20,6 +23,7 @@ public class GreenSlime : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private GameObject experienceOrb;
     [SerializeField] private Transform experienceDropPoint;
+    [SerializeField] private GameObject box;
 
     private GameObject player;
     private PlayerStatus ps;
@@ -71,6 +75,11 @@ public class GreenSlime : MonoBehaviour
         if (health <= 0)
         {
             Instantiate(experienceOrb, experienceDropPoint.position, experienceDropPoint.rotation);
+            
+            if (dropBox)
+            {
+                DropBox();
+            }
             Destroy(this.gameObject);
         }
     }
@@ -110,6 +119,13 @@ public class GreenSlime : MonoBehaviour
             moveSpeed += gm._redSlimeGrowMoveSpeed;
             attackDamage += gm._redSlimeGrowAttack;
         }
-        
+    }
+
+    private void DropBox()
+    {
+        if (Random.Range(1, 101) <= boxDropChange)
+        {
+            Instantiate(box, experienceDropPoint.position, experienceDropPoint.rotation);
+        }
     }
 }
