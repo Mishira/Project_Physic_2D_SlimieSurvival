@@ -25,6 +25,8 @@ public class UIController : MonoBehaviour
     [SerializeField] private GameObject iconSyringe;
     [SerializeField] private GameObject iconKnowledge;
     [SerializeField] private GameObject iconGoldenSword;
+    [SerializeField] private GameObject iconBoot;
+    [SerializeField] private GameObject iconGoldenClock;
 
     [Header("===== Get Component =====")]
     [SerializeField] private PlayerMovement pm;
@@ -147,6 +149,20 @@ public class UIController : MonoBehaviour
                 itemNameText.text = "Golden sword";
                 descriptionText.text = "All player damage +30%";
                 break;
+            
+            case "Boot" :
+                iconBoot.SetActive(true);
+                headerText.text = "Item Found!";
+                itemNameText.text = "Boot";
+                descriptionText.text = "Player move speed +40%";
+                break;
+            
+            case "Golden clock" :
+                iconGoldenClock.SetActive(true);
+                headerText.text = "Item Found!";
+                itemNameText.text = "Golden clock";
+                descriptionText.text = "Player attack cooldown -10%";
+                break;
         }
     }
 
@@ -158,5 +174,7 @@ public class UIController : MonoBehaviour
         iconSyringe.SetActive(false);
         iconKnowledge.SetActive(false);
         iconGoldenSword.SetActive(false);
+        iconBoot.SetActive(false);
+        iconGoldenClock.SetActive(false);
     }
 }

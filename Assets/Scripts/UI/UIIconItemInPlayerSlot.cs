@@ -10,6 +10,8 @@ public class UIIconItemInPlayerSlot : MonoBehaviour
     [SerializeField] private GameObject syringe;
     [SerializeField] private GameObject knowledge;
     [SerializeField] private GameObject goldenSword;
+    [SerializeField] private GameObject boot;
+    [SerializeField] private GameObject goldenClock;
 
     public void ShowItemIcon(string itemShowName)
     {
@@ -37,6 +39,14 @@ public class UIIconItemInPlayerSlot : MonoBehaviour
             
             case "Golden sword" :
                 goldenSword.SetActive(true);
+                break;
+            
+            case "Boot" :
+                boot.SetActive(true);
+                break;
+            
+            case "Golden clock" :
+                goldenClock.SetActive(true);
                 break;
             
             

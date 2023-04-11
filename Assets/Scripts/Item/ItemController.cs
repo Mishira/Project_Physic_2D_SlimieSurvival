@@ -55,6 +55,12 @@ public class ItemController : MonoBehaviour
     [Header("===== Golden sword =====")]
     [SerializeField] private float goldenSwordBuffDamage = 30;
 
+    [Header("===== Boot =====")]
+    [SerializeField] private float bootBuffMoveSpeed = 40;
+
+    [Header("===== Golden clock =====")]
+    [SerializeField] private float goldenClockBuffCooldown = 10;
+
     [Header("===== Key Bind =====")]
     [SerializeField] private KeyCode weapon2Key = KeyCode.Mouse1;
     [SerializeField] private KeyCode weapon2SecondKey = KeyCode.Space;
@@ -110,6 +116,14 @@ public class ItemController : MonoBehaviour
     //Golden sword
     private int goldenSwordSlot = -1;
     private bool goldenSwordPickUp = false;
+    
+    //Boot
+    private int bootSlot = -1;
+    private bool bootPickUp = false;
+    
+    //Golden clock
+    private int goldenClockSlot = -1;
+    private bool goldenClockPickUp = false;
 
     private void Start()
     {
@@ -120,6 +134,8 @@ public class ItemController : MonoBehaviour
         itemInRandomBox.Add("Syringe");
         itemInRandomBox.Add("Knowledge");
         itemInRandomBox.Add("Golden sword");
+        itemInRandomBox.Add("Boot");
+        itemInRandomBox.Add("Golden clock");
     }
 
     private void Update()
@@ -220,6 +236,20 @@ public class ItemController : MonoBehaviour
                 }
                 break;
             
+            case "Boot" :
+                if (bootPickUp)
+                {
+                    return true;
+                }
+                break;
+            
+            case "Golden clock" :
+                if (goldenClockPickUp)
+                {
+                    return true;
+                }
+                break;
+            
             default:
                 return true;
         }
@@ -293,6 +323,28 @@ public class ItemController : MonoBehaviour
                 goldenSwordPickUp = true;
                 itemInRandomBox.Remove("Golden sword");
                 PickUpGoldenSword();
+                PutItemIconInEmptySlot(nextEmptySlotItem);
+                uiC.OpenPickUpItemUI(false);
+                levelUp.AddItemUpgradeList(itemWaitingToPutInToList);
+                break;
+            
+            case "Boot" :
+                readyToAdd = false;
+                bootSlot = nextEmptySlotItem;
+                bootPickUp = true;
+                itemInRandomBox.Remove("Boot");
+                PickUpBoot();
+                PutItemIconInEmptySlot(nextEmptySlotItem);
+                uiC.OpenPickUpItemUI(false);
+                levelUp.AddItemUpgradeList(itemWaitingToPutInToList);
+                break;
+            
+            case "Golden clock" :
+                readyToAdd = false;
+                goldenClockSlot = nextEmptySlotItem;
+                goldenClockPickUp = true;
+                itemInRandomBox.Remove("Golden clock");
+                PickUpGoldenClock();
                 PutItemIconInEmptySlot(nextEmptySlotItem);
                 uiC.OpenPickUpItemUI(false);
                 levelUp.AddItemUpgradeList(itemWaitingToPutInToList);
@@ -520,13 +572,40 @@ public class ItemController : MonoBehaviour
     
     // =============================== Item - Golden sword ===============================
 
-    public void PickUpGoldenSword()
+    private void PickUpGoldenSword()
     {
         ps.UpgradeStatus(1, goldenSwordBuffDamage);
     }
 
     public void UpgradeGoldenSword(float addMultiply)
     {
+        goldenSwordBuffDamage += addMultiply;
         ps.UpgradeStatus(1, addMultiply);
+    }
+    
+    // =============================== Item - Boot ===============================
+
+    private void PickUpBoot()
+    {
+        ps.UpgradeStatus(3, bootBuffMoveSpeed);
+    }
+
+    public void UpgradeBoot(float addMultiply)
+    {
+        bootBuffMoveSpeed += addMultiply;
+        ps.UpgradeStatus(3, addMultiply);
+    }
+    
+    // =============================== Item - Golden clock ===============================
+
+    private void PickUpGoldenClock()
+    {
+        ps.UpgradeStatus(4, goldenClockBuffCooldown);
+    }
+
+    public void UpgradeGoldenClock(float addMultiply)
+    {
+        goldenClockBuffCooldown += addMultiply;
+        ps.UpgradeStatus(4, addMultiply);
     }
 }

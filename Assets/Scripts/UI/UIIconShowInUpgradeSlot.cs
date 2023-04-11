@@ -18,6 +18,8 @@ public class UIIconShowInUpgradeSlot : MonoBehaviour
     [SerializeField] private GameObject syringe;
     [SerializeField] private GameObject knowledge;
     [SerializeField] private GameObject goldenSword;
+    [SerializeField] private GameObject boot;
+    [SerializeField] private GameObject goldenClock;
 
     public void ShowIcon(string itemName)
     {
@@ -83,6 +85,16 @@ public class UIIconShowInUpgradeSlot : MonoBehaviour
                 goldenSword.SetActive(true);
                 break;
             
+            case "Boot" :
+                DisableAll();
+                boot.SetActive(true);
+                break;
+            
+            case "Golden clock" :
+                DisableAll();
+                goldenClock.SetActive(true);
+                break;
+            
 
             
             default:
@@ -105,5 +117,7 @@ public class UIIconShowInUpgradeSlot : MonoBehaviour
         syringe.SetActive(false);
         knowledge.SetActive(false);
         goldenSword.SetActive(false);
+        boot.SetActive(false);
+        goldenClock.SetActive(false);
     }
 }

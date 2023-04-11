@@ -47,6 +47,8 @@ public class LevelUp : MonoBehaviour
     private int levelSyringe = 1;
     private int levelKnowledge = 1;
     private int levelGoldenSword = 1;
+    private int levelBoot = 1;
+    private int levelGoldenClock = 1;
 
     private int itemUpgradeCount;
     private bool cooldownUpgradeStatusIsInUpgradeList = true;
@@ -224,6 +226,12 @@ public class LevelUp : MonoBehaviour
             case "Golden sword" :
                 return UpGradeGoldenSwordDescription(levelGoldenSword + 1);
             
+            case "Boot" :
+                return UpGradeBootDescription(levelBoot + 1);
+            
+            case "Golden clock" :
+                return UpGradeGoldenClockDescription(levelGoldenClock + 1);
+            
             
             default:
                 return "Upgrade name didn't match with Switch()";
@@ -286,6 +294,14 @@ public class LevelUp : MonoBehaviour
             
             case "Golden sword" :
                 UpgradeGoldenSword(levelGoldenSword + 1);
+                break;
+            
+            case "Boot" :
+                UpgradeBoot(levelBoot + 1);
+                break;
+            
+            case "Golden clock" :
+                UpgradeGoldenClock(levelGoldenClock + 1);
                 break;
             
             
@@ -363,6 +379,12 @@ public class LevelUp : MonoBehaviour
             
             case "Golden sword" :
                 return levelGoldenSword + 1;
+            
+            case "Boot" :
+                return levelBoot + 1;
+            
+            case "Golden clock" :
+                return levelGoldenClock + 1;
             
             
             default:
@@ -591,6 +613,49 @@ public class LevelUp : MonoBehaviour
 
         }
     }
+
+    private void UpgradeBoot(int lv)
+    {
+        switch (lv)
+        {
+            case 2 :
+                itemController.UpgradeBoot(30);     // Add 30 --> 70%
+                levelBoot++;
+                break;
+            
+            case 3 :
+                itemController.UpgradeBoot(30);     // Add 30 --> 100%
+                itemUpgrade.Remove("Boot");
+                break;
+        }
+    }
+
+    private void UpgradeGoldenClock(int lv)
+    {
+        switch (lv)
+        {
+            case 2 :
+                itemController.UpgradeGoldenClock(7.5f);        // Add 7.5 --> -17.5%
+                levelGoldenClock++;
+                break;
+            
+            case 3 :
+                itemController.UpgradeGoldenClock(7.5f);        // Add 7.5 --> -25%
+                levelGoldenClock++;
+                break;
+
+            case 4 :
+                itemController.UpgradeGoldenClock(7.5f);        // Add 7.5 --> -32.5%
+                levelGoldenClock++;
+                break;
+
+            case 5 :
+                itemController.UpgradeGoldenClock(7.5f);        // Add 7.5 --> -40%
+                itemUpgrade.Remove("Golden clock");
+                break;
+
+        }
+    }
     
     // =============================== Item - UpgradeDescription() ===============================
 
@@ -756,6 +821,44 @@ public class LevelUp : MonoBehaviour
             
             default:
                 return "UpGradeGoldenSwordDescription(int lv) - didn't match in switch";
+
+        }
+    }
+
+    private string UpGradeBootDescription(int lv)
+    {
+        switch (lv)
+        {
+            case 2 :
+                return "Player move speed +70%";
+            
+            case 3 :
+                return "Player move speed +100%";
+            
+            default:
+                return "UpGradeBoot(int lv) - didn't match in switch";
+
+        }
+    }
+
+    private string UpGradeGoldenClockDescription(int lv)
+    {
+        switch (lv)
+        {
+            case 2 :
+                return "Player attack cooldown -17.5%";
+            
+            case 3 :
+                return "Player attack cooldown -25%";
+
+            case 4 :
+                return "Player attack cooldown -32.5%";
+
+            case 5 :
+                return "Player attack cooldown -40%";
+            
+            default:
+                return "UpGradeGoldenClock(int lv) - didn't match in switch";
 
         }
     }
