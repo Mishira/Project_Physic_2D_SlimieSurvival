@@ -61,13 +61,23 @@ public class ItemController : MonoBehaviour
     [Header("===== Golden clock =====")]
     [SerializeField] private float goldenClockBuffCooldown = 10;
 
+    [Header("===== Golden Heart =====")]
+    [SerializeField] private float goldenHeartAddMaxHP = 5;
+    [SerializeField] private float goldenHeartCooldown = 10;
+
+    [Header("===== Mark of Calamity =====")]
+    [SerializeField] private int blueSlimeSpawnRate = 8;
+    [SerializeField] private int redSlimeSpawnRate = 2;
+
     [Header("===== Key Bind =====")]
     [SerializeField] private KeyCode weapon2Key = KeyCode.Mouse1;
     [SerializeField] private KeyCode weapon2SecondKey = KeyCode.Space;
 
+    [Header("===== Get Component =====")]
     [SerializeField] private PlayerStatus ps;
     [SerializeField] private UIController uiC;
     [SerializeField] private LevelUp levelUp;
+    [SerializeField] private GameManager gameManager;
 
     // List player item
     private List<string> itemInRandomBox = new List<string>();
@@ -124,6 +134,15 @@ public class ItemController : MonoBehaviour
     //Golden clock
     private int goldenClockSlot = -1;
     private bool goldenClockPickUp = false;
+    
+    //Golden Heart
+    private int goldenHeartSlot = -1;
+    private bool goldenHeartPickUp = false;
+    private bool goldenHeartReady = false;
+    
+    //Mark of Calamity
+    private int markOfCalamitySlot = -1;
+    private bool markOfCalamityPickUp = false;
 
     private void Start()
     {
@@ -136,6 +155,8 @@ public class ItemController : MonoBehaviour
         itemInRandomBox.Add("Golden sword");
         itemInRandomBox.Add("Boot");
         itemInRandomBox.Add("Golden clock");
+        itemInRandomBox.Add("Golden heart");
+        itemInRandomBox.Add("Mark of Calamity");
     }
 
     private void Update()
@@ -250,6 +271,20 @@ public class ItemController : MonoBehaviour
                 }
                 break;
             
+            case "Golden heart" :
+                if (goldenHeartPickUp)
+                {
+                    return true;
+                }
+                break;
+            
+            case "Mark of Calamity" :
+                if (markOfCalamityPickUp)
+                {
+                    return true;
+                }
+                break;
+            
             default:
                 return true;
         }
@@ -350,7 +385,29 @@ public class ItemController : MonoBehaviour
                 levelUp.AddItemUpgradeList(itemWaitingToPutInToList);
                 break;
             
+            case "Golden heart" :
+                readyToAdd = false;
+                goldenHeartSlot = nextEmptySlotItem;
+                goldenClockPickUp = true;
+                itemInRandomBox.Remove("Golden heart");
+                PickUpGoldenHeart();
+                PutItemIconInEmptySlot(nextEmptySlotItem);
+                uiC.OpenPickUpItemUI(false);
+                levelUp.AddItemUpgradeList(itemWaitingToPutInToList);
+                break;
             
+            case "Mark of Calamity" :
+                readyToAdd = false;
+                markOfCalamitySlot = nextEmptySlotItem;
+                markOfCalamityPickUp = true;
+                itemInRandomBox.Remove("Mark of Calamity");
+                PickUpMarkOfCalamity();
+                PutItemIconInEmptySlot(nextEmptySlotItem);
+                uiC.OpenPickUpItemUI(false);
+                levelUp.AddItemUpgradeList(itemWaitingToPutInToList);
+                break;
+
+
             default:
                 Debug.Log("PlayerPickUpItem(string itemName) Input didn't match with switch()");
                 break;
@@ -607,5 +664,49 @@ public class ItemController : MonoBehaviour
     {
         goldenClockBuffCooldown += addMultiply;
         ps.UpgradeStatus(4, addMultiply);
+    }
+    
+    // =============================== Item - Golden heart ===============================
+
+    private void PickUpGoldenHeart()
+    {
+        goldenHeartReady = true;
+        ps.PickUpGoldenHeart();
+    }
+
+    public void ActivateGoldenHeart()
+    {
+        if (goldenHeartReady)
+        {
+            goldenHeartReady = false;
+            ps.UpgradeStatus(0, goldenHeartAddMaxHP);
+            SetActivateCooldownItemSlot(goldenHeartSlot, goldenHeartCooldown);
+            Invoke(nameof(ResetGoldenHeartReady), goldenHeartCooldown);
+        }
+    }
+
+    public void UpgradeGoldenHeart(float addHP, float cooldown)
+    {
+        goldenHeartAddMaxHP = addHP;
+        goldenHeartCooldown = cooldown;
+    }
+
+    private void ResetGoldenHeartReady()
+    {
+        goldenHeartReady = true;
+    }
+    
+    // =============================== Item - Mark of Calamity ===============================
+
+    private void PickUpMarkOfCalamity()
+    {
+        gameManager.SetSpawnRate(blueSlimeSpawnRate, redSlimeSpawnRate);
+    }
+
+    public void UpgradeMarkOfCalamity(int blueSlimeRate, int redSlimeRate)
+    {
+        blueSlimeSpawnRate = blueSlimeRate;
+        redSlimeSpawnRate = redSlimeRate;
+        gameManager.SetSpawnRate(blueSlimeRate, redSlimeRate);
     }
 }

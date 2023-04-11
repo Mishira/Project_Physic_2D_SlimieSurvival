@@ -12,6 +12,8 @@ public class UIIconItemInPlayerSlot : MonoBehaviour
     [SerializeField] private GameObject goldenSword;
     [SerializeField] private GameObject boot;
     [SerializeField] private GameObject goldenClock;
+    [SerializeField] private GameObject goldenHeart;
+    [SerializeField] private GameObject markOfCalamity;
 
     public void ShowItemIcon(string itemShowName)
     {
@@ -47,6 +49,14 @@ public class UIIconItemInPlayerSlot : MonoBehaviour
             
             case "Golden clock" :
                 goldenClock.SetActive(true);
+                break;
+            
+            case "Golden heart" :
+                goldenHeart.SetActive(true);
+                break;
+            
+            case "Mark of Calamity" :
+                markOfCalamity.SetActive(true);
                 break;
             
             

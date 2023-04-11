@@ -49,6 +49,8 @@ public class LevelUp : MonoBehaviour
     private int levelGoldenSword = 1;
     private int levelBoot = 1;
     private int levelGoldenClock = 1;
+    private int levelGoldenHeart = 1;
+    private int levelMarkOfCalamity = 1;
 
     private int itemUpgradeCount;
     private bool cooldownUpgradeStatusIsInUpgradeList = true;
@@ -232,6 +234,12 @@ public class LevelUp : MonoBehaviour
             case "Golden clock" :
                 return UpGradeGoldenClockDescription(levelGoldenClock + 1);
             
+            case "Golden heart" :
+                return UpGradeGoldenHeartDescription(levelGoldenHeart + 1);
+            
+            case "Mark of Calamity" :
+                return UpGradeMarkOfCalamityDescription(levelMarkOfCalamity + 1);
+            
             
             default:
                 return "Upgrade name didn't match with Switch()";
@@ -302,6 +310,14 @@ public class LevelUp : MonoBehaviour
             
             case "Golden clock" :
                 UpgradeGoldenClock(levelGoldenClock + 1);
+                break;
+            
+            case "Golden heart" :
+                UpgradeGoldenHeart(levelGoldenHeart + 1);
+                break;
+            
+            case "Mark of Calamity" :
+                UpgradeMarkOfCalamity(levelMarkOfCalamity + 1);
                 break;
             
             
@@ -385,6 +401,12 @@ public class LevelUp : MonoBehaviour
             
             case "Golden clock" :
                 return levelGoldenClock + 1;
+            
+            case "Golden heart" :
+                return levelGoldenHeart + 1;
+            
+            case "Mark of Calamity" :
+                return levelMarkOfCalamity + 1;
             
             
             default:
@@ -656,6 +678,60 @@ public class LevelUp : MonoBehaviour
 
         }
     }
+
+    private void UpgradeGoldenHeart(int lv)
+    {
+        switch (lv)
+        {
+            case 2 :
+                itemController.UpgradeGoldenHeart(6, 10);
+                levelGoldenHeart++;
+                break;
+            
+            case 3 :
+                itemController.UpgradeGoldenHeart(7, 10);
+                levelGoldenHeart++;
+                break;
+
+            case 4 :
+                itemController.UpgradeGoldenHeart(8, 10);
+                levelGoldenHeart++;
+                break;
+
+            case 5 :
+                itemController.UpgradeGoldenHeart(10, 8);
+                itemUpgrade.Remove("Golden heart");
+                break;
+
+        }
+    }
+
+    private void UpgradeMarkOfCalamity(int lv)
+    {
+        switch (lv)
+        {
+            case 2 :
+                itemController.UpgradeMarkOfCalamity(12, 3);
+                levelMarkOfCalamity++;
+                break;
+            
+            case 3 :
+                itemController.UpgradeMarkOfCalamity(16, 4);
+                levelMarkOfCalamity++;
+                break;
+
+            case 4 :
+                itemController.UpgradeMarkOfCalamity(20, 5);
+                levelMarkOfCalamity++;
+                break;
+
+            case 5 :
+                itemController.UpgradeMarkOfCalamity(24, 6);
+                itemUpgrade.Remove("Mark of Calamity");
+                break;
+
+        }
+    }
     
     // =============================== Item - UpgradeDescription() ===============================
 
@@ -859,6 +935,49 @@ public class LevelUp : MonoBehaviour
             
             default:
                 return "UpGradeGoldenClock(int lv) - didn't match in switch";
+
+        }
+    }
+
+    private string UpGradeGoldenHeartDescription(int lv)
+    {
+        switch (lv)
+        {
+            case 2 :
+                return "When player take damage gain +6 max HP. Cooldown 10 second";
+            
+            case 3 :
+                return "When player take damage gain +7 max HP. Cooldown 10 second";
+
+            case 4 :
+                return "When player take damage gain +8 max HP. Cooldown 10 second";
+
+            case 5 :
+                return "When player take damage gain +10 max HP. Cooldown 8 second";
+
+            default:
+                return "UpGradeGoldenHeartDescription(int lv) - didn't match in switch";
+        }
+    }
+
+    private string UpGradeMarkOfCalamityDescription(int lv)
+    {
+        switch (lv)
+        {
+            case 2 :
+                return "Blue and Red Slime will spawn more...";
+            
+            case 3 :
+                return "Blue and Red Slime will spawn more...  Are you sure about that?";
+
+            case 4 :
+                return "This upgrade is very danger!  Just stop upgrade this thing...  Trust me";
+
+            case 5 :
+                return "OK... If you what this... Good luck and don't say I didn't tell about this thing.";
+            
+            default:
+                return "UpGradeMarkOfCalamityDescription(int lv) - didn't match in switch";
 
         }
     }

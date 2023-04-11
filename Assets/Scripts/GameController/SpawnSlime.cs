@@ -27,13 +27,13 @@ public class SpawnSlime : MonoBehaviour
         UpdateSpawnCooldown();
         cooldown = Random.Range(minSpawnCooldownTime, maxSpawnCooldownTime) / 10;
         Invoke(nameof(ResetReadyToSpawn), cooldown);
-
-        blueSlimeSpawnChange = gm._blueSlimeSpawnChange;
-        redSlimeSpawnChange = gm._redSlimeSpawnChange;
     }
 
     private void Update()
     {
+        blueSlimeSpawnChange = gm._blueSlimeSpawnChange;
+        redSlimeSpawnChange = gm._redSlimeSpawnChange;
+        
         UpdateSpawnCooldown();
         Spawn();
     }

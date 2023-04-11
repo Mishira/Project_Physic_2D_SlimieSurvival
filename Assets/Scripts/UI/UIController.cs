@@ -27,6 +27,8 @@ public class UIController : MonoBehaviour
     [SerializeField] private GameObject iconGoldenSword;
     [SerializeField] private GameObject iconBoot;
     [SerializeField] private GameObject iconGoldenClock;
+    [SerializeField] private GameObject iconGoldenHeart;
+    [SerializeField] private GameObject iconMarkOfCalamity;
 
     [Header("===== Get Component =====")]
     [SerializeField] private PlayerMovement pm;
@@ -163,6 +165,20 @@ public class UIController : MonoBehaviour
                 itemNameText.text = "Golden clock";
                 descriptionText.text = "Player attack cooldown -10%";
                 break;
+            
+            case "Golden heart" :
+                iconGoldenHeart.SetActive(true);
+                headerText.text = "Item Found!";
+                itemNameText.text = "Golden heart";
+                descriptionText.text = "When player take damage gain +5 max HP. Cooldown 10 second";
+                break;
+            
+            case "Mark of Calamity" :
+                iconMarkOfCalamity.SetActive(true);
+                headerText.text = "Item Found...";
+                itemNameText.text = "Mark of Calamity";
+                descriptionText.text = "Blue and Red Slime will spawn more...";
+                break;
         }
     }
 
@@ -176,5 +192,7 @@ public class UIController : MonoBehaviour
         iconGoldenSword.SetActive(false);
         iconBoot.SetActive(false);
         iconGoldenClock.SetActive(false);
+        iconGoldenHeart.SetActive(false);
+        iconMarkOfCalamity.SetActive(false);
     }
 }

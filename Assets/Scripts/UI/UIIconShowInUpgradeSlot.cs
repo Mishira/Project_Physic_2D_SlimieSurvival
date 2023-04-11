@@ -20,6 +20,8 @@ public class UIIconShowInUpgradeSlot : MonoBehaviour
     [SerializeField] private GameObject goldenSword;
     [SerializeField] private GameObject boot;
     [SerializeField] private GameObject goldenClock;
+    [SerializeField] private GameObject goldenHeart;
+    [SerializeField] private GameObject markOfCalamity;
 
     public void ShowIcon(string itemName)
     {
@@ -95,6 +97,15 @@ public class UIIconShowInUpgradeSlot : MonoBehaviour
                 goldenClock.SetActive(true);
                 break;
             
+            case "Golden heart" :
+                DisableAll();
+                goldenHeart.SetActive(true);
+                break;
+            
+            case "Mark of Calamity" :
+                DisableAll();
+                markOfCalamity.SetActive(true);
+                break;
 
             
             default:
@@ -119,5 +130,7 @@ public class UIIconShowInUpgradeSlot : MonoBehaviour
         goldenSword.SetActive(false);
         boot.SetActive(false);
         goldenClock.SetActive(false);
+        goldenHeart.SetActive(false);
+        markOfCalamity.SetActive(false);
     }
 }

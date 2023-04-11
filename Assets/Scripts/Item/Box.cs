@@ -15,6 +15,8 @@ public class Box : MonoBehaviour
     [SerializeField] private GameObject goldenSword;
     [SerializeField] private GameObject boot;
     [SerializeField] private GameObject goldenClock;
+    [SerializeField] private GameObject goldenHeart;
+    [SerializeField] private GameObject markOfCalamity;
 
     [Header("===== Drop Item Position =====")]
     [SerializeField] private Transform dropPosition;
@@ -78,6 +80,14 @@ public class Box : MonoBehaviour
             
             case "Golden clock" :
                 Instantiate(goldenClock, dropPosition.position, dropPosition.rotation);
+                break;
+            
+            case "Golden heart" :
+                Instantiate(goldenHeart, dropPosition.position, dropPosition.rotation);
+                break;
+            
+            case "Mark of Calamity" :
+                Instantiate(markOfCalamity, dropPosition.position, dropPosition.rotation);
                 break;
 
         }

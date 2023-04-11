@@ -186,4 +186,5 @@ MonoBehaviour:
   goldenSword: {fileID: 1844020528421262302, guid: ab2157ceabb1ffc43b4585def6cba151, type: 3}
   boot: {fileID: 7786607091641571290, guid: dd781c4cc4836534bb5b1e2a971027cf, type: 3}
   goldenClock: {fileID: 6265213916464387253, guid: 1fa71e0b94659cc47a55a847843e316d, type: 3}
+  goldenHeart: {fileID: 1564655654345124546, guid: e3e5f9e36a262844b94baa7d42465acb, type: 3}
   dropPosition: {fileID: 2691080781980786224}

@@ -38,6 +38,7 @@ public class PlayerStatus : MonoBehaviour
     private bool shieldDamageProtection = false;
     private float shieldInvincibleTime = 1;
     private bool syringeBuff = false;
+    private bool goldenHeart = false;
 
     public float _health => health;
     public float _maxHealth => maxHealth;
@@ -80,6 +81,11 @@ public class PlayerStatus : MonoBehaviour
                 playerInvincible = true;
                 itemController.ActivateShield();
                 Invoke(nameof(DisablePlayerInvincible), shieldInvincibleTime);
+            }
+
+            if (goldenHeart)
+            {
+                itemController.ActivateGoldenHeart();
             }
 
             if (syringeBuff && health > 0)
@@ -220,5 +226,10 @@ public class PlayerStatus : MonoBehaviour
     public void ResetSyringeBuff()
     {
         syringeBuff = true;
+    }
+
+    public void PickUpGoldenHeart()
+    {
+        goldenHeart = true;
     }
 }
