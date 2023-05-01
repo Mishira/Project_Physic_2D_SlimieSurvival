@@ -196,7 +196,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 18
-  moveSpeed: 0.4
+  moveSpeed: 0.5
   attackDamage: 10
   attackCooldown: 0.5
   dropBox: 1

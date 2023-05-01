@@ -1911,6 +1911,71 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1001 &184305478
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1111310912}
+    m_Modifications:
+    - target: {fileID: 4792614275578453376, guid: 9955568ae66609a4b880de7c77a80c24, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4792614275578453376, guid: 9955568ae66609a4b880de7c77a80c24, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -11.82988
+      objectReference: {fileID: 0}
+    - target: {fileID: 4792614275578453376, guid: 9955568ae66609a4b880de7c77a80c24, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.4309775
+      objectReference: {fileID: 0}
+    - target: {fileID: 4792614275578453376, guid: 9955568ae66609a4b880de7c77a80c24, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.4839215
+      objectReference: {fileID: 0}
+    - target: {fileID: 4792614275578453376, guid: 9955568ae66609a4b880de7c77a80c24, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4792614275578453376, guid: 9955568ae66609a4b880de7c77a80c24, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4792614275578453376, guid: 9955568ae66609a4b880de7c77a80c24, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4792614275578453376, guid: 9955568ae66609a4b880de7c77a80c24, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4792614275578453376, guid: 9955568ae66609a4b880de7c77a80c24, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4792614275578453376, guid: 9955568ae66609a4b880de7c77a80c24, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4792614275578453376, guid: 9955568ae66609a4b880de7c77a80c24, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4792614275578453380, guid: 9955568ae66609a4b880de7c77a80c24, type: 3}
+      propertyPath: m_Name
+      value: RedSlime_ExperienceOrb
+      objectReference: {fileID: 0}
+    - target: {fileID: 4792614275578453439, guid: 9955568ae66609a4b880de7c77a80c24, type: 3}
+      propertyPath: redSlime
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4792614275578453439, guid: 9955568ae66609a4b880de7c77a80c24, type: 3}
+      propertyPath: experience
+      value: 1700
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9955568ae66609a4b880de7c77a80c24, type: 3}
 --- !u!1 &187033445
 GameObject:
   m_ObjectHideFlags: 0
@@ -2091,10 +2156,10 @@ MonoBehaviour:
   goldenSwordBuffDamage: 30
   bootBuffMoveSpeed: 40
   goldenClockBuffCooldown: 10
-  goldenHeartAddMaxHP: 5
-  goldenHeartAddDamage: 3
-  goldenHeartAddProjectileSpeed: 10
-  goldenHeartCooldown: 10
+  goldenHeartAddMaxHP: 4
+  goldenHeartAddDamage: 2
+  goldenHeartAddProjectileSpeed: 2
+  goldenHeartCooldown: 16
   blueSlimeSpawnRate: 8
   redSlimeSpawnRate: 2
   ps: {fileID: 1776693614}
@@ -9604,6 +9669,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 916390239}
   m_CullTransparentMesh: 1
+--- !u!4 &917961904 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4792614275578453376, guid: 9955568ae66609a4b880de7c77a80c24, type: 3}
+  m_PrefabInstance: {fileID: 184305478}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &922951315
 GameObject:
   m_ObjectHideFlags: 0
@@ -11235,7 +11305,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1111310912
 Transform:
   m_ObjectHideFlags: 0
@@ -11249,6 +11319,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5008534754213043191}
+  - {fileID: 917961904}
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -15234,7 +15305,7 @@ PrefabInstance:
       objectReference: {fileID: 1776693614}
     - target: {fileID: 438930289, guid: 5692bac621ddb69428504723992f3349, type: 3}
       propertyPath: piercing
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 438930289, guid: 5692bac621ddb69428504723992f3349, type: 3}
       propertyPath: shootKey
@@ -18021,7 +18092,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7648226880630837719, guid: 9bc512922f1beaf409dd060da7a45178, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.50982
+      value: -2.01
       objectReference: {fileID: 0}
     - target: {fileID: 7648226880630837719, guid: 9bc512922f1beaf409dd060da7a45178, type: 3}
       propertyPath: m_LocalPosition.y
@@ -20304,6 +20375,7 @@ MonoBehaviour:
   attackCooldownMultiply: 0
   maxCooldownMultiplyLimit: 70
   projectileSpeedMultiply: 0
+  maxProjectileSpeedLimit: 200
   moveSpeedMultiply: 0
   experienceGainMultiply: 0
   playerLevel: 1
@@ -20507,28 +20579,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 569e41c07ebda3947a7f9410861ead5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawn: 0
+  enemySpawn: 1
   minSpawnCooldown: 1
   maxSpawnCooldown: 120
   growEverySecond: 30
-  growSpawnCooldownReduce: 3
-  maxGrowSpawnCooldownReduce: 20
-  gsGrowHealth: 2
+  growSpawnCooldownReduce: 4
+  maxGrowSpawnCooldownReduce: 15
+  gsGrowHealth: 3
   gsGrowAttackDamage: 1
-  gsGrowMoveSpeed: 0.15
+  gsGrowMoveSpeed: 0.14
   gsMaxGrowMoveSpeed: 4
-  greenSlimeExperienceDrop: 25
-  bsGrowHealth: 6
+  greenSlimeExperienceDrop: 17
+  bsGrowHealth: 9
   bsGrowAttackDamage: 1
-  bsGrowMoveSpeed: 0.15
+  bsGrowMoveSpeed: 0.14
   bsMaxGrowMoveSpeed: 4
-  blueSlimeExperienceDrop: 100
+  blueSlimeExperienceDrop: 75
   blueSlimeSpawnChange: 4
-  rsGrowHealth: 4
+  rsGrowHealth: 9
   rsGrowAttackDamage: 1.5
-  rsGrowMoveSpeed: 0.15
+  rsGrowMoveSpeed: 0.14
   rsMaxGrowMoveSpeed: 4
-  redSlimeExperienceDrop: 200
+  redSlimeExperienceDrop: 150
   redSlimeSpawnChange: 1
 --- !u!4 &1784990675
 Transform:
@@ -24448,7 +24520,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7126486587815097652, guid: c7811cd5802541544a68b3a05b9c5526, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7126486587815097655, guid: c7811cd5802541544a68b3a05b9c5526, type: 3}
       propertyPath: m_RootOrder

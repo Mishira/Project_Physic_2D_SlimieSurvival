@@ -54,6 +54,7 @@ public class LevelUp : MonoBehaviour
 
     private int itemUpgradeCount;
     private bool cooldownUpgradeStatusIsInUpgradeList = true;
+    private bool projectileSpeedUpgradeStatusIsInUpgradeList = true;
 
     private void Start()
     {
@@ -142,6 +143,15 @@ public class LevelUp : MonoBehaviour
         {
             cooldownUpgradeStatusIsInUpgradeList = false;
             statusUpgrade.Remove("Reduce arrow cooldown");
+        }
+    }
+
+    public void RemoveProjectileSpeedUpgradeStatus()
+    {
+        if (projectileSpeedUpgradeStatusIsInUpgradeList)
+        {
+            projectileSpeedUpgradeStatusIsInUpgradeList = false;
+            statusUpgrade.Remove("Increase player projectile speed");
         }
     }
 
@@ -685,22 +695,22 @@ public class LevelUp : MonoBehaviour
         switch (lv)
         {
             case 2 :
-                itemController.UpgradeGoldenHeart(6, 3, 13, 10);
+                itemController.UpgradeGoldenHeart(5, 2, 4, 16);
                 levelGoldenHeart++;
                 break;
             
             case 3 :
-                itemController.UpgradeGoldenHeart(7, 4, 15, 10);
+                itemController.UpgradeGoldenHeart(6, 3, 6, 15);
                 levelGoldenHeart++;
                 break;
 
             case 4 :
-                itemController.UpgradeGoldenHeart(8, 4, 18, 10);
+                itemController.UpgradeGoldenHeart(7, 3, 8, 15);
                 levelGoldenHeart++;
                 break;
 
             case 5 :
-                itemController.UpgradeGoldenHeart(10, 5, 20, 8);
+                itemController.UpgradeGoldenHeart(8, 4, 10, 14);
                 itemUpgrade.Remove("Golden heart");
                 break;
 
@@ -945,16 +955,16 @@ public class LevelUp : MonoBehaviour
         switch (lv)
         {
             case 2 :
-                return "Negate next damage than gain +6 max HP, +3% Damage, +13% projectile speed. Cooldown 10 second";
+                return "Negate next damage than gain +5 max HP, +2% Damage, +4% projectile speed. Cooldown 16 second";
             
             case 3 :
-                return "Negate next damage than gain +7 max HP, +4% Damage, +15% projectile speed. Cooldown 10 second";
+                return "Negate next damage than gain +6 max HP, +3% Damage, +6% projectile speed. Cooldown 15 second";
 
             case 4 :
-                return "Negate next damage than gain +8 max HP, +4% Damage, +18% projectile speed. Cooldown 10 second";
+                return "Negate next damage than gain +7 max HP, +3% Damage, +8% projectile speed. Cooldown 15 second";
 
             case 5 :
-                return "Negate next damage than gain +10 max HP, +5% Damage, +20% projectile speed. Cooldown 8 second";
+                return "Negate next damage than gain +8 max HP, +4% Damage, +10% projectile speed. Cooldown 14 second";
 
             default:
                 return "UpGradeGoldenHeartDescription(int lv) - didn't match in switch";

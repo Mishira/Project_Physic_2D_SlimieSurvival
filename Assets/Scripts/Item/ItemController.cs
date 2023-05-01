@@ -55,10 +55,10 @@ public class ItemController : MonoBehaviour
     [SerializeField] private float goldenClockBuffCooldown = 10;
 
     [Header("===== Golden Heart =====")]
-    [SerializeField] private float goldenHeartAddMaxHP = 5;
-    [SerializeField] private float goldenHeartAddDamage = 3;
-    [SerializeField] private float goldenHeartAddProjectileSpeed = 10;
-    [SerializeField] private float goldenHeartCooldown = 10;
+    [SerializeField] private float goldenHeartAddMaxHP = 4;
+    [SerializeField] private float goldenHeartAddDamage = 2;
+    [SerializeField] private float goldenHeartAddProjectileSpeed = 2;
+    [SerializeField] private float goldenHeartCooldown = 16;
 
     [Header("===== Mark of Calamity =====")]
     [SerializeField] private int blueSlimeSpawnRate = 8;

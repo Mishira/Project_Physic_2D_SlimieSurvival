@@ -12,6 +12,7 @@ public class PlayerStatus : MonoBehaviour
     [SerializeField] private float attackCooldownMultiply = 0;
     [SerializeField] private float maxCooldownMultiplyLimit = 70;
     [SerializeField] private float projectileSpeedMultiply = 0;
+    [SerializeField] private float maxProjectileSpeedLimit = 200;
     [SerializeField] private float moveSpeedMultiply = 0;
     [SerializeField] private float experienceGainMultiply = 0;
 
@@ -32,6 +33,7 @@ public class PlayerStatus : MonoBehaviour
     private float lastLevelExperienceRequire = 0;
     private bool openLevelUpUI = false;
     private bool firstTimeHitCooldownLimit = true;
+    private bool firstTimeHitProjectileSpeedLimit = true;
     private bool crucifixDeadProtection = false;
     private bool playerInvincible = false;
     private float crucifixInvincibleTime = 2;
@@ -64,10 +66,10 @@ public class PlayerStatus : MonoBehaviour
         CheckLevelUp();
         uiController.UpdateHealthBar();
         
-        if (Input.GetKeyDown(KeyCode.L))
+        /*if (Input.GetKeyDown(KeyCode.L))
         {
             PlayerPickUpExperienceOrb(nextLevelExperienceRequire - playerExperience);
-        }
+        }*/
     }
 
     public void PlayerTakeDamage(float damageTake)
@@ -172,6 +174,16 @@ public class PlayerStatus : MonoBehaviour
             
             case 2 :    // Projectile Speed
                 projectileSpeedMultiply += change;
+                if (projectileSpeedMultiply >= maxProjectileSpeedLimit && firstTimeHitProjectileSpeedLimit)
+                {
+                    firstTimeHitProjectileSpeedLimit = false;
+                    projectileSpeedMultiply = maxProjectileSpeedLimit;
+                    levelUp.RemoveProjectileSpeedUpgradeStatus();
+                }
+                else if (projectileSpeedMultiply > maxProjectileSpeedLimit)
+                {
+                    projectileSpeedMultiply = maxProjectileSpeedLimit;
+                }
                 break;
             
             case 3 :    // Move Speed
