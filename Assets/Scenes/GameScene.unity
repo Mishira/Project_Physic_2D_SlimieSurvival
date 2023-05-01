@@ -3116,7 +3116,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &266588707
 PrefabInstance:
@@ -6836,7 +6836,7 @@ Transform:
   - {fileID: 1666257356}
   - {fileID: 557161173}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &590445703
 GameObject:
@@ -7215,7 +7215,7 @@ Transform:
   - {fileID: 1512355446}
   - {fileID: 939275839}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &609214559
 GameObject:
@@ -7968,7 +7968,7 @@ RectTransform:
   - {fileID: 2101738313}
   - {fileID: 1142318694}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -10086,7 +10086,7 @@ Transform:
   - {fileID: 2089558848}
   - {fileID: 2134195370}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &870430350
 GameObject:
@@ -12663,7 +12663,7 @@ Transform:
   - {fileID: 5008534754213043191}
   - {fileID: 917961904}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1113073011
 GameObject:
@@ -37071,7 +37071,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3408982907303215176, guid: 5692bac621ddb69428504723992f3349, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3408982907303215176, guid: 5692bac621ddb69428504723992f3349, type: 3}
       propertyPath: m_LocalPosition.x
@@ -38743,7 +38743,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4360033947684476, guid: d26f07b6b8619784cacddf6eb54abb9a, type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 4360033947684476, guid: d26f07b6b8619784cacddf6eb54abb9a, type: 3}
       propertyPath: m_LocalScale.x
@@ -42874,7 +42874,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 569e41c07ebda3947a7f9410861ead5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawn: 1
+  enemySpawn: 0
   minSpawnCooldown: 1
   maxSpawnCooldown: 120
   growEverySecond: 30
@@ -46331,7 +46331,7 @@ MonoBehaviour:
   knowledge: {fileID: 1884715895}
   goldenSword: {fileID: 1056661477}
   boot: {fileID: 688220835}
-  goldenClock: {fileID: 1646184858}
+  goldenClock: {fileID: 897801711}
   goldenHeart: {fileID: 705476165}
   markOfCalamity: {fileID: 1978872979}
 --- !u!1 &2089558847
