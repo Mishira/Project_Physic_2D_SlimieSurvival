@@ -162,7 +162,7 @@ public class PlayerMovement : MonoBehaviour
         playerDead = true;
         pausePlayer = true;
         rb.simulated = false;
-        Invoke(nameof(GoToMainMenu), 3);
+        Invoke(nameof(GoToEndGameScene), 3);
     }
 
     public void SetPausePlayer(bool pause)
@@ -182,8 +182,8 @@ public class PlayerMovement : MonoBehaviour
         this.moveSpeed = defaultMoveSpeed * ((ps._moveSpeedMultiply + 100) / 100);
     }
 
-    private void GoToMainMenu()     // Temporary for prototype version
+    private void GoToEndGameScene()     
     {
-        sm.GotoMainMenuScene();
+        sm.GoToGameOverScene();
     }
 }

@@ -14,4 +14,9 @@ public class ScenceManager : MonoBehaviour
     {
         SceneManager.LoadScene("MainMenuScene");
     }
+
+    public void GoToGameOverScene()
+    {
+        SceneManager.LoadScene("EndGameScene");
+    }
 }
