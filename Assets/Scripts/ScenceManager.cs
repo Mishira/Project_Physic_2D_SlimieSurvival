@@ -19,4 +19,9 @@ public class ScenceManager : MonoBehaviour
     {
         SceneManager.LoadScene("EndGameScene");
     }
+
+    public void GotoExtraGameOverScene()
+    {
+        SceneManager.LoadScene("ExtraEndGameScene");
+    }
 }

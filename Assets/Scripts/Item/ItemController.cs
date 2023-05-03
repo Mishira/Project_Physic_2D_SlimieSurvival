@@ -69,6 +69,7 @@ public class ItemController : MonoBehaviour
     [SerializeField] private UIController uiC;
     [SerializeField] private LevelUp levelUp;
     [SerializeField] private GameManager gameManager;
+    [SerializeField] private PlayerMovement _playerMovement;
 
     // List player item
     private List<string> itemInRandomBox = new List<string>();
@@ -663,5 +664,6 @@ public class ItemController : MonoBehaviour
     private void MaxUpgradeEffectMarkOfCalamity()
     {
         UpgradeMarkOfCalamity(0, 100);
+        _playerMovement.ExtraEndScene();
     }
 }

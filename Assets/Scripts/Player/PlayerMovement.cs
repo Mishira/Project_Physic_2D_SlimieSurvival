@@ -35,6 +35,7 @@ public class PlayerMovement : MonoBehaviour
     private PlayerState _state;
     private bool pausePlayer = false;
     private bool playerDead = false;
+    private bool extraEnd = false;
 
     public bool _isFaceingRight => isFaceingRight;
     public bool _pausePlayer => pausePlayer;
@@ -182,8 +183,20 @@ public class PlayerMovement : MonoBehaviour
         this.moveSpeed = defaultMoveSpeed * ((ps._moveSpeedMultiply + 100) / 100);
     }
 
+    public void ExtraEndScene()
+    {
+        extraEnd = true;
+    }
+
     private void GoToEndGameScene()     
     {
-        sm.GoToGameOverScene();
+        if (extraEnd)
+        {
+            sm.GotoExtraGameOverScene();
+        }
+        else
+        {
+            sm.GoToGameOverScene();
+        }
     }
 }
