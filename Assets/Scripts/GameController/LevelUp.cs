@@ -738,6 +738,43 @@ public class LevelUp : MonoBehaviour
 
             case 5 :
                 itemController.UpgradeMarkOfCalamity(24, 6);
+                levelMarkOfCalamity++;
+                //itemUpgrade.Remove("Mark of Calamity");
+                break;
+            
+            case 6 :
+                itemController.UpgradeMarkOfCalamity(27, 6);
+                levelMarkOfCalamity++;
+                break;
+            
+            case 7 :
+                itemController.UpgradeMarkOfCalamity(30, 6);
+                levelMarkOfCalamity++;
+                break;
+
+            case 8 :
+                itemController.UpgradeMarkOfCalamity(34, 6);
+                levelMarkOfCalamity++;
+                break;
+
+            case 9 :
+                itemController.UpgradeMarkOfCalamity(37, 6);
+                levelMarkOfCalamity++;
+                break;
+
+            case 10 :
+                itemController.UpgradeMarkOfCalamity(38, 8);
+                levelMarkOfCalamity++;
+                break;
+
+            case 11 :
+                itemController.UpgradeMarkOfCalamity(40, 10);
+                levelMarkOfCalamity++;
+                break;
+
+            case 12 :
+                itemController.MaxUpgradeMarkOfCalamity(150);
+                levelMarkOfCalamity++;
                 itemUpgrade.Remove("Mark of Calamity");
                 break;
 
@@ -987,6 +1024,27 @@ public class LevelUp : MonoBehaviour
             case 5 :
                 return "OK... If you what this... Good luck and don't say I didn't tell about this thing.";
             
+            case 6 :
+                return "...";
+            
+            case 7 :
+                return "......";
+            
+            case 8 :
+                return "..........";
+
+            case 9 :
+                return "Hey... Why are you still Upgrade this thing?";
+
+            case 10 :
+                return "Hey why are you doing this... You want to challenge yourself?...   WHY?";
+
+            case 11 :
+                return "Warning if you continue upgrade this thing it will destroy yourself!!!	";
+
+            case 12 :
+                return "This is last warning... You need to stop upgrade this thing NOW.";
+
             default:
                 return "UpGradeMarkOfCalamityDescription(int lv) - didn't match in switch";
 

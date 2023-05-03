@@ -653,4 +653,15 @@ public class ItemController : MonoBehaviour
         redSlimeSpawnRate = redSlimeRate;
         gameManager.SetSpawnRate(blueSlimeRate, redSlimeRate);
     }
+
+    public void MaxUpgradeMarkOfCalamity(int cooldownEffect)
+    {
+        SetActivateCooldownItemSlot(markOfCalamitySlot, cooldownEffect);
+        Invoke(nameof(MaxUpgradeEffectMarkOfCalamity), cooldownEffect);
+    }
+
+    private void MaxUpgradeEffectMarkOfCalamity()
+    {
+        UpgradeMarkOfCalamity(0, 100);
+    }
 }
