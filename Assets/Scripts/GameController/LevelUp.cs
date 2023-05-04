@@ -207,10 +207,10 @@ public class LevelUp : MonoBehaviour
                 return $"All damage + {upGradeDamageAmount} %";
 
             case "Increase player projectile speed" :
-                return $"Arrow projectile speed + {upGradeProjectileSpeedAmount}";
+                return $"Arrow projectile speed + {upGradeProjectileSpeedAmount} %";
 
             case "Increase player move speed" :
-                return $"Player move speed + {upGradeMoveSpeedAmount}";
+                return $"Player move speed + {upGradeMoveSpeedAmount} %";
 
             case "Reduce arrow cooldown" :
                 return $"Arrow shoot cooldown - {upGradeCooldownAmount} %";

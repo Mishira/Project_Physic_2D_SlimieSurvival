@@ -29,7 +29,7 @@ public class UITextAtExtraEnd : MonoBehaviour
             {
                 showText.text = chatLog[textIndex];
                 readyToContinue = false;
-                Invoke(nameof(ResetReadyToContinue), 0.2f);
+                Invoke(nameof(ResetReadyToContinue), 0.35f);
             }
             else if (textIndex >= chatLog.Count)
             {
