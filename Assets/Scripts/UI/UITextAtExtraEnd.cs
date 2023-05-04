@@ -17,7 +17,10 @@ public class UITextAtExtraEnd : MonoBehaviour
 
     private void Start()
     {
-        Invoke(nameof(OpenChatLog), 3);
+        textBox.SetActive(false);
+        
+        Invoke(nameof(OpenChatLog), 1.5f);
+        Invoke(nameof(ResetReadyToContinue), 3);
     }
 
     private void Update()
@@ -42,7 +45,6 @@ public class UITextAtExtraEnd : MonoBehaviour
     {
         textBox.SetActive(true);
         showText.text = chatLog[textIndex];
-        readyToContinue = true;
     }
 
     private void ResetReadyToContinue()
