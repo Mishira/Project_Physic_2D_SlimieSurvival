@@ -43,7 +43,7 @@ public class ItemController : MonoBehaviour
     [SerializeField] private float syringeCooldown = 30;
 
     [Header("===== Knowledge =====")]
-    [SerializeField] private float knowledgeEXPMultiply = 35;
+    [SerializeField] private float knowledgeEXPMultiply = 10;
 
     [Header("===== Golden sword =====")]
     [SerializeField] private float goldenSwordBuffDamage = 30;
@@ -664,6 +664,7 @@ public class ItemController : MonoBehaviour
     private void MaxUpgradeEffectMarkOfCalamity()
     {
         UpgradeMarkOfCalamity(0, 100);
+        gameManager.SetCalamityUpgradeStatus(3, 25, 35);
         _playerMovement.ExtraEndScene();
     }
 }

@@ -142,7 +142,7 @@ public class UIController : MonoBehaviour
                 iconKnowledge.SetActive(true);
                 headerText.text = "Item Found!";
                 itemNameText.text = "Knowledge";
-                descriptionText.text = "Slime drop 35% more EXP.";
+                descriptionText.text = "Slime drop 10% more EXP.";
                 break;
             
             case "Golden sword" :

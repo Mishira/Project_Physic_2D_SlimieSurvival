@@ -599,22 +599,22 @@ public class LevelUp : MonoBehaviour
         switch (lv)
         {
             case 2 :
-                itemController.UpgradeKnowledge(10);     // Add 10 ---> 45%
+                itemController.UpgradeKnowledge(10);     // Add 10 ---> 20%
                 levelKnowledge++;
                 break;
             
             case 3 :
-                itemController.UpgradeKnowledge(10);     // Add 10 ---> 55%
+                itemController.UpgradeKnowledge(10);     // Add 10 ---> 30%
                 levelKnowledge++;
                 break;
             
             case 4 :
-                itemController.UpgradeKnowledge(10);     // Add 10 ---> 65%
+                itemController.UpgradeKnowledge(10);     // Add 10 ---> 40%
                 levelKnowledge++;
                 break;
             
             case 5 :
-                itemController.UpgradeKnowledge(10);     // Add 10 ---> 75%
+                itemController.UpgradeKnowledge(10);     // Add 10 ---> 50%
                 itemUpgrade.Remove("Knowledge");
                 break;
         }
@@ -773,7 +773,7 @@ public class LevelUp : MonoBehaviour
                 break;
 
             case 12 :
-                itemController.MaxUpgradeMarkOfCalamity(150);
+                itemController.MaxUpgradeMarkOfCalamity(15);
                 levelMarkOfCalamity++;
                 itemUpgrade.Remove("Mark of Calamity");
                 break;
@@ -910,16 +910,16 @@ public class LevelUp : MonoBehaviour
         switch (lv)
         {
             case 2 :
-                return "Slime drop 45% more EXP.";
+                return "Slime drop 20% more EXP.";
             
             case 3 :
-                return "Slime drop 55% more EXP.";
+                return "Slime drop 30% more EXP.";
 
             case 4 :
-                return "Slime drop 65% more EXP.";
+                return "Slime drop 40% more EXP.";
 
             case 5 :
-                return "Slime drop 75% more EXP.";
+                return "Slime drop 50% more EXP.";
             
             default:
                 return "UpGradeKnowledgeDescription(int lv) - didn't match in switch";

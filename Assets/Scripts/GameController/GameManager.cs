@@ -123,4 +123,15 @@ public class GameManager : MonoBehaviour
         blueSlimeSpawnChange = blueSlimeRate;
         redSlimeSpawnChange = redSlimeRate;
     }
+
+    public void SetCalamityUpgradeStatus(int multiply, float blueExp, float redExp)  //Only blue and red slime
+    {
+        bsGrowHealth = bsGrowHealth * multiply;
+        bsGrowAttackDamage = bsGrowAttackDamage * multiply;
+        rsGrowHealth = rsGrowHealth * multiply;
+        rsGrowAttackDamage = rsGrowAttackDamage * multiply;
+
+        blueSlimeExperienceDrop = blueExp;
+        redSlimeExperienceDrop = redExp;
+    }
 }
