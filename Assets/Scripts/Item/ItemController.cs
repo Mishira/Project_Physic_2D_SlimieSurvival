@@ -646,6 +646,7 @@ public class ItemController : MonoBehaviour
     private void PickUpMarkOfCalamity()
     {
         gameManager.SetSpawnRate(blueSlimeSpawnRate, redSlimeSpawnRate);
+        gameManager.SpawnMore(3, 0);
     }
 
     public void UpgradeMarkOfCalamity(int blueSlimeRate, int redSlimeRate)
@@ -653,6 +654,7 @@ public class ItemController : MonoBehaviour
         blueSlimeSpawnRate = blueSlimeRate;
         redSlimeSpawnRate = redSlimeRate;
         gameManager.SetSpawnRate(blueSlimeRate, redSlimeRate);
+        gameManager.SpawnMore(3, 0);
     }
 
     public void MaxUpgradeMarkOfCalamity(int cooldownEffect)
@@ -665,6 +667,7 @@ public class ItemController : MonoBehaviour
     {
         UpgradeMarkOfCalamity(0, 100);
         gameManager.SetCalamityUpgradeStatus(3, 25, 35);
+        gameManager.SpawnMore(3, 0);
         _playerMovement.ExtraEndScene();
     }
 }

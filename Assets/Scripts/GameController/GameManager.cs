@@ -118,6 +118,16 @@ public class GameManager : MonoBehaviour
         Invoke(nameof(EnemyGrow), growEverySecond);
     }
 
+    public void SpawnMore(int cooldownReduce, int changeMaxCooldown)
+    {
+        maxSpawnCooldown -= cooldownReduce;
+        maxGrowSpawnCooldownReduce += changeMaxCooldown;
+        if (maxSpawnCooldown < maxGrowSpawnCooldownReduce)
+        {
+            maxSpawnCooldown = maxGrowSpawnCooldownReduce;
+        }
+    }
+
     public void SetSpawnRate(int blueSlimeRate, int redSlimeRate)
     {
         blueSlimeSpawnChange = blueSlimeRate;

@@ -773,7 +773,7 @@ public class LevelUp : MonoBehaviour
                 break;
 
             case 12 :
-                itemController.MaxUpgradeMarkOfCalamity(15);
+                itemController.MaxUpgradeMarkOfCalamity(150);
                 levelMarkOfCalamity++;
                 itemUpgrade.Remove("Mark of Calamity");
                 break;
