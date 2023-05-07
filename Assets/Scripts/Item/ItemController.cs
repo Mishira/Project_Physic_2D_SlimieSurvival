@@ -338,7 +338,7 @@ public class ItemController : MonoBehaviour
             case "Golden heart" :
                 readyToAdd = false;
                 goldenHeartSlot = nextEmptySlotItem;
-                goldenClockPickUp = true;
+                goldenHeartPickUp = true;
                 itemInRandomBox.Remove("Golden heart");
                 PickUpGoldenHeart();
                 PutItemIconInEmptySlot(nextEmptySlotItem);
